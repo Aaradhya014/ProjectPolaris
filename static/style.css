@@ -1,0 +1,2172 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:linear-gradient(
+        180deg,
+        #f8fff9 0%,
+        #e8faed 45%,
+        #c9f4d4 100%
+    );
+
+    color:#1b1b1b;
+
+    min-height:100vh;
+
+}
+
+/* ==========================
+   NAVBAR
+   ========================== */
+
+nav{
+
+    position:sticky;
+
+    top:0;
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 30px;
+
+    background:rgb(31, 82, 73);
+
+    backdrop-filter:blur(12px);
+
+    box-shadow:0 8px 25px rgba(0,0,0,.15);
+
+    z-index:999;
+
+}
+
+/* ---------- LOGO ---------- */
+
+.logo{
+
+    color:white;
+
+    letter-spacing:1px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    white-space:nowrap;
+
+    font-size:1.5rem;
+
+    font-weight:700;
+
+}
+
+.polaris{
+    color:#00ff6a;      
+    font-weight:800;
+}
+
+/* ---------- NAV LINKS ---------- */
+
+.nav-links{
+    display:flex;
+
+    gap:18px;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+}
+
+.nav-links a{
+
+    text-decoration:none;
+
+    color:white;
+
+    font-weight:500;
+
+    padding:10px 16px;
+
+    font-size:0.95rem;
+
+    border-radius:40px;
+
+    transition:.35s;
+
+    white-space: nowrap;
+
+}
+
+.nav-links a:hover{
+
+    color:#0dff00;
+
+    transform:translateY(-4px);
+
+    box-shadow:0 10px 20px rgba(0,0,0,.2);
+
+}
+
+nav a:active{
+
+    transform:scale(.95);
+
+}
+
+/* Animated underline */
+
+nav a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:6px;
+
+    width:0;
+
+    height:2px;
+
+    background:white;
+
+    transition:.3s;
+
+}
+
+nav a:hover::after{
+
+    width:70%;
+
+    left:15%;
+
+}
+
+/* ==========================
+   HERO
+   ========================== */
+
+.hero{
+
+    min-height:100vh;
+
+    padding-top:20px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+}
+
+/* ---------- TITLE ---------- */
+
+.hero h1{
+
+    font-size:4.8rem;
+
+    color:#0ab453;
+
+    font-weight:800;
+
+    margin-bottom:20px;
+
+    letter-spacing:2px;
+
+    animation:fadeUp 1s ease;
+
+    text-shadow:
+
+    0 0 10px rgb(0, 160, 59);
+
+}
+
+/* ---------- EARTH ---------- */
+
+.earth{
+
+    display:inline-block;
+
+    animation:float 4s ease-in-out infinite;
+
+}
+
+.star{
+
+    display:inline-block;
+
+    animation:float 4s ease-in-out infinite;
+}
+
+/* ---------- SUBTITLE ---------- */
+
+.one{
+
+    font-size:2rem;
+
+    font-weight:300;
+
+    color:#2f2f2f;
+
+    max-width:850px;
+
+    margin-bottom:25px;
+
+    animation:fadeUp 1.4s ease;
+
+}
+
+.two{
+
+    font-size:1.25rem;
+
+    color:#5f5f5f;
+
+    font-style:italic;
+
+    max-width:750px;
+
+    margin-bottom:45px;
+
+    animation:fadeUp 1.8s ease;
+
+}
+
+.accent-line{
+
+    width:120px;
+
+    height:4px;
+
+    margin:35px auto;
+
+    border-radius:50px;
+
+    background:linear-gradient(
+        to right,
+        transparent,
+        #22c55e,
+        transparent
+    );
+
+}
+
+.heros{
+
+    text-decoration:none;
+
+    color:white;
+
+    background:#00752b;
+
+    padding:18px 42px;
+
+    border-radius:50px;
+
+    font-size:1.1rem;
+
+    font-weight:600;
+
+    transition:.35s;
+
+    box-shadow:0 12px 25px rgba(0, 117, 43, 0.856);
+
+}
+
+.heros:hover{
+
+    background-color: rgba(60, 135, 22, 0.772);
+
+    color: rgb(38, 255, 0);
+
+    transform:translateY(-6px);
+
+    box-shadow: 0 18px 30px rgba(0,0,0,.2);
+
+}
+
+.features{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+    gap:50px;
+
+    padding:80px 8%;
+
+}
+
+.card {
+    background: white;
+    padding: 35px;
+    border-radius: 22px;
+    text-align: center;
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        background .35s ease,
+        color .35s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+
+    box-shadow: 0 18px 30px rgb(26, 92, 7);
+
+    background: linear-gradient(
+        rgb(130, 255, 130),
+        white
+    );
+
+    cursor: pointer;
+}
+
+.card h2 {
+    color: #044620;
+    margin-bottom: 15px;
+}
+
+.card p {
+    color: #556080;
+    transition: color 0.3s ease;
+}
+
+footer{
+
+    background:#00332a;
+
+    color:white;
+
+    text-align:center;
+
+    padding:40px;
+
+    margin-top:70px;
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+@keyframes float{
+
+    0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-10px);
+
+    }
+
+}
+
+@media(max-width:900px){
+
+    nav{
+
+        flex-direction:column;
+
+        gap:20px;
+
+        padding:20px;
+
+    }
+
+    .nav-links{
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+    }
+
+    .hero h1{
+
+        font-size:3.6rem;
+
+    }
+
+    .one{
+
+        font-size:1.5rem;
+
+    }
+
+    .two{
+
+        font-size:1rem;
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    .hero h1{
+
+        font-size:2.7rem;
+
+    }
+
+    .one{
+
+        font-size:1.2rem;
+
+    }
+
+    .hero-btn{
+
+        width:100%;
+
+        max-width:320px;
+
+    }
+
+}
+
+body.dark-mode {
+    background: linear-gradient(
+        180deg,
+        #07130f 0%,
+        #0d2018 45%,
+        #163126 100%
+    );
+
+    color: #f1f5f9;
+}
+
+body.dark-mode .container{
+
+    background:#16251f;
+
+    box-shadow:0 12px 35px rgba(0,0,0,.45);
+
+}
+
+body.dark-mode .slider-group label{
+
+    color:white;
+
+}
+
+body.dark-mode nav {
+    background: linear-gradient(90deg, #020617, #0f172a);
+}
+
+body.dark-mode .one{
+    color: white;
+}
+
+body.dark-mode .two{
+    color: white;
+}
+
+body.dark-mode .card{
+
+    background:#1b2d26;
+
+    color:white;
+
+    box-shadow:0 12px 30px rgba(0,255,100,.18);
+
+}
+
+body.dark-mode .card h2{
+    color:#5dfd8a;
+}
+
+.hero-btn:hover {
+    background: #dcedc8;
+}
+
+body.dark-mode .modal-content{
+
+    background:#16251f;
+
+    color:white;
+
+}
+
+body.dark-mode .modal-content input{
+
+    background:#22352d;
+
+    color:white;
+
+    border:1px solid #2f5c4b;
+
+}
+
+body.dark-mode .modal-content label{
+
+    color:#f1f5f9;
+
+}
+
+body.dark-mode .hero h1{
+
+    text-shadow:
+
+    0 0 20px rgb(0, 104, 37);
+
+}
+
+.tagline{
+    font-size:1.2rem;
+    color:#555;
+    margin-top:-10px;
+    margin-bottom:35px;
+    font-weight:600;
+    letter-spacing:1px;
+}
+
+body.dark-mode .tagline{
+    color:white;
+}
+
+body.dark-mode .card p{
+
+    color: white;
+
+}
+
+.confidence.high{
+    color:#0c8d36;
+    font-weight:bold;
+}
+
+.confidence.medium{
+    color:#d4a017;
+    font-weight:bold;
+}
+
+.why{
+
+    margin-bottom:60px;
+
+}
+
+.why ul{
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    line-height: 40px;
+}
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(0,0,0,.7);
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:5000;
+
+}
+
+.modal-content{
+
+    width:500px;
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.4);
+
+    animation:popup .4s ease;
+
+}
+
+.modal-content h2{
+
+    color:#006d33;
+
+    margin-bottom:20px;
+
+}
+
+.modal-content label{
+
+    display:block;
+
+    margin-top:18px;
+
+    font-weight:600;
+
+}
+
+.modal-content input{
+
+    width:100%;
+
+    padding:12px;
+
+    margin-top:8px;
+
+    border-radius:8px;
+
+    border:1px solid #ccc;
+
+    font-size:16px;
+
+}
+
+.modal-content button{
+
+    margin-top:25px;
+
+    width:100%;
+
+    padding:15px;
+
+    background:#0c8d36;
+
+    color:white;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:17px;
+
+}
+
+.modal-content button:hover{
+
+    background:#066d28;
+
+}
+
+.close{
+
+    float:right;
+
+    font-size:30px;
+
+    cursor:pointer;
+
+}
+
+#result{
+
+    margin-top:25px;
+
+    text-align:center;
+
+    color:#006d33;
+
+}
+
+body.dark-mode #result{
+    color:#6dff9b;
+}
+
+@keyframes popup{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.8);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+.calculate{
+    
+    text-decoration:none;
+
+    color:white;
+
+    background:#00752b;
+
+    padding:18px 42px;
+
+    border-radius:50px;
+
+    font-size:1.1rem;
+
+    font-weight:600;
+
+    transition:.35s;
+
+    box-shadow: 0 18px 30px rgb(16, 114, 7);
+
+}
+
+.calculate:hover{
+
+    background-color: rgb(255, 255, 255);
+
+    color: rgb(0, 0, 0);
+
+    transform:translateY(-6px);
+
+    box-shadow: 0 18px 30px rgba(0,0,0,.2);
+
+}
+
+.container{
+    max-width:790px;
+
+    margin:80px auto;
+
+    padding:50px;
+
+    background:white;
+
+    border-radius:24px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+    text-align:center;
+}
+
+.input-methods{
+    margin:25px 0;
+}
+
+.input-methods h3{
+    margin-bottom:15px;
+}
+
+.option-box{
+    padding:15px;
+    margin:12px 0;
+    border:2px solid #d8e7d4;
+    border-radius:15px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.option-box:hover{
+    border-color:#0c8d36;
+    transform:translateY(-2px);
+}
+
+.confidence{
+    margin-top:20px;
+    color:#555;
+}
+
+.slider-group{
+    margin:28px 0;
+}
+
+.slider-group label{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-weight:600;
+    color:#1e3932;
+    margin-bottom:10px;
+    font-size:16px;
+}
+
+.slider-group label span{
+    color:#0c8d36;
+    font-weight:700;
+}
+
+.eco-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: #e2f0cb;
+    outline: none;
+    margin-top: 8px;
+}
+
+.eco-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #00875a; /* Your primary bright green */
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.eco-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+#submit-calc-btn{
+    width:100%;
+    padding:18px;
+    border:none;
+    border-radius:40px;
+    background:#14532d;
+    color:white;
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+    margin-top:35px;
+    transition:.3s;
+}
+
+#submit-calc-btn:hover{
+    background:#0c8d36;
+
+    transform:translateY(-3px);
+
+}
+
+/* Normal mode */
+.slider-group label span{
+    color:#0c8d36;
+    font-weight:700;
+}
+
+/* Dark mode */
+body.dark-mode .slider-group label span{
+    color:#7dffb3;
+}
+
+#dashboard h1{
+    font-size:50px ;
+}
+
+#dashboard h4{
+    font-size: 30px;
+}
+
+.rotating-earth {
+    display: inline-block;
+    animation: earthSpin 8s ease-in-out infinite;
+}
+
+@keyframes earthSpin {
+    0% {
+        transform: perspective(100px) rotateY(0deg) scaleX(1);
+    }
+
+    25% {
+        transform: perspective(100px) rotateY(60deg) scaleX(0.7);
+    }
+
+    50% {
+        transform: perspective(100px) rotateY(180deg) scaleX(1);
+    }
+
+    75% {
+        transform: perspective(100px) rotateY(300deg) scaleX(0.7);
+    }
+
+    100% {
+        transform: perspective(100px) rotateY(360deg) scaleX(1);
+    }
+}
+
+/* ==========================
+   CHALLENGES SECTION
+   ========================== */
+
+
+.challenge-container{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+
+    gap:30px;
+
+    padding:50px 8%;
+
+}
+
+.challenge-card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    color: #1b1b1b;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,.1);
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        background .35s ease,
+        color .35s ease;
+}
+
+.challenge-card:hover {
+    transform: translateY(-10px);
+
+    box-shadow:
+        0 18px 35px rgba(0,117,43,.2);
+}
+
+.challenge-btn {
+    display: inline-block;
+
+    margin-top: 20px;
+
+    padding: 10px 22px;
+
+    border: none;
+    border-radius: 30px;
+
+    background: #00752b;
+    color: white;
+
+    cursor: pointer;
+
+    font-weight: 600;
+    font-size: .9rem;
+
+    text-decoration: none;
+
+    transition: .3s;
+}
+
+.challenge-btn:hover {
+    background: #005c22;
+    transform: translateY(-3px);
+}
+
+/* ==========================
+   DARK MODE
+   ========================== */
+
+body.dark-mode .challenge-card {
+    background: #1b2d26;
+    color: white;
+
+    box-shadow:
+        0 20px 45px rgba(0,255,100,.15);
+}
+
+body.dark-mode .challenge-card h2 {
+    color: #5dfd8a;
+}
+
+body.dark-mode .challenge-card p {
+    color: #e5e7eb;
+}
+
+body.dark-mode .challenge-card:hover {
+    background: #223b31;
+}
+
+body.dark-mode .challenge-btn {
+    background: #00a846;
+}
+
+body.dark-mode .challenge-btn:hover {
+    background: #00c957;
+}
+
+.challenge-page {
+
+    min-height:80vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:70px 20px;
+
+}
+
+
+.challenge-detail {
+
+    width:100%;
+
+    max-width:700px;
+
+    background:white;
+
+    padding:50px;
+
+    border-radius:25px;
+
+    text-align:center;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.12);
+
+}
+
+
+.challenge-icon {
+
+    font-size:4rem;
+
+    margin-bottom:15px;
+
+}
+
+
+.challenge-detail h1 {
+
+    font-size:3rem;
+
+    color:#087f23;
+
+    margin-bottom:10px;
+
+}
+
+
+.challenge-subtitle {
+
+    font-size:1.2rem;
+
+    color:#556080;
+
+    margin-bottom:40px;
+
+}
+
+
+.challenge-section {
+
+    text-align:left;
+
+    margin-top:30px;
+
+    padding:25px;
+
+    border-radius:18px;
+
+    background:#f1fff4;
+
+}
+
+
+.challenge-section h2 {
+
+    color:#087f23;
+
+    margin-bottom:12px;
+
+}
+
+
+.challenge-section p {
+
+    color:#374151;
+
+    line-height:1.7;
+
+}
+
+
+.challenge-section ul {
+
+    padding-left:25px;
+
+    line-height:2;
+
+    color:#374151;
+
+}
+
+
+.challenge-goal {
+
+    margin-top:30px;
+
+    padding:25px;
+
+    border-radius:18px;
+
+    background:#e2f0cb;
+
+}
+
+
+.challenge-goal h2 {
+
+    color:#087f23;
+
+    margin-bottom:10px;
+
+}
+
+
+.challenge-back {
+
+    display:inline-block;
+
+    margin-top:30px;
+
+    text-decoration:none;
+
+    color:white;
+
+    background:#00752b;
+
+    padding:13px 28px;
+
+    border-radius:30px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+
+.challenge-back:hover {
+
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 10px 25px rgba(0,117,43,.3);
+
+}
+
+body.dark-mode .challenge-detail {
+
+    background:#1b2d26;
+
+    color:white;
+
+}
+
+body.dark-mode .challenge-detail h1 {
+
+    color:#5dfd8a;
+
+}
+
+body.dark-mode .challenge-subtitle {
+
+    color:#d1d5db;
+
+}
+
+body.dark-mode .challenge-section {
+
+    background:#22352d;
+
+}
+
+body.dark-mode .challenge-section h2 {
+
+    color:#5dfd8a;
+
+}
+
+body.dark-mode .challenge-section p,
+body.dark-mode .challenge-section li {
+
+    color:#f1f5f9;
+
+}
+
+body.dark-mode .challenge-goal {
+
+    background:#294437;
+
+}
+
+body.dark-mode .challenge-goal h2 {
+
+    color:#5dfd8a;
+
+}
+
+/* ==============================
+   POLARIS FOOTER
+================================ */
+
+.site-footer {
+    background: #081d35;
+    color: #7186a0;
+    padding: 75px 8% 25px;
+    margin-top: 80px;
+}
+
+.footer-container {
+    width: 100%;
+    margin: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 2.2fr)
+        minmax(0, 1fr)
+        minmax(0, 1.2fr)
+        minmax(0, 1fr);
+
+    gap: clamp(30px, 6vw, 120px);
+}
+
+/* ==============================
+   BRAND
+================================ */
+
+.footer-brand {
+    width: 100%;
+    max-width: none;
+}
+
+.footer-brand h2 {
+    display: inline-block;
+
+    color: #ffffff;
+    font-size: 28px;
+    margin: 0 0 22px;
+
+    font-weight: 700;
+}
+
+.footer-brand p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #7186a0;
+
+    max-width: 500px;
+}
+
+
+/* ==============================
+   COLUMN HEADINGS
+================================ */
+
+.footer-column h3 {
+    color: #8fa3bd;
+
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+
+    margin: 0 0 25px;
+
+    font-weight: 700;
+}
+
+
+/* ==============================
+   LINKS
+================================ */
+
+.footer-column a {
+    display: block;
+
+    color: #7186a0;
+    text-decoration: none;
+
+    font-size: 15px;
+
+    margin-bottom: 17px;
+
+    transition: 0.2s ease;
+}
+
+.footer-column a:hover {
+    color: #ffffff;
+    transform: translateX(3px);
+}
+
+
+/* ==============================
+   SOCIALS
+================================ */
+
+.footer-socials {
+    display: flex;
+    gap: 15px;
+    width: 100px;
+    height: 100px;
+    margin: 25px auto;
+}
+
+/* ==============================
+   CONTACT
+================================ */
+
+.footer-contact a {
+    margin-bottom: 18px;
+}
+
+.footer-divider {
+    width: 100%;
+    margin: 65px 0 25px;
+}
+
+/* ==============================
+   BOTTOM
+================================ */
+
+.footer-bottom {
+    width: 100%;
+    margin: 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-bottom p {
+    margin: 0;
+
+    font-size: 13px;
+    color: #536a84;
+}
+
+.footer-tagline {
+    color: #1db6c9 !important;
+}
+
+
+/* ==============================
+   MOBILE
+================================ */
+
+@media (max-width: 900px) {
+
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .site-footer {
+        padding: 55px 25px 25px;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .footer-brand {
+        grid-column: auto;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+}
+
+/* ==============================
+   COMPLETE POLARIS DARK MODE
+   ============================== */
+
+body.dark-mode {
+    background: linear-gradient(
+        180deg,
+        #07130f 0%,
+        #0d2018 45%,
+        #163126 100%
+    );
+
+    color: #f1f5f9;
+}
+
+
+/* ==============================
+   HEADINGS
+   ============================== */
+
+/* H1 STAYS EXACTLY LIKE LIGHT MODE */
+body.dark-mode h1 {
+    color: #0ab453;
+
+    text-shadow:
+        0 0 10px rgb(0, 160, 59);
+}
+
+
+/* Other headings and text */
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode p,
+body.dark-mode li {
+    color: #f1f5f9;
+}
+
+
+/* ==============================
+   NAVBAR
+   ============================== */
+
+body.dark-mode nav {
+    background: linear-gradient(
+        90deg,
+        #020617,
+        #0f172a
+    );
+}
+
+
+/* ==============================
+   HERO
+   ============================== */
+
+body.dark-mode .one,
+body.dark-mode .two,
+body.dark-mode .tagline {
+    color: #f1f5f9;
+}
+
+
+/* ==============================
+   NORMAL CARDS
+   ============================== */
+
+body.dark-mode .card {
+    background: #1b2d26;
+    color: #f1f5f9;
+
+    box-shadow:
+        0 12px 30px rgba(0,255,100,.18);
+}
+
+body.dark-mode .card:hover {
+    background: #223b31;
+
+    transform: translateY(-10px);
+
+    box-shadow:
+        0 18px 35px rgba(0,255,100,.25);
+}
+
+body.dark-mode .card h2 {
+    color: #5dfd8a;
+}
+
+body.dark-mode .card p {
+    color: #e5e7eb;
+}
+
+
+/* ==============================
+   CALCULATOR CONTAINER
+   ============================== */
+
+body.dark-mode .container {
+    background: #16251f;
+    color: #f1f5f9;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.45);
+}
+
+
+/* ==============================
+   SLIDERS
+   ============================== */
+
+body.dark-mode .slider-group label {
+    color: #f1f5f9;
+}
+
+body.dark-mode .slider-group label span {
+    color: #7dffb3;
+}
+
+
+/* ==============================
+   CHALLENGE CARDS
+   ============================== */
+
+body.dark-mode .challenge-card {
+    background: #1b2d26;
+    color: #f1f5f9;
+
+    box-shadow:
+        0 20px 45px rgba(0,255,100,.15);
+}
+
+body.dark-mode .challenge-card:hover {
+    background: #223b31;
+
+    transform: translateY(-10px);
+
+    box-shadow:
+        0 20px 40px rgba(0,255,100,.25);
+}
+
+body.dark-mode .challenge-card h2 {
+    color: #5dfd8a;
+}
+
+body.dark-mode .challenge-card p {
+    color: #e5e7eb;
+}
+
+
+/* ==============================
+   CHALLENGE DETAIL
+   ============================== */
+
+body.dark-mode .challenge-detail {
+    background: #1b2d26;
+    color: #f1f5f9;
+}
+
+body.dark-mode .challenge-detail h1 {
+    color: #0ab453;
+
+    text-shadow:
+        0 0 10px rgb(0, 160, 59);
+}
+
+body.dark-mode .challenge-subtitle {
+    color: #d1d5db;
+}
+
+
+/* ==============================
+   CHALLENGE SECTIONS
+   ============================== */
+
+body.dark-mode .challenge-section {
+    background: #22352d;
+}
+
+body.dark-mode .challenge-section h2 {
+    color: #5dfd8a;
+}
+
+body.dark-mode .challenge-section p,
+body.dark-mode .challenge-section li {
+    color: #f1f5f9;
+}
+
+
+/* ==============================
+   CHALLENGE GOAL
+   ============================== */
+
+body.dark-mode .challenge-goal {
+    background: #294437;
+}
+
+body.dark-mode .challenge-goal h2 {
+    color: #5dfd8a;
+}
+
+
+/* ==============================
+   MODAL
+   ============================== */
+
+body.dark-mode .modal-content {
+    background: #16251f;
+    color: #f1f5f9;
+}
+
+body.dark-mode .modal-content h2 {
+    color: #5dfd8a;
+}
+
+body.dark-mode .modal-content input {
+    background: #22352d;
+    color: white;
+
+    border: 1px solid #2f5c4b;
+}
+
+body.dark-mode .modal-content label {
+    color: #f1f5f9;
+}
+
+
+/* ==============================
+   RESULT
+   ============================== */
+
+body.dark-mode #result {
+    color: #6dff9b;
+}
+
+
+/* ==============================
+   FOOTER
+   ============================== */
+
+body.dark-mode .site-footer {
+    background: #020b08;
+    color: #d1d5db;
+}
+
+body.dark-mode .footer-brand h2 {
+    color: #7dffb3;
+}
+
+body.dark-mode .footer-brand p {
+    color: #f9fbfa;
+}
+
+body.dark-mode .footer-column h3 {
+    color: #7dffb3;
+}
+
+body.dark-mode .footer-column a {
+    color: #a8b5ae;
+}
+
+body.dark-mode .footer-column a:hover {
+    color: #ffffff;
+}
+
+body.dark-mode .footer-divider {
+    border-top-color: #243b32;
+}
+
+body.dark-mode .footer-bottom p {
+    color: #82958b;
+}
+
+body.dark-mode .footer-tagline {
+    color: #5dfd8a !important;
+}
+
+
+/* ==============================
+   SMOOTH TRANSITIONS
+   ============================== */
+
+body,
+nav,
+.card,
+.container,
+.challenge-card,
+.challenge-detail,
+.challenge-section,
+.challenge-goal,
+.modal-content,
+.site-footer {
+    transition:
+        background 0.4s ease,
+        background-color 0.4s ease,
+        color 0.4s ease,
+        box-shadow 0.4s ease,
+        transform 0.35s ease;
+}
+
+/* ==========================
+   ECO BADGES
+========================== */
+
+#eco-badges {
+    padding: 70px 8%;
+    text-align: center;
+}
+
+#eco-badges h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.badges-subtitle {
+    font-size: 17px;
+    margin-bottom: 40px;
+    opacity: 0.8;
+}
+
+
+/* ==========================
+   BADGE GRID
+========================== */
+
+.badges-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+
+/* ==========================
+   BADGE CARD
+========================== */
+
+.badge-card {
+    background: white;
+    border-radius: 18px;
+    padding: 30px 20px;
+
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+    border: 2px solid transparent;
+}
+
+.badge-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ==========================
+   BADGE ICON
+========================== */
+
+.badge-icon {
+    font-size: 55px;
+    margin-bottom: 15px;
+
+    transition: transform 0.3s ease;
+}
+
+.badge-card:hover .badge-icon {
+    transform: scale(1.1);
+}
+
+
+/* ==========================
+   BADGE TEXT
+========================== */
+
+.badge-card h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.badge-card p {
+    font-size: 14px;
+    line-height: 1.5;
+    opacity: 0.75;
+}
+
+
+/* ==========================
+   LOCKED BADGES
+========================== */
+
+.badge-card.locked {
+    opacity: 0.55;
+    filter: grayscale(0.8);
+}
+
+.badge-card.locked .badge-icon {
+    filter: grayscale(1);
+}
+
+
+/* ==========================
+   UNLOCKED BADGES
+========================== */
+
+.badge-card.unlocked {
+    opacity: 1;
+    filter: none;
+
+    border: 2px solid #4caf50;
+
+    box-shadow:
+        0 8px 25px rgba(76, 175, 80, 0.25);
+}
+
+.badge-card.unlocked .badge-icon {
+    filter: none;
+}
+
+
+/* ==========================
+   STATUS
+========================== */
+
+.badge-status {
+    display: inline-block;
+
+    margin-top: 15px;
+
+    padding: 7px 14px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    background: #eeeeee;
+}
+
+.badge-card.unlocked .badge-status {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+
+/* ==========================
+   PROGRESS
+========================== */
+
+.badge-progress {
+    max-width: 600px;
+    margin: 50px auto 0;
+}
+
+.badge-progress h3 {
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 15px;
+
+    background: #e0e0e0;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+#badge-progress-fill {
+    width: 0%;
+    height: 100%;
+
+    background: #4caf50;
+
+    border-radius: 20px;
+
+    transition: width 0.5s ease;
+}
+
+
+/* ==========================
+   DARK MODE
+========================== */
+
+.dark-mode .badge-card {
+    background: #1e1e1e;
+    color: white;
+}
+
+.dark-mode .badge-status {
+    background: #333;
+    color: white;
+}
+
+.dark-mode .badge-card.unlocked .badge-status {
+    background: #1b5e20;
+    color: white;
+}
+
+.dark-mode .progress-bar {
+    background: #333;
+}
+
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media (max-width: 900px) {
+
+    .badges-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .badges-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #eco-badges h1 {
+        font-size: 28px;
+    }
+
+}
+
+.challenge-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 600px;
+    max-width: 90%;
+
+    margin: 35px auto 0;
+    gap: 40px;
+}
+
+.challenge-btn {
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    transition: 0.3s;
+}
+
+.back-btn {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.start-btn {
+    background: #2e7d32;
+    color: white;
+}
+
+.challenge-btn:hover {
+    transform: translateY(-2px);
+}
+
+.start-btn:disabled {
+    cursor: default;
+    opacity: 0.8;
+}
+
+/* ==========================
+   7-DAY CHALLENGE TRACKER
+========================== */
+
+.challenge-tracker {
+    margin-top: 35px;
+    padding: 25px;
+
+    background: rgba(76, 175, 80, 0.08);
+
+    border-radius: 15px;
+}
+
+.challenge-tracker h2 {
+    margin-bottom: 10px;
+}
+
+#tracker-status {
+    margin-bottom: 25px;
+    opacity: 0.8;
+}
+
+
+/* ==========================
+   DAYS
+========================== */
+
+.days-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+
+    margin-bottom: 25px;
+}
+
+.day-box {
+    padding: 15px 8px;
+
+    border-radius: 10px;
+
+    background: #eeeeee;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 6px;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.day-box.active {
+    background: #fff3cd;
+    border: 2px solid #f0ad4e;
+}
+
+.day-box.completed {
+    background: #e8f5e9;
+    border: 2px solid #4caf50;
+}
+
+.day-box.completed .day-status {
+    color: #2e7d32;
+}
+
+
+/* ==========================
+   COMPLETE BUTTON
+========================== */
+
+.complete-day-btn {
+    padding: 13px 25px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #2e7d32;
+    color: white;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.complete-day-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+}
+
+.complete-day-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+/* ==========================
+   BADGE UNLOCKED
+========================== */
+
+.badge-earned {
+    margin-top: 25px;
+    padding: 25px;
+
+    background: #fff8dc;
+
+    border-radius: 15px;
+
+    text-align: center;
+}
+
+.earned-badge-icon {
+    font-size: 65px;
+}
+
+.badge-earned.hidden {
+    display: none;
+}
+
+
+/* ==========================
+   DARK MODE
+========================== */
+
+.dark-mode .challenge-tracker {
+    background: rgba(76, 175, 80, 0.12);
+}
+
+.dark-mode .day-box {
+    background: #333;
+    color: white;
+}
+
+.dark-mode .day-box.active {
+    background: #4a3f22;
+}
+
+.dark-mode .day-box.completed {
+    background: #1b5e20;
+}
+
+.dark-mode .badge-earned {
+    background: #3d3518;
+}
+
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media (max-width: 700px) {
+
+    .days-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+}

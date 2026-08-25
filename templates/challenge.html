@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ challenge.title }} | Project Polaris</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+    <!-- ==========================================
+         NAVIGATION
+    =========================================== -->
+
+    <nav>
+
+        <div class="logo">
+            🌍 Project <span class="polaris">Polaris</span>
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">🏠 Home</a>
+
+            <a href="/#mission">🎯 Mission</a>
+
+            <a href="/#calculator">📊 Calculator</a>
+
+            <a href="/#dashboard">📈 Dashboard</a>
+
+            <a href="/#challenges">🌱 Challenges</a>
+
+            <a href="/#about">ℹ About</a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ==========================================
+         CHALLENGE PAGE
+    =========================================== -->
+
+    <main class="challenge-page">
+
+        <div class="challenge-detail">
+
+
+            <!-- ==================================
+                 CHALLENGE HEADER
+            =================================== -->
+
+            <div class="challenge-icon">
+                {{ challenge.icon }}
+            </div>
+
+
+            <h1>
+                {{ challenge.title }}
+            </h1>
+
+
+            <p class="challenge-subtitle">
+                {{ challenge.subtitle }}
+            </p>
+
+
+            <!-- ==================================
+                 YOUR MISSION
+            =================================== -->
+
+            <section class="challenge-section">
+
+                <h2>
+                    🎯 Your Mission
+                </h2>
+
+                <p>
+                    {{ challenge.goal }}
+                </p>
+
+            </section>
+
+
+            <!-- ==================================
+                 WHAT TO DO
+            =================================== -->
+
+            <section class="challenge-section">
+
+                <h2>
+                    🌱 What To Do
+                </h2>
+
+                <ul>
+
+                    {% for action in challenge.actions %}
+
+                    <li>
+                        {{ action }}
+                    </li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </section>
+
+
+            <!-- ==================================
+                 GOAL
+            =================================== -->
+
+            <div class="challenge-goal">
+
+                <h2>
+                    🏆 Goal
+                </h2>
+
+                <p>
+                    Complete the actions for 7 days
+                    and earn your Polaris eco badge!
+                </p>
+
+            </div>
+
+
+            <!-- ==========================================
+                 7-DAY CHALLENGE TRACKER
+            =========================================== -->
+
+            <div
+                class="challenge-tracker"
+                id="challenge-tracker"
+            >
+
+                <h2>
+                    🌱 Your 7-Day Progress
+                </h2>
+
+
+                <p id="tracker-status">
+                    Click "Start Challenge" to begin
+                    your journey!
+                </p>
+
+
+                <!-- ==================================
+                     TODAY'S TASK
+                =================================== -->
+
+                <div
+                    id="today-task-box"
+                    class="today-task-box"
+                >
+
+                    <h3>
+                        🌱 Today's Task
+                    </h3>
+
+
+                    <p id="today-action">
+                        Start the challenge to reveal
+                        your first task!
+                    </p>
+
+                </div>
+
+
+                <!-- ==================================
+                     DAYS
+                =================================== -->
+
+                <div class="days-container">
+
+
+                    <div
+                        class="day-box"
+                        data-day="1"
+                    >
+
+                        <span>
+                            Day 1
+                        </span>
+
+                        <span class="day-status">
+                            🔒
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="day-box"
+                        data-day="2"
+                    >
+
+                        <span>
+                            Day 2
+                        </span>
+
+                        <span class="day-status">
+                            🔒
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="day-box"
+                        data-day="3"
+                    >
+
+                        <span>
+                            Day 3
+                        </span>
+
+                        <span class="day-status">
+                            🔒
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="day-box"
+                        data-day="4"
+                    >
+
+                        <span>
+                            Day 4
+                        </span>
+
+                        <span class="day-status">
+                            🔒
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="day-box"
+                        data-day="5"
+                    >
+
+                        <span>
+                            Day 5
+                        </span>
+
+                        <span class="day-status">
+                            🔒
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="day-box"
+                        data-day="6"
+                    >
+
+                        <span>
+                            Day 6
+                        </span>
+
+                        <span class="day-status">
+                            🔒
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="day-box"
+                        data-day="7"
+                    >
+
+                        <span>
+                            Day 7
+                        </span>
+
+                        <span class="day-status">
+                            🔒
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- ==================================
+                     COMPLETE BUTTON
+                =================================== -->
+
+                <button
+                    type="button"
+                    id="complete-day-btn"
+                    class="complete-day-btn"
+                    disabled
+                >
+
+                    Complete Today's Action
+
+                </button>
+
+
+                <!-- ==================================
+                     BADGE
+                =================================== -->
+
+                <div
+                    id="badge-earned"
+                    class="badge-earned hidden"
+                >
+
+                    <div class="earned-badge-icon">
+                        🏅
+                    </div>
+
+
+                    <h2>
+                        🎉 Eco Badge Unlocked!
+                    </h2>
+
+
+                    <p id="earned-badge-name"></p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==========================================
+                 NAVIGATION BUTTONS
+            =========================================== -->
+
+            <div class="challenge-buttons">
+
+
+                <a
+                    href="/"
+                    class="challenge-btn back-btn"
+                >
+
+                    ← Back to Polaris
+
+                </a>
+
+
+                <button
+                    type="button"
+                    class="challenge-btn start-btn"
+                    id="start-challenge-btn"
+                >
+
+                    🚀 Start Challenge
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- ==================================================
+         POLARIS CHALLENGE JAVASCRIPT
+    =================================================== -->
+
+    <script>
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+
+            // ==================================================
+            // CHALLENGE ID
+            // ==================================================
+
+            const pathParts =
+                window.location.pathname
+                    .split("/")
+                    .filter(Boolean);
+
+
+            const challengeId =
+                pathParts.length > 1 &&
+                pathParts[0] === "challenge"
+
+                    ? pathParts[pathParts.length - 1]
+
+                    : null;
+
+
+            if (!challengeId) {
+
+                console.error(
+                    "Polaris: Challenge ID not found."
+                );
+
+                return;
+
+            }
+
+
+            // ==================================================
+            // BADGES
+            // ==================================================
+
+            const badges = {
+
+                "energy-saver": {
+
+                    name: "Energy Guardian",
+
+                    icon: "💡"
+
+                },
+
+                "water-warrior": {
+
+                    name: "Water Protector",
+
+                    icon: "💧"
+
+                },
+
+                "food-hero": {
+
+                    name: "Food Saver",
+
+                    icon: "🍽️"
+
+                },
+
+                "plastic-patrol": {
+
+                    name: "Plastic Defender",
+
+                    icon: "♻️"
+
+                },
+
+                "energy-guardian": {
+
+                    name: "Fuel Saver",
+
+                    icon: "🔥"
+
+                },
+
+                "green-journey": {
+
+                    name: "Green Traveler",
+
+                    icon: "🚗"
+
+                },
+
+                "sky-impact": {
+
+                    name: "Sky Protector",
+
+                    icon: "✈️"
+
+                }
+
+            };
+
+
+            // ==================================================
+            // 7 DAYS OF TASKS
+            // ==================================================
+
+            const challengeTasks = {
+
+                "energy-saver": [
+
+                    "Turn off lights in rooms that are not being used. Before leaving each room, check that unnecessary lights are switched off.",
+
+                    "Choose one electronic device that is normally left on standby. Turn it completely off when you are finished using it.",
+
+                    "Spend at least 30 minutes using natural daylight instead of turning on artificial lights.",
+
+                    "Check your home for unnecessary electronics that are switched on. Turn off at least three devices that do not need to be running.",
+
+                    "Use an energy-saving mode on a device you use today, such as a computer, television, or phone.",
+
+                    "Do an evening energy check. Walk through your home and switch off unnecessary lights, electronics, and chargers.",
+
+                    "Complete a final energy audit. Identify the biggest energy-wasting habit you changed during the challenge and keep that habit going."
+
+                ],
+
+
+                "water-warrior": [
+
+                    "Turn off the tap while brushing your teeth and only turn it on when you need to rinse.",
+
+                    "Take a shower that is at least 2 minutes shorter than your usual shower.",
+
+                    "Inspect the taps and visible pipes around your home. Report or fix any leaks you find.",
+
+                    "When washing dishes, hands, or other items, avoid leaving the water running unnecessarily.",
+
+                    "Measure your water use today by paying attention to every time you turn on a tap. Try to eliminate one unnecessary use.",
+
+                    "Reuse suitable leftover water for plants, cleaning, or another practical purpose instead of throwing it away.",
+
+                    "Perform a final water-waste check around your home. Identify one habit you will continue changing after the challenge."
+
+                ],
+
+
+                "food-hero": [
+
+                    "At your next meal, take only the amount of food you realistically expect to finish.",
+
+                    "Check your refrigerator for leftovers and make sure they are stored properly so they can be eaten later.",
+
+                    "Before buying food, check your refrigerator and pantry and make a list of what you already have.",
+
+                    "Choose one food item that may expire soon and use it in a meal instead of letting it go to waste.",
+
+                    "Plan your meals for the next day before deciding what food to buy or prepare.",
+
+                    "Create a new meal using leftovers instead of throwing them away.",
+
+                    "Complete a food-waste audit. Think about what food was wasted this week and identify one change to prevent it."
+
+                ],
+
+
+                "plastic-patrol": [
+
+                    "Use a reusable water bottle instead of a single-use plastic bottle today.",
+
+                    "Avoid using unnecessary plastic bags. Carry a reusable bag when shopping or carrying items.",
+
+                    "Use a reusable container instead of disposable packaging for one meal or snack.",
+
+                    "Before accepting a single-use plastic item, ask yourself whether you actually need it.",
+
+                    "Choose a product with less plastic packaging when there is a reasonable alternative.",
+
+                    "Count how many unnecessary single-use plastic items you avoided today.",
+
+                    "Complete a plastic audit. Identify the biggest source of unnecessary plastic you use and choose one habit to change."
+
+                ],
+
+
+                "energy-guardian": [
+
+                    "When cooking, match the flame size to the size of your cookware so energy is not unnecessarily wasted.",
+
+                    "Cover a pot while cooking when appropriate to help food heat more efficiently.",
+
+                    "Check the stove while cooking and make sure no burner is left on when it is not needed.",
+
+                    "Check your cooking equipment and make sure it is being used efficiently and safely.",
+
+                    "Use the correct-sized burner for the pot or pan you are using.",
+
+                    "Once food is cooking properly, reduce the flame when a high flame is no longer necessary.",
+
+                    "Complete a cooking-energy check. Identify one cooking habit that wastes fuel and change it going forward."
+
+                ],
+
+
+                "green-journey": [
+
+                    "For one nearby destination, walk instead of using a car when it is safe and practical.",
+
+                    "Use public transportation for one journey that you could otherwise make by car.",
+
+                    "Share a ride with another person when traveling somewhere you would normally travel alone.",
+
+                    "Combine two or more errands into one trip instead of making separate journeys.",
+
+                    "Avoid one unnecessary car journey today by walking, cycling, using public transport, or staying home.",
+
+                    "Walk or cycle for one short journey that you would normally make using a motor vehicle.",
+
+                    "Plan one lower-carbon journey for tomorrow and decide what transportation option you will use."
+
+                ],
+
+
+                "sky-impact": [
+
+                    "Think about one future trip you might take. Ask whether the journey is necessary or could be avoided.",
+
+                    "For a suitable future journey, investigate whether a ground-transport alternative could replace a flight.",
+
+                    "Combine errands or activities into one journey instead of making multiple separate trips.",
+
+                    "Choose one future trip and compare different transportation options based on their environmental impact.",
+
+                    "Research whether train, bus, or another ground-transport option could replace a short flight you might otherwise take.",
+
+                    "Identify one unnecessary short flight that could reasonably be avoided or replaced by another form of transportation.",
+
+                    "Create a personal lower-carbon travel plan. Choose one change you will make to reduce the impact of your future travel."
+
+                ]
+
+            };
+
+
+            // ==================================================
+            // ELEMENTS
+            // ==================================================
+
+            const startButton =
+                document.getElementById(
+                    "start-challenge-btn"
+                );
+
+
+            const completeButton =
+                document.getElementById(
+                    "complete-day-btn"
+                );
+
+
+            const trackerStatus =
+                document.getElementById(
+                    "tracker-status"
+                );
+
+
+            const todayAction =
+                document.getElementById(
+                    "today-action"
+                );
+
+
+            const badgeBox =
+                document.getElementById(
+                    "badge-earned"
+                );
+
+
+            const badgeName =
+                document.getElementById(
+                    "earned-badge-name"
+                );
+
+
+            // ==================================================
+            // STORAGE
+            // ==================================================
+
+            const storageKey =
+                "polarisChallenge_" +
+                challengeId;
+
+
+            function loadProgress() {
+
+                try {
+
+                    const saved =
+                        localStorage.getItem(
+                            storageKey
+                        );
+
+
+                    if (!saved) {
+
+                        return {
+
+                            started: false,
+
+                            startDate: null,
+
+                            completedDays: [],
+
+                            lastCompletedDate: null
+
+                        };
+
+                    }
+
+
+                    const data =
+                        JSON.parse(saved);
+
+
+                    if (
+                        !data ||
+                        typeof data !== "object"
+                    ) {
+
+                        throw new Error(
+                            "Invalid progress data"
+                        );
+
+                    }
+
+
+                    if (
+                        !Array.isArray(
+                            data.completedDays
+                        )
+                    ) {
+
+                        data.completedDays = [];
+
+                    }
+
+
+                    return data;
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        "Polaris progress error:",
+                        error
+                    );
+
+
+                    return {
+
+                        started: false,
+
+                        startDate: null,
+
+                        completedDays: [],
+
+                        lastCompletedDate: null
+
+                    };
+
+                }
+
+            }
+
+
+            let progress =
+                loadProgress();
+
+
+            function saveProgress() {
+
+                localStorage.setItem(
+
+                    storageKey,
+
+                    JSON.stringify(
+                        progress
+                    )
+
+                );
+
+            }
+
+
+            // ==================================================
+            // TODAY'S DATE
+            // ==================================================
+
+            function getToday() {
+
+                const now =
+                    new Date();
+
+
+                const year =
+                    now.getFullYear();
+
+
+                const month =
+                    String(
+                        now.getMonth() + 1
+                    ).padStart(2, "0");
+
+
+                const day =
+                    String(
+                        now.getDate()
+                    ).padStart(2, "0");
+
+
+                return (
+                    year +
+                    "-" +
+                    month +
+                    "-" +
+                    day
+                );
+
+            }
+
+
+            // ==================================================
+            // SHOW TODAY'S TASK
+            // ==================================================
+
+            function showTodayTask() {
+
+                if (!todayAction) {
+
+                    return;
+
+                }
+
+
+                // Challenge hasn't started
+
+                if (!progress.started) {
+
+                    todayAction.textContent =
+                        "Start the challenge to reveal your first task! 🌱";
+
+                    return;
+
+                }
+
+
+                const completed =
+                    progress.completedDays.length;
+
+
+                // All 7 completed
+
+                if (completed >= 7) {
+
+                    todayAction.textContent =
+                        "🎉 You completed all 7 days!";
+
+                    return;
+
+                }
+
+
+                // Current task is based ONLY
+                // on completed days
+
+                const task =
+                    challengeTasks[
+                        challengeId
+                    ][completed];
+
+
+                if (task) {
+
+                    todayAction.textContent =
+                        task;
+
+                }
+
+            }
+
+
+            // ==================================================
+            // UPDATE DAY BOXES
+            // ==================================================
+
+            function updateDayBoxes() {
+
+                const completed =
+                    progress.completedDays.length;
+
+
+                const dayBoxes =
+                    document.querySelectorAll(
+                        ".day-box"
+                    );
+
+
+                dayBoxes.forEach(
+                    function (box) {
+
+                        const day =
+                            Number(
+                                box.dataset.day
+                            );
+
+
+                        const status =
+                            box.querySelector(
+                                ".day-status"
+                            );
+
+
+                        box.classList.remove(
+                            "active",
+                            "completed"
+                        );
+
+
+                        // Completed
+
+                        if (
+                            progress.completedDays
+                                .includes(day)
+                        ) {
+
+                            box.classList.add(
+                                "completed"
+                            );
+
+
+                            if (status) {
+
+                                status.textContent =
+                                    "✅";
+
+                            }
+
+
+                            return;
+
+                        }
+
+
+                        // ONLY the next day is active
+
+                        if (
+                            progress.started &&
+                            day === completed + 1 &&
+                            completed < 7
+                        ) {
+
+                            box.classList.add(
+                                "active"
+                            );
+
+
+                            if (status) {
+
+                                status.textContent =
+                                    "▶️";
+
+                            }
+
+
+                            return;
+
+                        }
+
+
+                        // Everything else locked
+
+                        if (status) {
+
+                            status.textContent =
+                                "🔒";
+
+                        }
+
+                    }
+                );
+
+            }
+
+
+            // ==================================================
+            // UPDATE UI
+            // ==================================================
+
+            function updateTracker() {
+
+                const completed =
+                    progress.completedDays.length;
+
+
+                updateDayBoxes();
+
+
+                showTodayTask();
+
+
+                // ------------------------------------------
+                // NOT STARTED
+                // ------------------------------------------
+
+                if (!progress.started) {
+
+                    trackerStatus.textContent =
+                        'Click "Start Challenge" to begin your journey! 🌱';
+
+
+                    startButton.disabled =
+                        false;
+
+
+                    startButton.textContent =
+                        "🚀 Start Challenge";
+
+
+                    completeButton.disabled =
+                        true;
+
+
+                    completeButton.textContent =
+                        "Complete Today's Action";
+
+
+                    return;
+
+                }
+
+
+                // ------------------------------------------
+                // COMPLETED
+                // ------------------------------------------
+
+                if (completed >= 7) {
+
+                    trackerStatus.textContent =
+                        "🎉 You completed all 7 days!";
+
+
+                    startButton.disabled =
+                        true;
+
+
+                    startButton.textContent =
+                        "✅ Challenge Complete";
+
+
+                    completeButton.disabled =
+                        true;
+
+
+                    completeButton.textContent =
+                        "🏅 Challenge Complete";
+
+
+                    showBadge();
+
+
+                    return;
+
+                }
+
+
+                // ------------------------------------------
+                // STARTED
+                // ------------------------------------------
+
+                startButton.disabled =
+                    true;
+
+
+                startButton.textContent =
+                    "✅ Challenge Started";
+
+
+                trackerStatus.textContent =
+                    "Day " +
+                    (completed + 1) +
+                    " of 7 — Keep going! 🌱";
+
+
+                // ------------------------------------------
+                // SAME-DAY PROTECTION
+                // ------------------------------------------
+
+                const today =
+                    getToday();
+
+
+                if (
+                    progress.lastCompletedDate ===
+                    today
+                ) {
+
+                    completeButton.disabled =
+                        true;
+
+
+                    completeButton.textContent =
+                        "✅ Today's Action Complete";
+
+
+                    trackerStatus.textContent =
+                        "✅ Today's action is complete! Come back tomorrow for your next task.";
+
+                }
+
+                else {
+
+                    completeButton.disabled =
+                        false;
+
+
+                    completeButton.textContent =
+                        "Complete Today's Action";
+
+                }
+
+            }
+
+
+            // ==================================================
+            // START CHALLENGE
+            // ==================================================
+
+            startButton.addEventListener(
+                "click",
+                function () {
+
+                    if (progress.started) {
+
+                        return;
+
+                    }
+
+
+                    progress.started =
+                        true;
+
+
+                    progress.startDate =
+                        getToday();
+
+
+                    progress.completedDays =
+                        [];
+
+
+                    progress.lastCompletedDate =
+                        null;
+
+
+                    saveProgress();
+
+
+                    updateTracker();
+
+                }
+            );
+
+
+            // ==================================================
+            // COMPLETE TODAY'S ACTION
+            // ==================================================
+
+            completeButton.addEventListener(
+                "click",
+                function () {
+
+
+                    // --------------------------------------
+                    // MUST START FIRST
+                    // --------------------------------------
+
+                    if (!progress.started) {
+
+                        alert(
+                            "🚀 Start the challenge first!"
+                        );
+
+                        return;
+
+                    }
+
+
+                    // --------------------------------------
+                    // ALREADY FINISHED
+                    // --------------------------------------
+
+                    if (
+                        progress.completedDays.length >= 7
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    // --------------------------------------
+                    // TODAY
+                    // --------------------------------------
+
+                    const today =
+                        getToday();
+
+
+                    // --------------------------------------
+                    // SAME-DAY LOCK
+                    // --------------------------------------
+
+                    if (
+                        progress.lastCompletedDate ===
+                        today
+                    ) {
+
+                        alert(
+                            "🌱 You've already completed today's action!\n\n" +
+                            "Come back tomorrow for your next task."
+                        );
+
+                        return;
+
+                    }
+
+
+                    // --------------------------------------
+                    // DETERMINE CURRENT DAY
+                    // --------------------------------------
+
+                    const currentDay =
+                        progress.completedDays.length + 1;
+
+
+                    // --------------------------------------
+                    // SAFETY CHECK
+                    // --------------------------------------
+
+                    if (
+                        currentDay < 1 ||
+                        currentDay > 7
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    // --------------------------------------
+                    // RECORD COMPLETION
+                    // --------------------------------------
+
+                    progress.completedDays.push(
+                        currentDay
+                    );
+
+
+                    progress.lastCompletedDate =
+                        today;
+
+
+                    saveProgress();
+
+
+                    // --------------------------------------
+                    // DAY 7
+                    // --------------------------------------
+
+                    if (
+                        progress.completedDays.length >= 7
+                    ) {
+
+                        unlockBadge();
+
+                    }
+
+
+                    // --------------------------------------
+                    // REFRESH PAGE
+                    //
+                    // After refresh:
+                    //
+                    // Day 1 completed
+                    // → task becomes Day 2
+                    //
+                    // Day 2 completed
+                    // → task becomes Day 3
+                    //
+                    // etc.
+                    // --------------------------------------
+
+                    window.location.reload();
+
+                }
+            );
+
+
+            // ==================================================
+            // UNLOCK BADGE
+            // ==================================================
+
+            function unlockBadge() {
+
+                const badge =
+                    badges[
+                        challengeId
+                    ];
+
+
+                if (!badge) {
+
+                    return;
+
+                }
+
+
+                let unlockedBadges;
+
+
+                try {
+
+                    unlockedBadges =
+                        JSON.parse(
+                            localStorage.getItem(
+                                "polarisBadges"
+                            )
+                        ) || [];
+
+                }
+
+                catch {
+
+                    unlockedBadges = [];
+
+                }
+
+
+                if (
+                    !Array.isArray(
+                        unlockedBadges
+                    )
+                ) {
+
+                    unlockedBadges = [];
+
+                }
+
+
+                if (
+                    !unlockedBadges.includes(
+                        challengeId
+                    )
+                ) {
+
+                    unlockedBadges.push(
+                        challengeId
+                    );
+
+                }
+
+
+                localStorage.setItem(
+
+                    "polarisBadges",
+
+                    JSON.stringify(
+                        unlockedBadges
+                    )
+
+                );
+
+            }
+
+
+            // ==================================================
+            // SHOW BADGE
+            // ==================================================
+
+            function showBadge() {
+
+                const badge =
+                    badges[
+                        challengeId
+                    ];
+
+
+                if (
+                    !badge ||
+                    !badgeBox ||
+                    !badgeName
+                ) {
+
+                    return;
+
+                }
+
+
+                badgeBox.classList.remove(
+                    "hidden"
+                );
+
+
+                badgeName.textContent =
+                    badge.icon +
+                    " " +
+                    badge.name;
+
+            }
+
+
+            // ==================================================
+            // INITIALIZE
+            // ==================================================
+
+            updateTracker();
+
+        }
+
+    );
+
+        // =======================================
+    // DARK MODE
+    // =======================================
+
+    const darkModeBtn =
+        document.createElement("button");
+
+    darkModeBtn.textContent = "🌙 Dark Mode";
+
+    Object.assign(darkModeBtn.style, {
+        position: "fixed",
+        bottom: "20px",
+        right: "20px",
+        padding: "12px 18px",
+        background: "#2e7d32",
+        color: "#ffffff",
+        border: "none",
+        borderRadius: "6px",
+        fontWeight: "bold",
+        cursor: "pointer",
+        zIndex: "10000"
+    });
+
+    document.body.appendChild(darkModeBtn);
+
+    darkModeBtn.addEventListener("click", function () {
+
+        document.body.classList.toggle("dark-mode");
+
+    });
+
+    </script>
+
+</body>
+
+</html>

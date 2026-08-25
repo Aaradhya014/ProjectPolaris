@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Project Polaris</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+
+    <nav>
+
+        <div class="logo">
+    🌍 Project <span class="polaris">Polaris</span>
+</div>
+
+        <div class="nav-links">
+
+            <a href="#home">🏠 Home</a>
+
+            <a href="#mission">🎯 Mission</a>
+
+            <a href="#calculator">📊 Calculator</a>
+
+            <a href="#dashboard">📈 Dashboard</a>
+
+            <a href="#challenges">🌱 Challenges</a>
+
+            <a href="#about">ℹ About</a>
+
+        </div>
+
+    </nav>
+
+    <!-- Hero -->
+
+    <section class="hero">
+
+        <h1>
+    Project Polaris
+    <span class="earth">🌍</span>
+</h1>
+
+<h3 class="tagline">
+    Sustainable Living Platform
+</h3>
+
+        <p class="one">
+            Guiding families toward a sustainable future.
+        </p>
+
+        <p class="two">
+            "Like the North Star, Polaris helps guide families toward a greener future."
+            <div class="accent-line"></div>
+        </p>
+
+        <section id="mission">
+
+    <section class="features">
+
+        <div class="card">
+            <h2>📊 Measure</h2>
+            <p>Calculate your family's carbon footprint using everyday habits.</p>
+        </div>
+
+        <div class="card">
+            <h2>🔍 Analyze</h2>
+            <p>Discover which activities contribute the most to your emissions.</p>
+        </div>
+
+        <div class="card">
+            <h2>🌱 Improve</h2>
+            <p>Receive personalized suggestions to reduce your environmental impact.</p>
+        </div>
+
+        <div class="card">
+            <h2>🎯 Challenges</h2>
+            <p>Undertake challenges as a part of helping in the sustainability movement.</p>
+        </div>
+
+    </section>
+
+    <section class="why">
+
+        <h1>🌱 Why Choose Polaris?</h1>
+
+        <ul>
+            <li>Learn how your day-to-day actions affect the environment.</li>
+            <li>Find out which action is the largest carbon footprint contributor.</li>
+            <li>Get personalized suggestions on how to reduce your carbon footprint.</li>
+            <li>Participate in challenges and earn eco badges as rewards!</li>
+        </ul>
+
+    </section>
+
+    <a href="#calculator" class="calculate">
+            Start Your Analysis →
+        </a>
+
+</section>
+
+<section id="calculator">
+
+<div class="container">
+
+    <h2>🏡 Household Impact Calculator</h2>
+    <p class="calculator-subtitle">
+        Estimate your household's weekly carbon footprint.
+    </p>
+
+    <!-- Input Method -->
+    <div class="input-method">
+
+        <h3>How would you like to enter your data?</h3>
+
+        <label class="radio-option">
+            <input type="radio" name="input_method" value="low">
+            Incomplete Information
+        </label>
+
+        <label class="radio-option">
+            <input type="radio" name="input_method" value="estimate">
+            Estimate Manually
+        </label>
+
+        <label class="radio-option">
+            <input type="radio" name="input_method" value="bill">
+            Use Utility Bills
+        </label>
+
+        <label class="radio-option">
+            <input type="radio" name="input_method" value="verified">
+            AI Verify My Bills
+        </label>
+
+    </div>
+
+    <!-- Confidence -->
+    <div class="confidence-box">
+
+    <h3>Calculation Confidence</h3>
+
+    <div class="confidence high" id="confidence-level">
+        🟢 High
+    </div>
+
+    <p id="confidence-text">
+        Based on utility bills.
+    </p>
+
+</div>
+
+    <h3 class="slider-title">
+        Enter your household information
+    </h3>
+
+    <p class="slider-subtitle">
+        Move each slider to match your household.
+    </p>
+
+<form id="footprint-form" action="/calculate" method="POST">
+
+<!-- Electricity -->
+<div class="slider-group">
+
+    <label for="electricity">
+        ⚡ Monthly electricity usage (kWh)
+    </label>
+
+    <div class="slider-value">
+        <span class="slider-value">800</span> kWh
+    </div>
+
+    <input type="range"
+           id="electricity"
+           name="electricity"
+           min="0"
+           max="5000"
+           step="20"
+           value="800"
+           class="eco-slider">
+
+</div>
+
+<!-- Water -->
+<div class="slider-group">
+
+    <label for="water">
+        💧 Monthly water usage (litres)
+    </label>
+
+    <div class="slider-value">
+        <span class="slider-value">500</span> L
+    </div>
+
+    <input type="range"
+           id="water"
+           name="water"
+           min="0"
+           max="10000"
+           value="500"
+           class="eco-slider">
+
+</div>
+
+<!-- Food -->
+<div class="slider-group">
+
+    <label for="food">
+        🍽 Monthly food waste (kg)
+    </label>
+
+    <div class="slider-value">
+        <span class="slider-value">5</span> meals/week
+    </div>
+
+    <input type="range"
+           id="food"
+           name="food"
+           min="0"
+           max="30"
+           value="5"
+           class="eco-slider">
+
+</div>
+
+<!-- Plastic -->
+<div class="slider-group">
+
+    <label for="plastic">
+        🛍 Monthly plastic waste (kg)
+    </label>
+
+    <div class="slider-value">
+        <span class="slider-value">5 </span> items/week
+    </div>
+
+    <input type="range"
+           id="plastic"
+           name="plastic"
+           min="0"
+           max="30"
+           value="5"
+           class="eco-slider">
+
+</div>
+
+<!-- Transport -->
+<div class="slider-group">
+
+    <label for="transport">
+        🚗 Monthly distance driven (km)
+    </label>
+
+    <div class="slider-value">
+        <span class="slider-value">50</span> km/week
+    </div>
+
+    <input type="range"
+           id="transport"
+           name="transport"
+           min="0"
+           max="600"
+           value="50"
+           class="eco-slider">
+
+</div>
+
+<!-- Family -->
+<div class="slider-group">
+
+    <label for="size">
+        👨‍👩‍👧 Family Size
+    </label>
+
+    <div class="slider-value">
+        <span class="slider-value">4</span> people
+    </div>
+
+    <input type="range"
+           id="size"
+           name="size"
+           min="1"
+           max="10"
+           value="4"
+           class="eco-slider">
+
+</div>
+
+<!-- Gas -->
+<div class="slider-group">
+
+    <label for="usage">
+        🔥 LPG cylinders used per month
+    </label>
+
+    <div class="slider-value">
+        <span class="slider-value">3</span> 
+    </div>
+
+    <input type="range"
+           id="usage"
+           name="usage"
+           min="1"
+           max="10"
+           value="1"
+           class="eco-slider">
+
+</div>
+
+<!-- Flights -->
+<div class="slider-group">
+
+    <label for="flights">
+        ✈️ Number of Flights Taken This Year
+    </label>
+
+    <div class="slider-value">
+        <span class="slider-value">2</span> flights
+    </div>
+
+    <input type="range"
+           id="flights"
+           name="flights"
+           min="0"
+           max="10"
+           value="2"
+           class="eco-slider">
+
+</div>
+
+<button type="submit" id="submit-calc-btn">
+    🌍 Analyze Footprint
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+    </div>
+
+    <section id="dashboard">
+
+    <h1>📈 Your Sustainability Dashboard</h1>
+
+    <div class="dashboard-card">
+
+        <h3>🏠 Household Carbon Footprint</h3>
+
+        <h2 id="household-score">
+            0 kg CO₂e/year
+        </h2>
+
+    </div>
+
+    <div class="dashboard-card">
+
+        <h3>👤 Per Person Footprint</h3>
+
+        <h2 id="person-score">
+            0 kg CO₂e/year
+        </h2>
+
+    </div>
+
+    <div class="dashboard-card">
+
+        <h3>🔥 Largest Contributor</h3>
+
+        <h2 id="largest-source">
+            -
+        </h2>
+
+        <section class="recommendation">
+    <h2>💡 Polaris Recommendation:</h2>
+    <p id="recommendation">Your largest contributor is: ⚡Electricity</h4>
+    </section>
+
+    </div>
+
+    <canvas id="carbonChart"></canvas>
+
+</section>
+
+<section class="comparison">
+
+<h1>
+    <span class="rotating-earth">🌍</span> Global comparison
+</h1>
+
+<h3>👣 Your Footprint:</h3>
+<h2 id="your-footprint">
+            0 kg CO₂e/year
+        </h2>
+
+<h3>🌍 Global footprint:</h3>
+<h2 id="global-footprint">
+            0 kg CO₂e/year
+        </h2>
+
+<h3>⚖️ Comparison:</h3>
+<h2 id="comparison-score">
+            0 kg CO₂e/year
+        </h2>
+
+<div class="comparison-message">
+
+    <h3 id="polaris-insight">
+        🌱 You are below the global average!
+    </h3>
+
+</div> 
+
+<section id="challenges">
+
+    <h1>🌱 Sustainability Challenges</h1>
+
+    <p>
+        Complete challenges and earn eco badges!
+    </p>
+
+
+    <div class="challenge-container">
+
+        <div class="challenge-card">
+
+            <h2>💡 Energy Saver</h2>
+
+            <p>Reduce electricity waste for 7 days.</p>
+
+            <a href="/challenge/energy-saver" class="challenge-btn">
+                Start Challenge
+            </a>
+
+        </div>
+
+
+        <div class="challenge-card">
+
+            <h2>💧 Water Warrior</h2>
+
+            <p>
+            Complete daily actions to protect every drop.
+            </p>
+
+            <a href="/challenge/water-warrior" class="challenge-btn">
+                Start Challenge
+            </a>
+
+        </div>
+
+
+        <div class="challenge-card">
+
+            <h2>🍽 Food Hero</h2>
+
+            <p>
+           Take the challenge to reduce wasted food.
+            </p>
+
+            <a href="/challenge/food-hero" class="challenge-btn">
+                Start Challenge
+            </a>
+
+        </div>
+
+        <div class="challenge-card">
+
+            <h2>♻️ Plastic Patrol</h2>
+
+            <p>
+            Join the mission to reduce single-use plastics.
+            </p>
+
+            <a href="/challenge/plastic-patrol" class="challenge-btn">
+                Start Challenge
+            </a>
+
+        </div>
+
+        <div class="challenge-card">
+
+            <h2>🔥 Energy Guardian</h2>
+
+            <p>
+            Build smarter cooking habits and save fuel.
+            </p>
+
+            <a href="/challenge/energy-guardian" class="challenge-btn">
+                Start Challenge
+            </a>
+
+        </div>
+
+        <div class="challenge-card">
+
+            <h2>🚗 Green Journey</h2>
+
+            <p>
+            Choose cleaner ways to travel.
+            </p>
+
+            <a href="/challenge/green-journey" class="challenge-btn">
+                Start Challenge
+            </a>
+
+        </div>
+
+        <div class="challenge-card">
+
+            <h2>✈️ Sky Impact</h2>
+
+            <p>
+            Make travel choices that protect our atmosphere.
+            </p>
+
+            <a href="/challenge/sky-impact" class="challenge-btn">
+                Start Challenge
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================
+     ECO BADGES
+========================== -->
+
+<section id="eco-badges">
+
+    <h1>🏅 Your Eco Badges</h1>
+
+    <p class="badges-subtitle">
+        Complete Polaris challenges to unlock your Eco Badges!
+    </p>
+
+    <div class="badges-grid">
+
+        <!-- Energy Saver -->
+        <div class="badge-card locked" data-badge="energy-saver">
+            <div class="badge-icon">💡</div>
+            <h3>Energy Guardian</h3>
+            <p>Complete the Energy Saver challenge.</p>
+            <span class="badge-status">🔒 Locked</span>
+        </div>
+
+        <!-- Water Warrior -->
+        <div class="badge-card locked" data-badge="water-warrior">
+            <div class="badge-icon">💧</div>
+            <h3>Water Protector</h3>
+            <p>Complete the Water Warrior challenge.</p>
+            <span class="badge-status">🔒 Locked</span>
+        </div>
+
+        <!-- Food Hero -->
+        <div class="badge-card locked" data-badge="food-hero">
+            <div class="badge-icon">🍽️</div>
+            <h3>Food Saver</h3>
+            <p>Complete the Food Hero challenge.</p>
+            <span class="badge-status">🔒 Locked</span>
+        </div>
+
+        <!-- Plastic Patrol -->
+        <div class="badge-card locked" data-badge="plastic-patrol">
+            <div class="badge-icon">♻️</div>
+            <h3>Plastic Defender</h3>
+            <p>Complete the Plastic Patrol challenge.</p>
+            <span class="badge-status">🔒 Locked</span>
+        </div>
+
+        <!-- Energy Guardian -->
+        <div class="badge-card locked" data-badge="energy-guardian">
+            <div class="badge-icon">🔥</div>
+            <h3>Fuel Saver</h3>
+            <p>Complete the Energy Guardian challenge.</p>
+            <span class="badge-status">🔒 Locked</span>
+        </div>
+
+        <!-- Green Journey -->
+        <div class="badge-card locked" data-badge="green-journey">
+            <div class="badge-icon">🚗</div>
+            <h3>Green Traveler</h3>
+            <p>Complete the Green Journey challenge.</p>
+            <span class="badge-status">🔒 Locked</span>
+        </div>
+
+        <!-- Sky Impact -->
+        <div class="badge-card locked" data-badge="sky-impact">
+            <div class="badge-icon">✈️</div>
+            <h3>Sky Protector</h3>
+            <p>Complete the Sky Impact challenge.</p>
+            <span class="badge-status">🔒 Locked</span>
+        </div>
+
+    </div>
+
+    <div class="badge-progress">
+
+        <h3>🌱 Your Progress</h3>
+
+        <p>
+            <span id="badges-earned">0</span>
+            / 7 badges unlocked
+        </p>
+
+        <div class="progress-bar">
+            <div id="badge-progress-fill"></div>
+        </div>
+
+    </div>
+
+</section>
+
+<footer id="about">
+
+    <div class="footer-container">
+
+        <!-- BRAND -->
+        <div class="footer-brand">
+
+            <h2>🌍 Polaris</h2>
+
+            <p><i>Guiding families toward a sustainable future.</i></p>
+
+            <div class="footer-socials">
+                <img src="https://www.fenews.co.uk/wp-content/uploads/2021/04/Earth_Prize_logo_on_white_750.jpg" alt="">
+            </div>
+
+        </div>
+
+        <!-- NAVIGATE -->
+        <div class="footer-column">
+
+            <h3>Navigate</h3>
+
+            <a href="#home">Home</a>
+            <a href="#mission">Mission</a>
+            <a href="#calculator">Calculator</a>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#challenges">Challenges</a>
+            <a href="#about">About</a>
+
+        </div>
+
+        <!-- EXPLORE -->
+        <!-- EXPLORE -->
+<div class="footer-column">
+
+    <h3>Explore</h3>
+
+    <a
+        href="https://www.theearthprize.org/"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        The Earth Prize
+    </a>
+
+    <a
+        href="https://climate.nasa.gov/"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        NASA Climate
+    </a>
+
+    <a
+        href="https://ourworldindata.org/"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        Our World in Data
+    </a>
+
+    <a
+        href="https://www.unwater.org/"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        UN-Water
+    </a>
+
+</div>
+
+        <!-- CONTACT -->
+        <div class="footer-column footer-contact">
+
+            <h3>Contact</h3>
+
+            <a href="https://mail.google.com/mail/u/1/#inbox">
+                aaradhya14.d@gmail.com
+            </a>
+
+            <a href="#">
+                +971 509821582
+            </a>
+
+        </div>
+
+    </div>
+
+    <hr class="footer-divider">
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 Polaris. All rights reserved.
+        </p>
+
+        <p class="footer-tagline">
+            Small actions. Big changes. 🌱
+        </p>
+
+    </div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
