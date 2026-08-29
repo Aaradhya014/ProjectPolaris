@@ -1,1905 +1,904 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+/* =========================================================
+   PROJECT POLARIS
+   Main Stylesheet
+========================================================= */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
 
-html{
-    scroll-behavior:smooth;
-}
+/* =========================================================
+   GLOBAL
+========================================================= */
 
-body{
-
-    font-family:'Poppins',sans-serif;
-
-    background:linear-gradient(
-        180deg,
-        #f8fff9 0%,
-        #e8faed 45%,
-        #c9f4d4 100%
-    );
-
-    color:#1b1b1b;
-
-    min-height:100vh;
-
-}
-
-/* ==========================
-   NAVBAR
-   ========================== */
-
-nav{
-
-    position:sticky;
-
-    top:0;
-
-    width:100%;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:18px 30px;
-
-    background:rgb(31, 82, 73);
-
-    backdrop-filter:blur(12px);
-
-    box-shadow:0 8px 25px rgba(0,0,0,.15);
-
-    z-index:999;
-
-}
-
-/* ---------- LOGO ---------- */
-
-.logo{
-
-    color:white;
-
-    letter-spacing:1px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    white-space:nowrap;
-
-    font-size:1.5rem;
-
-    font-weight:700;
-
-}
-
-.polaris{
-    color:#00ff6a;      
-    font-weight:800;
-}
-
-/* ---------- NAV LINKS ---------- */
-
-.nav-links{
-    display:flex;
-
-    gap:18px;
-
-    align-items:center;
-
-    flex-wrap:wrap;
-
-}
-
-.nav-links a{
-
-    text-decoration:none;
-
-    color:white;
-
-    font-weight:500;
-
-    padding:10px 16px;
-
-    font-size:0.95rem;
-
-    border-radius:40px;
-
-    transition:.35s;
-
-    white-space: nowrap;
-
-}
-
-.nav-links a:hover{
-
-    color:#0dff00;
-
-    transform:translateY(-4px);
-
-    box-shadow:0 10px 20px rgba(0,0,0,.2);
-
-}
-
-nav a:active{
-
-    transform:scale(.95);
-
-}
-
-/* Animated underline */
-
-nav a::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-
-    bottom:6px;
-
-    width:0;
-
-    height:2px;
-
-    background:white;
-
-    transition:.3s;
-
-}
-
-nav a:hover::after{
-
-    width:70%;
-
-    left:15%;
-
-}
-
-/* ==========================
-   HERO
-   ========================== */
-
-.hero{
-
-    min-height:100vh;
-
-    padding-top:20px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    text-align:center;
-
-}
-
-/* ---------- TITLE ---------- */
-
-.hero h1{
-
-    font-size:4.8rem;
-
-    color:#0ab453;
-
-    font-weight:800;
-
-    margin-bottom:20px;
-
-    letter-spacing:2px;
-
-    animation:fadeUp 1s ease;
-
-    text-shadow:
-
-    0 0 10px rgb(0, 160, 59);
-
-}
-
-/* ---------- EARTH ---------- */
-
-.earth{
-
-    display:inline-block;
-
-    animation:float 4s ease-in-out infinite;
-
-}
-
-.star{
-
-    display:inline-block;
-
-    animation:float 4s ease-in-out infinite;
-}
-
-/* ---------- SUBTITLE ---------- */
-
-.one{
-
-    font-size:2rem;
-
-    font-weight:300;
-
-    color:#2f2f2f;
-
-    max-width:850px;
-
-    margin-bottom:25px;
-
-    animation:fadeUp 1.4s ease;
-
-}
-
-.two{
-
-    font-size:1.25rem;
-
-    color:#5f5f5f;
-
-    font-style:italic;
-
-    max-width:750px;
-
-    margin-bottom:45px;
-
-    animation:fadeUp 1.8s ease;
-
-}
-
-.accent-line{
-
-    width:120px;
-
-    height:4px;
-
-    margin:35px auto;
-
-    border-radius:50px;
-
-    background:linear-gradient(
-        to right,
-        transparent,
-        #22c55e,
-        transparent
-    );
-
-}
-
-.heros{
-
-    text-decoration:none;
-
-    color:white;
-
-    background:#00752b;
-
-    padding:18px 42px;
-
-    border-radius:50px;
-
-    font-size:1.1rem;
-
-    font-weight:600;
-
-    transition:.35s;
-
-    box-shadow:0 12px 25px rgba(0, 117, 43, 0.856);
-
-}
-
-.heros:hover{
-
-    background-color: rgba(60, 135, 22, 0.772);
-
-    color: rgb(38, 255, 0);
-
-    transform:translateY(-6px);
-
-    box-shadow: 0 18px 30px rgba(0,0,0,.2);
-
-}
-
-.features{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-
-    gap:50px;
-
-    padding:80px 8%;
-
-}
-
-.card {
-    background: white;
-    padding: 35px;
-    border-radius: 22px;
-    text-align: center;
-
-    transition:
-        transform .35s ease,
-        box-shadow .35s ease,
-        background .35s ease,
-        color .35s ease;
-}
-
-.card:hover {
-    transform: translateY(-10px);
-
-    box-shadow: 0 18px 30px rgb(26, 92, 7);
-
-    background: linear-gradient(
-        rgb(130, 255, 130),
-        white
-    );
-
-    cursor: pointer;
-}
-
-.card h2 {
-    color: #044620;
-    margin-bottom: 15px;
-}
-
-.card p {
-    color: #556080;
-    transition: color 0.3s ease;
-}
-
-footer{
-
-    background:#00332a;
-
-    color:white;
-
-    text-align:center;
-
-    padding:40px;
-
-    margin-top:70px;
-
-}
-
-@keyframes fadeUp{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(40px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
-
-}
-
-@keyframes float{
-
-    0%,100%{
-
-        transform:translateY(0);
-
-    }
-
-    50%{
-
-        transform:translateY(-10px);
-
-    }
-
-}
-
-@media(max-width:900px){
-
-    nav{
-
-        flex-direction:column;
-
-        gap:20px;
-
-        padding:20px;
-
-    }
-
-    .nav-links{
-
-        flex-wrap:wrap;
-
-        justify-content:center;
-
-    }
-
-    .hero h1{
-
-        font-size:3.6rem;
-
-    }
-
-    .one{
-
-        font-size:1.5rem;
-
-    }
-
-    .two{
-
-        font-size:1rem;
-
-    }
-
-}
-
-@media(max-width:600px){
-
-    .hero h1{
-
-        font-size:2.7rem;
-
-    }
-
-    .one{
-
-        font-size:1.2rem;
-
-    }
-
-    .hero-btn{
-
-        width:100%;
-
-        max-width:320px;
-
-    }
-
-}
-
-body.dark-mode {
-    background: linear-gradient(
-        180deg,
-        #07130f 0%,
-        #0d2018 45%,
-        #163126 100%
-    );
-
-    color: #f1f5f9;
-}
-
-body.dark-mode .container{
-
-    background:#16251f;
-
-    box-shadow:0 12px 35px rgba(0,0,0,.45);
-
-}
-
-body.dark-mode .slider-group label{
-
-    color:white;
-
-}
-
-body.dark-mode nav {
-    background: linear-gradient(90deg, #020617, #0f172a);
-}
-
-body.dark-mode .one{
-    color: white;
-}
-
-body.dark-mode .two{
-    color: white;
-}
-
-body.dark-mode .card{
-
-    background:#1b2d26;
-
-    color:white;
-
-    box-shadow:0 12px 30px rgba(0,255,100,.18);
-
-}
-
-body.dark-mode .card h2{
-    color:#5dfd8a;
-}
-
-.hero-btn:hover {
-    background: #dcedc8;
-}
-
-body.dark-mode .modal-content{
-
-    background:#16251f;
-
-    color:white;
-
-}
-
-body.dark-mode .modal-content input{
-
-    background:#22352d;
-
-    color:white;
-
-    border:1px solid #2f5c4b;
-
-}
-
-body.dark-mode .modal-content label{
-
-    color:#f1f5f9;
-
-}
-
-body.dark-mode .hero h1{
-
-    text-shadow:
-
-    0 0 20px rgb(0, 104, 37);
-
-}
-
-.tagline{
-    font-size:1.2rem;
-    color:#555;
-    margin-top:-10px;
-    margin-bottom:35px;
-    font-weight:600;
-    letter-spacing:1px;
-}
-
-body.dark-mode .tagline{
-    color:white;
-}
-
-body.dark-mode .card p{
-
-    color: white;
-
-}
-
-.confidence.high{
-    color:#0c8d36;
-    font-weight:bold;
-}
-
-.confidence.medium{
-    color:#d4a017;
-    font-weight:bold;
-}
-
-.why{
-
-    margin-bottom:60px;
-
-}
-
-.why ul{
-    font-size: 20px;
-    letter-spacing: 0.5px;
-    line-height: 40px;
-}
-
-.modal{
-
-    display:none;
-
-    position:fixed;
-
-    left:0;
-
-    top:0;
-
-    width:100%;
-
-    height:100%;
-
-    background:rgba(0,0,0,.7);
-
-    justify-content:center;
-
-    align-items:center;
-
-    z-index:5000;
-
-}
-
-.modal-content{
-
-    width:500px;
-
-    background:white;
-
-    padding:40px;
-
-    border-radius:20px;
-
-    box-shadow:0 15px 40px rgba(0,0,0,.4);
-
-    animation:popup .4s ease;
-
-}
-
-.modal-content h2{
-
-    color:#006d33;
-
-    margin-bottom:20px;
-
-}
-
-.modal-content label{
-
-    display:block;
-
-    margin-top:18px;
-
-    font-weight:600;
-
-}
-
-.modal-content input{
-
-    width:100%;
-
-    padding:12px;
-
-    margin-top:8px;
-
-    border-radius:8px;
-
-    border:1px solid #ccc;
-
-    font-size:16px;
-
-}
-
-.modal-content button{
-
-    margin-top:25px;
-
-    width:100%;
-
-    padding:15px;
-
-    background:#0c8d36;
-
-    color:white;
-
-    border:none;
-
-    border-radius:10px;
-
-    cursor:pointer;
-
-    font-size:17px;
-
-}
-
-.modal-content button:hover{
-
-    background:#066d28;
-
-}
-
-.close{
-
-    float:right;
-
-    font-size:30px;
-
-    cursor:pointer;
-
-}
-
-#result{
-
-    margin-top:25px;
-
-    text-align:center;
-
-    color:#006d33;
-
-}
-
-body.dark-mode #result{
-    color:#6dff9b;
-}
-
-@keyframes popup{
-
-    from{
-
-        opacity:0;
-
-        transform:scale(.8);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:scale(1);
-
-    }
-
-}
-
-.calculate{
-    
-    text-decoration:none;
-
-    color:white;
-
-    background:#00752b;
-
-    padding:18px 42px;
-
-    border-radius:50px;
-
-    font-size:1.1rem;
-
-    font-weight:600;
-
-    transition:.35s;
-
-    box-shadow: 0 18px 30px rgb(16, 114, 7);
-
-}
-
-.calculate:hover{
-
-    background-color: rgb(255, 255, 255);
-
-    color: rgb(0, 0, 0);
-
-    transform:translateY(-6px);
-
-    box-shadow: 0 18px 30px rgba(0,0,0,.2);
-
-}
-
-.container{
-    max-width:790px;
-
-    margin:80px auto;
-
-    padding:50px;
-
-    background:white;
-
-    border-radius:24px;
-
-    box-shadow:0 15px 35px rgba(0,0,0,.08);
-
-    text-align:center;
-}
-
-.input-methods{
-    margin:25px 0;
-}
-
-.input-methods h3{
-    margin-bottom:15px;
-}
-
-.option-box{
-    padding:15px;
-    margin:12px 0;
-    border:2px solid #d8e7d4;
-    border-radius:15px;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.option-box:hover{
-    border-color:#0c8d36;
-    transform:translateY(-2px);
-}
-
-.confidence{
-    margin-top:20px;
-    color:#555;
-}
-
-.slider-group{
-    margin:28px 0;
-}
-
-.slider-group label{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    font-weight:600;
-    color:#1e3932;
-    margin-bottom:10px;
-    font-size:16px;
-}
-
-.slider-group label span{
-    color:#0c8d36;
-    font-weight:700;
-}
-
-.eco-slider {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 8px;
-    border-radius: 4px;
-    background: #e2f0cb;
-    outline: none;
-    margin-top: 8px;
-}
-
-.eco-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: #00875a; /* Your primary bright green */
-    cursor: pointer;
-    transition: transform 0.1s ease;
-}
-
-.eco-slider::-webkit-slider-thumb:hover {
-    transform: scale(1.2);
-}
-
-#submit-calc-btn{
-    width:100%;
-    padding:18px;
-    border:none;
-    border-radius:40px;
-    background:#14532d;
-    color:white;
-    font-size:18px;
-    font-weight:700;
-    cursor:pointer;
-    margin-top:35px;
-    transition:.3s;
-}
-
-#submit-calc-btn:hover{
-    background:#0c8d36;
-
-    transform:translateY(-3px);
-
-}
-
-/* Normal mode */
-.slider-group label span{
-    color:#0c8d36;
-    font-weight:700;
-}
-
-/* Dark mode */
-body.dark-mode .slider-group label span{
-    color:#7dffb3;
-}
-
-#dashboard h1{
-    font-size:50px ;
-}
-
-#dashboard h4{
-    font-size: 30px;
-}
-
-.rotating-earth {
-    display: inline-block;
-    animation: earthSpin 8s ease-in-out infinite;
-}
-
-@keyframes earthSpin {
-    0% {
-        transform: perspective(100px) rotateY(0deg) scaleX(1);
-    }
-
-    25% {
-        transform: perspective(100px) rotateY(60deg) scaleX(0.7);
-    }
-
-    50% {
-        transform: perspective(100px) rotateY(180deg) scaleX(1);
-    }
-
-    75% {
-        transform: perspective(100px) rotateY(300deg) scaleX(0.7);
-    }
-
-    100% {
-        transform: perspective(100px) rotateY(360deg) scaleX(1);
-    }
-}
-
-/* ==========================
-   CHALLENGES SECTION
-   ========================== */
-
-
-.challenge-container{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(280px,1fr));
-
-    gap:30px;
-
-    padding:50px 8%;
-
-}
-
-.challenge-card {
-    background: white;
-    padding: 30px;
-    border-radius: 20px;
-    text-align: center;
-    color: #1b1b1b;
-
-    box-shadow: 0 10px 25px rgba(0,0,0,.1);
-
-    transition:
-        transform .35s ease,
-        box-shadow .35s ease,
-        background .35s ease,
-        color .35s ease;
-}
-
-.challenge-card:hover {
-    transform: translateY(-10px);
-
-    box-shadow:
-        0 18px 35px rgba(0,117,43,.2);
-}
-
-.challenge-btn {
-    display: inline-block;
-
-    margin-top: 20px;
-
-    padding: 10px 22px;
-
-    border: none;
-    border-radius: 30px;
-
-    background: #00752b;
-    color: white;
-
-    cursor: pointer;
-
-    font-weight: 600;
-    font-size: .9rem;
-
-    text-decoration: none;
-
-    transition: .3s;
-}
-
-.challenge-btn:hover {
-    background: #005c22;
-    transform: translateY(-3px);
-}
-
-/* ==========================
-   DARK MODE
-   ========================== */
-
-body.dark-mode .challenge-card {
-    background: #1b2d26;
-    color: white;
-
-    box-shadow:
-        0 20px 45px rgba(0,255,100,.15);
-}
-
-body.dark-mode .challenge-card h2 {
-    color: #5dfd8a;
-}
-
-body.dark-mode .challenge-card p {
-    color: #e5e7eb;
-}
-
-body.dark-mode .challenge-card:hover {
-    background: #223b31;
-}
-
-body.dark-mode .challenge-btn {
-    background: #00a846;
-}
-
-body.dark-mode .challenge-btn:hover {
-    background: #00c957;
-}
-
-.challenge-page {
-
-    min-height:80vh;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    padding:70px 20px;
-
-}
-
-
-.challenge-detail {
-
-    width:100%;
-
-    max-width:700px;
-
-    background:white;
-
-    padding:50px;
-
-    border-radius:25px;
-
-    text-align:center;
-
-    box-shadow:
-        0 15px 40px rgba(0,0,0,.12);
-
-}
-
-
-.challenge-icon {
-
-    font-size:4rem;
-
-    margin-bottom:15px;
-
-}
-
-
-.challenge-detail h1 {
-
-    font-size:3rem;
-
-    color:#087f23;
-
-    margin-bottom:10px;
-
-}
-
-
-.challenge-subtitle {
-
-    font-size:1.2rem;
-
-    color:#556080;
-
-    margin-bottom:40px;
-
-}
-
-
-.challenge-section {
-
-    text-align:left;
-
-    margin-top:30px;
-
-    padding:25px;
-
-    border-radius:18px;
-
-    background:#f1fff4;
-
-}
-
-
-.challenge-section h2 {
-
-    color:#087f23;
-
-    margin-bottom:12px;
-
-}
-
-
-.challenge-section p {
-
-    color:#374151;
-
-    line-height:1.7;
-
-}
-
-
-.challenge-section ul {
-
-    padding-left:25px;
-
-    line-height:2;
-
-    color:#374151;
-
-}
-
-
-.challenge-goal {
-
-    margin-top:30px;
-
-    padding:25px;
-
-    border-radius:18px;
-
-    background:#e2f0cb;
-
-}
-
-
-.challenge-goal h2 {
-
-    color:#087f23;
-
-    margin-bottom:10px;
-
-}
-
-
-.challenge-back {
-
-    display:inline-block;
-
-    margin-top:30px;
-
-    text-decoration:none;
-
-    color:white;
-
-    background:#00752b;
-
-    padding:13px 28px;
-
-    border-radius:30px;
-
-    font-weight:600;
-
-    transition:.3s;
-
-}
-
-
-.challenge-back:hover {
-
-    transform:translateY(-4px);
-
-    box-shadow:
-        0 10px 25px rgba(0,117,43,.3);
-
-}
-
-body.dark-mode .challenge-detail {
-
-    background:#1b2d26;
-
-    color:white;
-
-}
-
-body.dark-mode .challenge-detail h1 {
-
-    color:#5dfd8a;
-
-}
-
-body.dark-mode .challenge-subtitle {
-
-    color:#d1d5db;
-
-}
-
-body.dark-mode .challenge-section {
-
-    background:#22352d;
-
-}
-
-body.dark-mode .challenge-section h2 {
-
-    color:#5dfd8a;
-
-}
-
-body.dark-mode .challenge-section p,
-body.dark-mode .challenge-section li {
-
-    color:#f1f5f9;
-
-}
-
-body.dark-mode .challenge-goal {
-
-    background:#294437;
-
-}
-
-body.dark-mode .challenge-goal h2 {
-
-    color:#5dfd8a;
-
-}
-
-/* ==============================
-   POLARIS FOOTER
-================================ */
-
-.site-footer {
-    background: #081d35;
-    color: #7186a0;
-    padding: 75px 8% 25px;
-    margin-top: 80px;
-}
-
-.footer-container {
-    width: 100%;
+* {
+    box-sizing: border-box;
     margin: 0;
-
-    display: grid;
-
-    grid-template-columns:
-        minmax(0, 2.2fr)
-        minmax(0, 1fr)
-        minmax(0, 1.2fr)
-        minmax(0, 1fr);
-
-    gap: clamp(30px, 6vw, 120px);
+    padding: 0;
 }
 
-/* ==============================
-   BRAND
-================================ */
-
-.footer-brand {
-    width: 100%;
-    max-width: none;
+html {
+    scroll-behavior: smooth;
 }
 
-.footer-brand h2 {
-    display: inline-block;
-
-    color: #ffffff;
-    font-size: 28px;
-    margin: 0 0 22px;
-
-    font-weight: 700;
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f8f4;
+    color: #1f2d24;
+    line-height: 1.6;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
-.footer-brand p {
-    font-size: 16px;
-    line-height: 1.8;
-    color: #7186a0;
+section {
+    scroll-margin-top: 90px;
+}
 
-    max-width: 500px;
+h1,
+h2,
+h3 {
+    line-height: 1.25;
+}
+
+button,
+input,
+a {
+    font-family: inherit;
 }
 
 
-/* ==============================
-   COLUMN HEADINGS
-================================ */
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
-.footer-column h3 {
-    color: #8fa3bd;
-
-    font-size: 13px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-
-    margin: 0 0 25px;
-
-    font-weight: 700;
-}
-
-
-/* ==============================
-   LINKS
-================================ */
-
-.footer-column a {
-    display: block;
-
-    color: #7186a0;
-    text-decoration: none;
-
-    font-size: 15px;
-
-    margin-bottom: 17px;
-
-    transition: 0.2s ease;
-}
-
-.footer-column a:hover {
-    color: #ffffff;
-    transform: translateX(3px);
-}
-
-
-/* ==============================
-   SOCIALS
-================================ */
-
-.footer-socials {
-    display: flex;
-    gap: 15px;
-    width: 100px;
-    height: 100px;
-    margin: 25px auto;
-}
-
-/* ==============================
-   CONTACT
-================================ */
-
-.footer-contact a {
-    margin-bottom: 18px;
-}
-
-.footer-divider {
-    width: 100%;
-    margin: 65px 0 25px;
-}
-
-/* ==============================
-   BOTTOM
-================================ */
-
-.footer-bottom {
-    width: 100%;
-    margin: 0;
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    padding: 18px 6%;
+
+    background: rgba(255, 255, 255, 0.96);
+    border-bottom: 1px solid #dce8de;
+
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
 }
 
-.footer-bottom p {
-    margin: 0;
-
-    font-size: 13px;
-    color: #536a84;
+.logo {
+    font-size: 1.35rem;
+    font-weight: 800;
+    white-space: nowrap;
 }
 
-.footer-tagline {
-    color: #1db6c9 !important;
+.polaris {
+    color: #43a047;
 }
 
-
-/* ==============================
-   MOBILE
-================================ */
-
-@media (max-width: 900px) {
-
-    .footer-container {
-        grid-template-columns: 1fr 1fr;
-        gap: 50px;
-    }
-
-    .footer-brand {
-        grid-column: 1 / -1;
-    }
-
+.nav-links {
+    display: flex;
+    gap: 22px;
+    align-items: center;
 }
 
+.nav-links a {
+    color: #26352b;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
 
-@media (max-width: 600px) {
-
-    .site-footer {
-        padding: 55px 25px 25px;
-    }
-
-    .footer-container {
-        grid-template-columns: 1fr;
-        gap: 35px;
-    }
-
-    .footer-brand {
-        grid-column: auto;
-    }
-
-    .footer-bottom {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-    }
-
+    transition: color 0.2s ease;
 }
 
-/* ==============================
-   COMPLETE POLARIS DARK MODE
-   ============================== */
-
-body.dark-mode {
-    background: linear-gradient(
-        180deg,
-        #07130f 0%,
-        #0d2018 45%,
-        #163126 100%
-    );
-
-    color: #f1f5f9;
+.nav-links a:hover {
+    color: #43a047;
 }
 
 
-/* ==============================
-   HEADINGS
-   ============================== */
-
-/* H1 STAYS EXACTLY LIKE LIGHT MODE */
-body.dark-mode h1 {
-    color: #0ab453;
-
-    text-shadow:
-        0 0 10px rgb(0, 160, 59);
-}
-
-
-/* Other headings and text */
-body.dark-mode h2,
-body.dark-mode h3,
-body.dark-mode h4,
-body.dark-mode p,
-body.dark-mode li {
-    color: #f1f5f9;
-}
-
-
-/* ==============================
-   NAVBAR
-   ============================== */
-
-body.dark-mode nav {
-    background: linear-gradient(
-        90deg,
-        #020617,
-        #0f172a
-    );
-}
-
-
-/* ==============================
+/* =========================================================
    HERO
-   ============================== */
+========================================================= */
 
-body.dark-mode .one,
-body.dark-mode .two,
-body.dark-mode .tagline {
-    color: #f1f5f9;
+.hero {
+    text-align: center;
+
+    padding: 95px 8% 80px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #eef8ef 0%,
+            #f4f8f4 100%
+        );
 }
 
+.hero h1 {
+    font-size: clamp(2.6rem, 6vw, 4.8rem);
 
-/* ==============================
-   NORMAL CARDS
-   ============================== */
+    color: #43a047;
 
-body.dark-mode .card {
-    background: #1b2d26;
-    color: #f1f5f9;
+    margin-bottom: 10px;
 
-    box-shadow:
-        0 12px 30px rgba(0,255,100,.18);
-}
-
-body.dark-mode .card:hover {
-    background: #223b31;
-
-    transform: translateY(-10px);
-
-    box-shadow:
-        0 18px 35px rgba(0,255,100,.25);
-}
-
-body.dark-mode .card h2 {
-    color: #5dfd8a;
-}
-
-body.dark-mode .card p {
-    color: #e5e7eb;
-}
-
-
-/* ==============================
-   CALCULATOR CONTAINER
-   ============================== */
-
-body.dark-mode .container {
-    background: #16251f;
-    color: #f1f5f9;
-
-    box-shadow:
-        0 12px 35px rgba(0,0,0,.45);
-}
-
-
-/* ==============================
-   SLIDERS
-   ============================== */
-
-body.dark-mode .slider-group label {
-    color: #f1f5f9;
-}
-
-body.dark-mode .slider-group label span {
-    color: #7dffb3;
-}
-
-
-/* ==============================
-   CHALLENGE CARDS
-   ============================== */
-
-body.dark-mode .challenge-card {
-    background: #1b2d26;
-    color: #f1f5f9;
-
-    box-shadow:
-        0 20px 45px rgba(0,255,100,.15);
-}
-
-body.dark-mode .challenge-card:hover {
-    background: #223b31;
-
-    transform: translateY(-10px);
-
-    box-shadow:
-        0 20px 40px rgba(0,255,100,.25);
-}
-
-body.dark-mode .challenge-card h2 {
-    color: #5dfd8a;
-}
-
-body.dark-mode .challenge-card p {
-    color: #e5e7eb;
-}
-
-
-/* ==============================
-   CHALLENGE DETAIL
-   ============================== */
-
-body.dark-mode .challenge-detail {
-    background: #1b2d26;
-    color: #f1f5f9;
-}
-
-body.dark-mode .challenge-detail h1 {
-    color: #0ab453;
-
+    /* Original Polaris glow effect */
     text-shadow:
-        0 0 10px rgb(0, 160, 59);
+        0 0 8px rgba(76, 175, 80, 0.45),
+        0 0 18px rgba(76, 175, 80, 0.25);
 }
 
-body.dark-mode .challenge-subtitle {
-    color: #d1d5db;
+.earth {
+    display: inline-block;
+}
+
+.tagline {
+    font-size: 1.4rem;
+    color: #49614e;
+    margin-bottom: 18px;
+}
+
+.one {
+    font-size: 1.15rem;
+    margin-bottom: 12px;
+}
+
+.two {
+    max-width: 700px;
+    margin: 0 auto;
+
+    color: #58705d;
+
+    font-style: italic;
+}
+
+.accent-line {
+    width: 75px;
+    height: 4px;
+
+    margin: 22px auto 0;
+
+    background: #4caf50;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 0 8px rgba(76, 175, 80, 0.65),
+        0 0 16px rgba(76, 175, 80, 0.3);
 }
 
 
-/* ==============================
-   CHALLENGE SECTIONS
-   ============================== */
+/* =========================================================
+   FEATURE CARDS
+========================================================= */
 
-body.dark-mode .challenge-section {
-    background: #22352d;
+.features {
+    max-width: 1100px;
+
+    margin: 60px auto 0;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 20px;
 }
 
-body.dark-mode .challenge-section h2 {
-    color: #5dfd8a;
+.card {
+    position: relative;
+
+    padding: 28px 22px;
+
+    background: white;
+
+    border: 1px solid #dce8de;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 8px 25px rgba(42, 87, 48, 0.07);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-body.dark-mode .challenge-section p,
-body.dark-mode .challenge-section li {
-    color: #f1f5f9;
+/* Glowing line underneath each feature card */
+.card::after {
+    content: "";
+
+    position: absolute;
+
+    left: 20%;
+    right: 20%;
+    bottom: -7px;
+
+    height: 3px;
+
+    background: #4caf50;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 0 7px rgba(76, 175, 80, 0.7),
+        0 0 15px rgba(76, 175, 80, 0.35);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 12px 30px rgba(42, 87, 48, 0.12);
+}
+
+.card h2 {
+    color: #43a047;
+    margin-bottom: 12px;
+}
+
+.card p {
+    color: #536458;
 }
 
 
-/* ==============================
-   CHALLENGE GOAL
-   ============================== */
+/* =========================================================
+   WHY POLARIS
+========================================================= */
 
-body.dark-mode .challenge-goal {
-    background: #294437;
+.why {
+    max-width: 850px;
+
+    margin: 60px auto 35px;
+
+    padding: 35px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    border: 1px solid #dce8de;
+
+    text-align: left;
 }
 
-body.dark-mode .challenge-goal h2 {
-    color: #5dfd8a;
+.why h1 {
+    text-align: center;
+
+    color: #43a047;
+
+    margin-bottom: 25px;
 }
 
-
-/* ==============================
-   MODAL
-   ============================== */
-
-body.dark-mode .modal-content {
-    background: #16251f;
-    color: #f1f5f9;
+.why ul {
+    padding-left: 25px;
 }
 
-body.dark-mode .modal-content h2 {
-    color: #5dfd8a;
+.why li {
+    margin: 12px 0;
+
+    color: #4d5e51;
 }
 
-body.dark-mode .modal-content input {
-    background: #22352d;
+.calculate {
+    display: inline-block;
+
+    padding: 14px 28px;
+
+    background: #2e7d32;
+
     color: white;
 
-    border: 1px solid #2f5c4b;
-}
+    text-decoration: none;
 
-body.dark-mode .modal-content label {
-    color: #f1f5f9;
-}
+    font-weight: 700;
 
+    border-radius: 10px;
 
-/* ==============================
-   RESULT
-   ============================== */
-
-body.dark-mode #result {
-    color: #6dff9b;
-}
-
-
-/* ==============================
-   FOOTER
-   ============================== */
-
-body.dark-mode .site-footer {
-    background: #020b08;
-    color: #d1d5db;
-}
-
-body.dark-mode .footer-brand h2 {
-    color: #7dffb3;
-}
-
-body.dark-mode .footer-brand p {
-    color: #f9fbfa;
-}
-
-body.dark-mode .footer-column h3 {
-    color: #7dffb3;
-}
-
-body.dark-mode .footer-column a {
-    color: #a8b5ae;
-}
-
-body.dark-mode .footer-column a:hover {
-    color: #ffffff;
-}
-
-body.dark-mode .footer-divider {
-    border-top-color: #243b32;
-}
-
-body.dark-mode .footer-bottom p {
-    color: #82958b;
-}
-
-body.dark-mode .footer-tagline {
-    color: #5dfd8a !important;
-}
-
-
-/* ==============================
-   SMOOTH TRANSITIONS
-   ============================== */
-
-body,
-nav,
-.card,
-.container,
-.challenge-card,
-.challenge-detail,
-.challenge-section,
-.challenge-goal,
-.modal-content,
-.site-footer {
     transition:
-        background 0.4s ease,
-        background-color 0.4s ease,
-        color 0.4s ease,
-        box-shadow 0.4s ease,
-        transform 0.35s ease;
+        background 0.2s ease,
+        transform 0.2s ease;
 }
 
-/* ==========================
-   ECO BADGES
-========================== */
+.calculate:hover {
+    background: #256628;
 
-#eco-badges {
-    padding: 70px 8%;
-    text-align: center;
-}
-
-#eco-badges h1 {
-    font-size: 36px;
-    margin-bottom: 10px;
-}
-
-.badges-subtitle {
-    font-size: 17px;
-    margin-bottom: 40px;
-    opacity: 0.8;
+    transform: translateY(-2px);
 }
 
 
-/* ==========================
-   BADGE GRID
-========================== */
+/* =========================================================
+   CALCULATOR
+========================================================= */
 
-.badges-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
-    max-width: 1100px;
+#calculator {
+    padding: 80px 6%;
+
+    background: white;
+}
+
+.container {
+    max-width: 900px;
+
     margin: auto;
 }
 
+#calculator h2 {
+    text-align: center;
 
-/* ==========================
-   BADGE CARD
-========================== */
+    font-size: 2.3rem;
 
-.badge-card {
-    background: white;
-    border-radius: 18px;
-    padding: 30px 20px;
+    color: #43a047;
+}
 
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+.calculator-subtitle {
+    text-align: center;
+
+    color: #657267;
+
+    margin: 10px 0 40px;
+}
+
+
+/* =========================================================
+   INPUT METHOD
+========================================================= */
+
+.input-method {
+    display: none;
+}
+
+
+/* =========================================================
+   SLIDER SECTION
+========================================================= */
+
+.slider-title {
+    text-align: center;
+
+    color: #43a047;
+
+    font-size: 1.5rem;
+
+    margin-top: 25px;
+}
+
+.slider-subtitle {
+    text-align: center;
+
+    color: #657267;
+
+    margin-bottom: 35px;
+}
+
+.slider-group {
+    margin-bottom: 30px;
+
+    padding: 22px;
+
+    background: #f6faf6;
+
+    border: 1px solid #dce8de;
+
+    border-radius: 14px;
+}
+
+.slider-group label {
+    display: block;
+
+    font-weight: 700;
+
+    color: #304536;
+
+    margin-bottom: 12px;
+}
+
+.slider-value {
+    text-align: right;
+
+    font-weight: 700;
+
+    color: #43a047;
+
+    margin-bottom: 8px;
+}
+
+
+/* =========================================================
+   RANGE SLIDERS
+========================================================= */
+
+.eco-slider {
+    width: 100%;
+
+    height: 7px;
+
+    cursor: pointer;
+
+    accent-color: #4caf50;
+}
+
+
+/* =========================================================
+   CALCULATOR BUTTON
+========================================================= */
+
+#submit-calc-btn {
+    display: block;
+
+    width: 100%;
+
+    padding: 16px;
+
+    margin-top: 30px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #2e7d32;
+
+    color: white;
+
+    font-size: 1.05rem;
+
+    font-weight: 700;
+
+    cursor: pointer;
 
     transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
+        background 0.2s ease,
+        transform 0.2s ease;
+}
 
-    border: 2px solid transparent;
+#submit-calc-btn:hover {
+    background: #256628;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   SUSTAINABILITY SNAPSHOT
+========================================================= */
+
+#dashboard {
+    padding: 85px 6%;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f4f8f4,
+            #edf6ee
+        );
+}
+
+#dashboard > h1 {
+    color: #43a047;
+
+    font-size: 2.4rem;
+
+    margin-bottom: 45px;
+
+    text-align: center;
+
+    text-shadow:
+        0 0 7px rgba(76, 175, 80, 0.25);
+}
+
+
+/* =========================================================
+   DASHBOARD CARDS
+========================================================= */
+
+.dashboard-card {
+    width: 100%;
+
+    max-width: 650px;
+
+    margin: 20px auto;
+
+    padding: 30px;
+
+    background: white;
+
+    border: 1px solid #dce8de;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 25px rgba(42, 87, 48, 0.07);
+
+    text-align: center;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.dashboard-card h3 {
+    color: #536458;
+
+    margin-bottom: 12px;
+
+    text-align: center;
+}
+
+.dashboard-card h2 {
+    color: #43a047;
+
+    font-size: clamp(1.7rem, 4vw, 2.4rem);
+
+    text-align: center;
+
+    margin: 0;
+}
+
+
+/* =========================================================
+   RECOMMENDATION
+========================================================= */
+
+.recommendation {
+    width: 100%;
+
+    max-width: 650px;
+
+    margin: 30px auto 0;
+
+    padding: 25px;
+
+    background: #f0f8f1;
+
+    border-left: 5px solid #4caf50;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    box-shadow:
+        0 6px 20px rgba(42, 87, 48, 0.06);
+}
+
+.recommendation h2 {
+    color: #43a047;
+
+    font-size: 1.25rem;
+
+    margin-bottom: 12px;
+
+    text-align: center;
+}
+
+.recommendation p {
+    color: #536458;
+
+    line-height: 1.7;
+
+    text-align: center;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   CHART
+========================================================= */
+
+#carbonChart {
+    display: block;
+
+    width: 100% !important;
+
+    max-width: 900px;
+
+    margin: 55px auto 0;
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 18px;
+
+    border: 1px solid #dce8de;
+}
+
+
+/* =========================================================
+   GLOBAL COMPARISON
+========================================================= */
+
+.comparison {
+    padding: 80px 6%;
+
+    text-align: center;
+
+    background: white;
+}
+
+.comparison h1 {
+    color: #43a047;
+
+    margin-bottom: 40px;
+}
+
+.comparison h3 {
+    color: #657267;
+
+    margin-top: 22px;
+}
+
+.comparison h2 {
+    color: #43a047;
+
+    margin-top: 5px;
+}
+
+.comparison-message {
+    max-width: 650px;
+
+    margin: 35px auto 0;
+
+    padding: 20px;
+
+    background: #f0f8f1;
+
+    border-radius: 12px;
+
+    border: 1px solid #dce8de;
+}
+
+.comparison-message h3 {
+    color: #43a047;
+
+    margin: 0;
+}
+
+.rotating-earth {
+    display: inline-block;
+}
+
+
+/* =========================================================
+   CHALLENGES
+========================================================= */
+
+#challenges {
+    padding: 85px 6%;
+
+    text-align: center;
+
+    background: #f4f8f4;
+}
+
+#challenges > h1 {
+    color: #43a047;
+
+    font-size: 2.4rem;
+}
+
+#challenges > p {
+    color: #657267;
+
+    margin: 12px 0 40px;
+}
+
+.challenge-container {
+    max-width: 1150px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+.challenge-card {
+    padding: 30px 24px;
+
+    background: white;
+
+    border: 1px solid #dce8de;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 25px rgba(42, 87, 48, 0.07);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    min-height: 230px;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.challenge-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 12px 30px rgba(42, 87, 48, 0.12);
+}
+
+.challenge-card h2 {
+    color: #43a047;
+
+    margin-bottom: 15px;
+}
+
+.challenge-card p {
+    color: #657267;
+
+    flex-grow: 1;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.challenge-btn {
+    display: inline-block;
+
+    padding: 11px 20px;
+
+    background: #2e7d32;
+
+    color: white;
+
+    text-decoration: none;
+
+    border: none;
+
+    border-radius: 9px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.challenge-btn:hover {
+    background: #256628;
+
+    transform: translateY(-2px);
+}
+
+.challenge-btn:disabled,
+button:disabled {
+    opacity: 0.65;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================================================
+   ECO BADGES
+========================================================= */
+
+#eco-badges {
+    padding: 85px 6%;
+
+    text-align: center;
+
+    background: white;
+}
+
+#eco-badges > h1 {
+    color: #43a047;
+}
+
+.badges-subtitle {
+    color: #657267;
+
+    margin: 10px 0 40px;
+}
+
+.badges-grid {
+    max-width: 1050px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 20px;
+}
+
+.badge-card {
+    padding: 25px 18px;
+
+    border-radius: 16px;
+
+    border: 1px solid #dce8de;
+
+    background: #f8fbf8;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .badge-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
 }
-
-
-/* ==========================
-   BADGE ICON
-========================== */
 
 .badge-icon {
-    font-size: 55px;
-    margin-bottom: 15px;
+    font-size: 2.5rem;
 
-    transition: transform 0.3s ease;
+    margin-bottom: 10px;
 }
-
-.badge-card:hover .badge-icon {
-    transform: scale(1.1);
-}
-
-
-/* ==========================
-   BADGE TEXT
-========================== */
 
 .badge-card h3 {
-    margin-bottom: 10px;
-    font-size: 20px;
+    color: #43a047;
+
+    margin-bottom: 8px;
 }
 
 .badge-card p {
-    font-size: 14px;
-    line-height: 1.5;
-    opacity: 0.75;
+    color: #657267;
+
+    font-size: 0.9rem;
 }
-
-
-/* ==========================
-   LOCKED BADGES
-========================== */
-
-.badge-card.locked {
-    opacity: 0.55;
-    filter: grayscale(0.8);
-}
-
-.badge-card.locked .badge-icon {
-    filter: grayscale(1);
-}
-
-
-/* ==========================
-   UNLOCKED BADGES
-========================== */
-
-.badge-card.unlocked {
-    opacity: 1;
-    filter: none;
-
-    border: 2px solid #4caf50;
-
-    box-shadow:
-        0 8px 25px rgba(76, 175, 80, 0.25);
-}
-
-.badge-card.unlocked .badge-icon {
-    filter: none;
-}
-
-
-/* ==========================
-   STATUS
-========================== */
 
 .badge-status {
     display: inline-block;
 
     margin-top: 15px;
 
-    padding: 7px 14px;
-
-    border-radius: 20px;
-
-    font-size: 13px;
-    font-weight: bold;
-
-    background: #eeeeee;
+    font-weight: 700;
 }
 
-.badge-card.unlocked .badge-status {
-    background: #e8f5e9;
-    color: #2e7d32;
+.badge-card.locked {
+    opacity: 0.65;
 }
 
+.badge-card.unlocked {
+    opacity: 1;
 
-/* ==========================
-   PROGRESS
-========================== */
+    border: 2px solid #4caf50;
+
+    background: #f0f8f1;
+
+    box-shadow:
+        0 0 10px rgba(76, 175, 80, 0.15);
+}
 
 .badge-progress {
     max-width: 600px;
-    margin: 50px auto 0;
+
+    margin: 45px auto 0;
 }
 
 .badge-progress h3 {
+    color: #43a047;
+
     margin-bottom: 10px;
 }
 
 .progress-bar {
     width: 100%;
-    height: 15px;
 
-    background: #e0e0e0;
+    height: 12px;
+
+    margin-top: 15px;
+
+    background: #dfe9e1;
 
     border-radius: 20px;
 
@@ -1908,265 +907,921 @@ nav,
 
 #badge-progress-fill {
     width: 0%;
+
     height: 100%;
 
     background: #4caf50;
 
-    border-radius: 20px;
-
-    transition: width 0.5s ease;
+    transition: width 0.4s ease;
 }
 
 
-/* ==========================
+/* =========================================================
+   CHALLENGE DETAIL PAGE
+========================================================= */
+
+.challenge-page {
+    min-height: 100vh;
+
+    padding: 70px 6%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #eef8ef,
+            #f4f8f4
+        );
+}
+
+.challenge-detail {
+    max-width: 850px;
+
+    margin: auto;
+
+    padding: 45px;
+
+    background: white;
+
+    border-radius: 22px;
+
+    border: 1px solid #dce8de;
+
+    box-shadow:
+        0 10px 35px rgba(42, 87, 48, 0.08);
+
+    text-align: center;
+}
+
+.challenge-icon {
+    font-size: 4rem;
+
+    margin-bottom: 15px;
+}
+
+.challenge-detail > h1 {
+    color: #43a047;
+
+    font-size: 2.7rem;
+}
+
+.challenge-subtitle {
+    color: #657267;
+
+    margin: 12px auto 35px;
+}
+
+
+/* =========================================================
+   CHALLENGE SECTIONS
+========================================================= */
+
+.challenge-section {
+    margin: 25px 0;
+
+    padding: 25px;
+
+    background: #f7faf7;
+
+    border-radius: 14px;
+
+    text-align: left;
+}
+
+.challenge-section h2 {
+    color: #43a047;
+
+    margin-bottom: 12px;
+}
+
+.challenge-section p {
+    color: #536458;
+}
+
+.challenge-section ul {
+    padding-left: 25px;
+}
+
+.challenge-section li {
+    margin: 9px 0;
+
+    color: #536458;
+}
+
+
+/* =========================================================
+   CHALLENGE GOAL
+========================================================= */
+
+.challenge-goal {
+    margin: 30px 0;
+
+    padding: 25px;
+
+    background: #edf7ee;
+
+    border-radius: 14px;
+}
+
+.challenge-goal h2 {
+    color: #43a047;
+
+    margin-bottom: 8px;
+}
+
+
+/* =========================================================
+   CHALLENGE TRACKER
+========================================================= */
+
+.challenge-tracker {
+    margin-top: 40px;
+
+    padding: 30px;
+
+    background: #f8fbf8;
+
+    border: 1px solid #dce8de;
+
+    border-radius: 18px;
+}
+
+.challenge-tracker > h2 {
+    color: #43a047;
+
+    margin-bottom: 10px;
+}
+
+#tracker-status {
+    color: #657267;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================================================
+   TODAY'S TASK
+========================================================= */
+
+.today-task-box {
+    padding: 25px;
+
+    margin-bottom: 25px;
+
+    background: white;
+
+    border: 1px solid #dce8de;
+
+    border-radius: 14px;
+}
+
+.today-task-box h3 {
+    color: #43a047;
+
+    margin-bottom: 10px;
+}
+
+.today-task-box p {
+    color: #536458;
+}
+
+
+/* =========================================================
+   DAY TRACKER
+========================================================= */
+
+.days-container {
+    display: grid;
+
+    grid-template-columns: repeat(7, 1fr);
+
+    gap: 10px;
+
+    margin: 25px 0;
+}
+
+.day-box {
+    min-height: 75px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 5px;
+
+    border-radius: 10px;
+
+    background: #e9eeee;
+
+    color: #68736b;
+
+    font-weight: 700;
+}
+
+.day-box.active {
+    background: #e8f5e9;
+
+    color: #2e7d32;
+
+    border: 2px solid #4caf50;
+}
+
+.day-box.completed {
+    background: #dff2e1;
+
+    color: #236329;
+}
+
+
+/* =========================================================
+   COMPLETE DAY BUTTON
+========================================================= */
+
+.complete-day-btn {
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #2e7d32;
+
+    color: white;
+
+    font-weight: 700;
+
+    font-size: 1rem;
+
+    cursor: pointer;
+}
+
+.complete-day-btn:hover:not(:disabled) {
+    background: #256628;
+}
+
+
+/* =========================================================
+   BADGE EARNED
+========================================================= */
+
+.badge-earned {
+    margin-top: 30px;
+
+    padding: 30px;
+
+    background: #edf8ee;
+
+    border: 2px solid #4caf50;
+
+    border-radius: 16px;
+}
+
+.earned-badge-icon {
+    font-size: 3rem;
+
+    margin-bottom: 10px;
+}
+
+.badge-earned h2 {
+    color: #43a047;
+}
+
+.badge-earned p {
+    margin-top: 8px;
+}
+
+.hidden {
+    display: none;
+}
+
+
+/* =========================================================
+   CHALLENGE NAVIGATION
+========================================================= */
+
+.challenge-buttons {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    margin-top: 30px;
+
+    flex-wrap: wrap;
+}
+
+.back-btn {
+    background: #607d65;
+}
+
+.back-btn:hover {
+    background: #4d6852;
+}
+
+.start-btn {
+    background: #2e7d32;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    padding: 65px 7% 25px;
+
+    background: #1d3022;
+
+    color: #dce9df;
+}
+
+.footer-container {
+    max-width: 1150px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+
+    gap: 45px;
+}
+
+.footer-brand h2 {
+    color: white;
+
+    margin-bottom: 10px;
+}
+
+.footer-brand p {
+    color: #b8cabb;
+}
+
+.footer-socials img {
+    width: 100px;
+
+    margin-top: 20px;
+
+    border-radius: 8px;
+}
+
+.footer-column {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.footer-column h3 {
+    color: white;
+
+    margin-bottom: 8px;
+}
+
+.footer-column a {
+    color: #b8cabb;
+
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+.footer-column a:hover {
+    color: white;
+}
+
+.footer-divider {
+    max-width: 1150px;
+
+    margin: 45px auto 20px;
+
+    border: none;
+
+    border-top: 1px solid #3d5142;
+}
+
+.footer-bottom {
+    max-width: 1150px;
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    color: #9fb2a2;
+
+    font-size: 0.9rem;
+}
+
+.footer-tagline {
+    font-style: italic;
+}
+
+
+/* =========================================================
    DARK MODE
-========================== */
+========================================================= */
 
-.dark-mode .badge-card {
-    background: #1e1e1e;
-    color: white;
-}
+body.dark-mode {
+    background: #101710;
 
-.dark-mode .badge-status {
-    background: #333;
-    color: white;
-}
-
-.dark-mode .badge-card.unlocked .badge-status {
-    background: #1b5e20;
-    color: white;
-}
-
-.dark-mode .progress-bar {
-    background: #333;
+    color: #ffffff;
 }
 
 
-/* ==========================
-   MOBILE
-========================== */
+/* =========================
+   NAVIGATION
+========================= */
 
-@media (max-width: 900px) {
+body.dark-mode nav {
+    background: #182219;
+
+    border-color: #2e3d31;
+}
+
+body.dark-mode .nav-links a {
+    color: #ffffff;
+}
+
+body.dark-mode .nav-links a:hover {
+    color: #81c784;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+body.dark-mode .hero {
+    background:
+        linear-gradient(
+            180deg,
+            #101b12,
+            #101710
+        );
+}
+
+body.dark-mode .hero h1 {
+    color: #81c784;
+
+    text-shadow:
+        0 0 8px rgba(129, 199, 132, 0.75),
+        0 0 20px rgba(129, 199, 132, 0.4);
+}
+
+body.dark-mode .tagline,
+body.dark-mode .one,
+body.dark-mode .two {
+    color: #ffffff;
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+body.dark-mode #challenges,
+body.dark-mode #dashboard {
+    background: #101710;
+}
+
+body.dark-mode #calculator,
+body.dark-mode .comparison,
+body.dark-mode #eco-badges {
+    background: #151d16;
+}
+
+
+/* =========================
+   GENERAL CARDS
+========================= */
+
+body.dark-mode .card,
+body.dark-mode .why,
+body.dark-mode .dashboard-card,
+body.dark-mode .challenge-card,
+body.dark-mode .badge-card,
+body.dark-mode .challenge-detail,
+body.dark-mode #carbonChart {
+    background: #1b261d;
+
+    border-color: #304133;
+
+    color: #ffffff;
+}
+
+body.dark-mode .card h2,
+body.dark-mode .dashboard-card h2,
+body.dark-mode .challenge-card h2,
+body.dark-mode .badge-card h3 {
+    color: #81c784;
+}
+
+body.dark-mode .card p,
+body.dark-mode .dashboard-card h3,
+body.dark-mode .challenge-card p,
+body.dark-mode .badge-card p {
+    color: #ffffff;
+}
+
+
+/* =========================
+   FEATURE CARD GLOW
+========================= */
+
+body.dark-mode .card::after {
+    background: #81c784;
+
+    box-shadow:
+        0 0 8px rgba(129, 199, 132, 0.8),
+        0 0 18px rgba(129, 199, 132, 0.4);
+}
+
+
+/* =========================
+   WHY POLARIS
+========================= */
+
+body.dark-mode .why h1 {
+    color: #81c784;
+}
+
+body.dark-mode .why li {
+    color: #ffffff;
+}
+
+
+/* =========================
+   CALCULATOR
+========================= */
+
+body.dark-mode #calculator h2,
+body.dark-mode .slider-title {
+    color: #81c784;
+}
+
+body.dark-mode .calculator-subtitle,
+body.dark-mode .slider-subtitle,
+body.dark-mode .slider-group label,
+body.dark-mode .slider-value {
+    color: #ffffff;
+}
+
+body.dark-mode .slider-group {
+    background: #172118;
+
+    border-color: #304133;
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+body.dark-mode #dashboard > h1 {
+    color: #81c784;
+
+    text-shadow:
+        0 0 8px rgba(129, 199, 132, 0.35);
+}
+
+body.dark-mode .dashboard-card h3 {
+    color: #ffffff;
+}
+
+body.dark-mode .dashboard-card h2 {
+    color: #81c784;
+}
+
+
+/* =========================
+   RECOMMENDATION
+========================= */
+
+body.dark-mode .recommendation {
+    background: #1d2b1f;
+
+    border-left-color: #4caf50;
+}
+
+body.dark-mode .recommendation h2 {
+    color: #81c784;
+}
+
+body.dark-mode .recommendation p {
+    color: #ffffff;
+}
+
+
+/* =========================
+   COMPARISON
+========================= */
+
+body.dark-mode .comparison h1,
+body.dark-mode .comparison h2 {
+    color: #81c784;
+}
+
+body.dark-mode .comparison h3 {
+    color: #ffffff;
+}
+
+body.dark-mode .comparison-message {
+    background: #1d2b1f;
+
+    border-color: #38523c;
+
+    color: #ffffff;
+}
+
+body.dark-mode .comparison-message h3 {
+    color: #81c784;
+}
+
+
+/* =========================
+   CHALLENGES
+========================= */
+
+body.dark-mode #challenges > h1 {
+    color: #81c784;
+}
+
+body.dark-mode #challenges > p {
+    color: #ffffff;
+}
+
+body.dark-mode .challenge-card h2 {
+    color: #81c784;
+}
+
+body.dark-mode .challenge-card p {
+    color: #ffffff;
+}
+
+
+/* =========================
+   BADGES
+========================= */
+
+body.dark-mode #eco-badges > h1 {
+    color: #81c784;
+}
+
+body.dark-mode .badges-subtitle {
+    color: #ffffff;
+}
+
+body.dark-mode .badge-card h3 {
+    color: #81c784;
+}
+
+body.dark-mode .badge-card p {
+    color: #ffffff;
+}
+
+body.dark-mode .badge-card.locked {
+    opacity: 0.55;
+}
+
+body.dark-mode .badge-card.unlocked {
+    opacity: 1;
+
+    border: 2px solid #4caf50;
+
+    background: #1d2b1f;
+
+    box-shadow:
+        0 0 12px rgba(76, 175, 80, 0.2);
+}
+
+body.dark-mode .badge-progress h3 {
+    color: #81c784;
+}
+
+
+/* =========================
+   CHALLENGE DETAIL
+========================= */
+
+body.dark-mode .challenge-page {
+    background:
+        linear-gradient(
+            180deg,
+            #101b12,
+            #101710
+        );
+}
+
+body.dark-mode .challenge-detail > h1 {
+    color: #81c784;
+}
+
+body.dark-mode .challenge-subtitle {
+    color: #ffffff;
+}
+
+body.dark-mode .challenge-section,
+body.dark-mode .challenge-tracker {
+    background: #172118;
+
+    border-color: #304133;
+}
+
+body.dark-mode .challenge-section h2,
+body.dark-mode .challenge-goal h2 {
+    color: #81c784;
+}
+
+body.dark-mode .challenge-section p,
+body.dark-mode .challenge-section li {
+    color: #ffffff;
+}
+
+
+/* =========================
+   CHALLENGE GOAL
+========================= */
+
+body.dark-mode .challenge-goal {
+    background: #1d2b1f;
+
+    border-color: #38523c;
+}
+
+
+/* =========================
+   TRACKER
+========================= */
+
+body.dark-mode .challenge-tracker > h2 {
+    color: #81c784;
+}
+
+body.dark-mode #tracker-status {
+    color: #ffffff;
+}
+
+body.dark-mode .today-task-box {
+    background: #1d2b1f;
+
+    border-color: #304133;
+}
+
+body.dark-mode .today-task-box h3 {
+    color: #81c784;
+}
+
+body.dark-mode .today-task-box p {
+    color: #ffffff;
+}
+
+
+/* =========================
+   DAY TRACKER
+========================= */
+
+body.dark-mode .day-box {
+    background: #29342b;
+
+    color: #ffffff;
+}
+
+body.dark-mode .day-box.active {
+    background: #1f3823;
+
+    color: #81c784;
+
+    border: 2px solid #4caf50;
+}
+
+body.dark-mode .day-box.completed {
+    background: #234128;
+
+    color: #81c784;
+}
+
+
+/* =========================
+   BADGE EARNED
+========================= */
+
+body.dark-mode .badge-earned {
+    background: #1d2b1f;
+
+    border: 2px solid #4caf50;
+}
+
+body.dark-mode .badge-earned h2 {
+    color: #81c784;
+}
+
+body.dark-mode .badge-earned p {
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   RESPONSIVE DESIGN
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .features {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .challenge-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
     .badges-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 
-@media (max-width: 600px) {
+@media (max-width: 750px) {
 
+    nav {
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+        gap: 12px;
+    }
+
+    .hero {
+        padding-top: 65px;
+    }
+
+    .features,
+    .challenge-container,
     .badges-grid {
         grid-template-columns: 1fr;
     }
-
-    #eco-badges h1 {
-        font-size: 28px;
-    }
-
-}
-
-.challenge-buttons {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    width: 600px;
-    max-width: 90%;
-
-    margin: 35px auto 0;
-    gap: 40px;
-}
-
-.challenge-btn {
-    padding: 14px 28px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    text-decoration: none;
-    border: none;
-    transition: 0.3s;
-}
-
-.back-btn {
-    background: #e0e0e0;
-    color: #333;
-}
-
-.start-btn {
-    background: #2e7d32;
-    color: white;
-}
-
-.challenge-btn:hover {
-    transform: translateY(-2px);
-}
-
-.start-btn:disabled {
-    cursor: default;
-    opacity: 0.8;
-}
-
-/* ==========================
-   7-DAY CHALLENGE TRACKER
-========================== */
-
-.challenge-tracker {
-    margin-top: 35px;
-    padding: 25px;
-
-    background: rgba(76, 175, 80, 0.08);
-
-    border-radius: 15px;
-}
-
-.challenge-tracker h2 {
-    margin-bottom: 10px;
-}
-
-#tracker-status {
-    margin-bottom: 25px;
-    opacity: 0.8;
-}
-
-
-/* ==========================
-   DAYS
-========================== */
-
-.days-container {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
-
-    margin-bottom: 25px;
-}
-
-.day-box {
-    padding: 15px 8px;
-
-    border-radius: 10px;
-
-    background: #eeeeee;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    gap: 6px;
-
-    font-size: 13px;
-    font-weight: bold;
-
-    transition: 0.3s;
-}
-
-.day-box.active {
-    background: #fff3cd;
-    border: 2px solid #f0ad4e;
-}
-
-.day-box.completed {
-    background: #e8f5e9;
-    border: 2px solid #4caf50;
-}
-
-.day-box.completed .day-status {
-    color: #2e7d32;
-}
-
-
-/* ==========================
-   COMPLETE BUTTON
-========================== */
-
-.complete-day-btn {
-    padding: 13px 25px;
-
-    border: none;
-    border-radius: 8px;
-
-    background: #2e7d32;
-    color: white;
-
-    font-size: 15px;
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: 0.3s;
-}
-
-.complete-day-btn:hover:not(:disabled) {
-    transform: translateY(-2px);
-}
-
-.complete-day-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-
-/* ==========================
-   BADGE UNLOCKED
-========================== */
-
-.badge-earned {
-    margin-top: 25px;
-    padding: 25px;
-
-    background: #fff8dc;
-
-    border-radius: 15px;
-
-    text-align: center;
-}
-
-.earned-badge-icon {
-    font-size: 65px;
-}
-
-.badge-earned.hidden {
-    display: none;
-}
-
-
-/* ==========================
-   DARK MODE
-========================== */
-
-.dark-mode .challenge-tracker {
-    background: rgba(76, 175, 80, 0.12);
-}
-
-.dark-mode .day-box {
-    background: #333;
-    color: white;
-}
-
-.dark-mode .day-box.active {
-    background: #4a3f22;
-}
-
-.dark-mode .day-box.completed {
-    background: #1b5e20;
-}
-
-.dark-mode .badge-earned {
-    background: #3d3518;
-}
-
-
-/* ==========================
-   MOBILE
-========================== */
-
-@media (max-width: 700px) {
 
     .days-container {
         grid-template-columns: repeat(4, 1fr);
     }
 
+    .challenge-detail {
+        padding: 28px 20px;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+
+        text-align: center;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    #calculator h2,
+    #dashboard > h1,
+    #challenges > h1 {
+        font-size: 1.9rem;
+    }
+
+    .hero h1 {
+        font-size: 2.7rem;
+    }
+
+    .days-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .challenge-buttons {
+        flex-direction: column;
+    }
+
+    .challenge-buttons .challenge-btn {
+        width: 100%;
+    }
 }

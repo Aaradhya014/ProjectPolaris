@@ -2,21 +2,20 @@ from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
-
-# ==========================
+# ============================================================
 # HOME PAGE
-# ==========================
+# ============================================================
 
 @app.route("/")
 def home():
     return render_template("index.html")
 
-
-# ==========================
+# ============================================================
 # CHALLENGE DATA
-# ==========================
+# ============================================================
 
 challenges = {
+
     "energy-saver": {
         "icon": "💡",
         "title": "Energy Saver",
@@ -110,9 +109,9 @@ challenges = {
 }
 
 
-# ==========================
+# ============================================================
 # CHALLENGE PAGE
-# ==========================
+# ============================================================
 
 @app.route("/challenge/<challenge_id>")
 def challenge(challenge_id):
@@ -127,29 +126,70 @@ def challenge(challenge_id):
         challenge=challenge_data
     )
 
-# ==========================
-# CALCULATOR
-# ==========================
+
+# ============================================================
+# CARBON FOOTPRINT CALCULATOR
+# ============================================================
 
 @app.route("/calculate", methods=["POST"])
 def calculate():
 
-    # ==========================
-    # User Inputs
-    # ==========================
+    # ========================================================
+    # GET USER INPUTS
+    # ========================================================
 
-    electricity = float(request.form["electricity"])
-    water = float(request.form["water"])
-    food = float(request.form["food"])
-    plastic = float(request.form["plastic"])
-    transport = float(request.form["transport"])
-    size = int(request.form["size"])
-    gas = float(request.form["usage"])
-    flights = int(request.form["flights"])
+    try:
 
-    # ==========================
-    # Emission Factors
-    # ==========================
+        electricity = float(request.form["electricity"])
+        water = float(request.form["water"])
+        food = float(request.form["food"])
+        plastic = float(request.form["plastic"])
+        transport = float(request.form["transport"])
+        size = int(request.form["size"])
+        gas = float(request.form["usage"])
+        flights = int(request.form["flights"])
+
+    except (KeyError, ValueError, TypeError):
+
+        return jsonify({
+            "error": "Please provide valid values for all calculator fields."
+        }), 400
+
+
+    # ========================================================
+    # BASIC INPUT VALIDATION
+    # ========================================================
+
+    if (
+        electricity < 0 or
+        water < 0 or
+        food < 0 or
+        plastic < 0 or
+        transport < 0 or
+        gas < 0 or
+        flights < 0 or
+        size < 1
+    ):
+
+        return jsonify({
+            "error": "Calculator values cannot be negative and household size must be at least 1."
+        }), 400
+
+
+    # ========================================================
+    # EMISSION FACTORS
+    # ========================================================
+    #
+    # These are estimates used by the Polaris prototype.
+    #
+    # They should NOT be interpreted as universal scientific
+    # constants because real emissions depend on location,
+    # energy sources, materials, travel type, etc.
+    #
+    # The calculations use these factors consistently, while
+    # the displayed results are rounded to avoid implying
+    # false precision.
+    # ========================================================
 
     ELECTRICITY_FACTOR = 0.45
     WATER_FACTOR = 0.00034
@@ -162,9 +202,10 @@ def calculate():
 
     FLIGHT_FACTOR = 250
 
-    # ==========================
-    # Annual Inputs
-    # ==========================
+
+    # ========================================================
+    # CONVERT MONTHLY INPUTS TO ANNUAL INPUTS
+    # ========================================================
 
     electricity_year = electricity * 12
     water_year = water * 12
@@ -175,23 +216,50 @@ def calculate():
     gas_year = gas * 12
     gas_kg_year = gas_year * LPG_CYLINDER_WEIGHT
 
-    # ==========================
-    # Annual CO₂e
-    # ==========================
 
-    electricity_score = electricity_year * ELECTRICITY_FACTOR
-    water_score = water_year * WATER_FACTOR
-    food_score = food_year * FOOD_FACTOR
-    plastic_score = plastic_year * PLASTIC_FACTOR
-    transport_score = transport_year * TRANSPORT_FACTOR
+    # ========================================================
+    # CALCULATE ESTIMATED CO₂e
+    # ========================================================
 
-    gas_score = gas_kg_year * LPG_FACTOR
+    electricity_score = (
+        electricity_year *
+        ELECTRICITY_FACTOR
+    )
 
-    flight_score = flights * FLIGHT_FACTOR
+    water_score = (
+        water_year *
+        WATER_FACTOR
+    )
 
-    # ==========================
-    # Total Footprint
-    # ==========================
+    food_score = (
+        food_year *
+        FOOD_FACTOR
+    )
+
+    plastic_score = (
+        plastic_year *
+        PLASTIC_FACTOR
+    )
+
+    transport_score = (
+        transport_year *
+        TRANSPORT_FACTOR
+    )
+
+    gas_score = (
+        gas_kg_year *
+        LPG_FACTOR
+    )
+
+    flight_score = (
+        flights *
+        FLIGHT_FACTOR
+    )
+
+
+    # ========================================================
+    # TOTAL HOUSEHOLD FOOTPRINT
+    # ========================================================
 
     household_footprint = (
         electricity_score +
@@ -203,61 +271,106 @@ def calculate():
         flight_score
     )
 
-    per_person_footprint = household_footprint / size
 
-    # ==========================
-    # Global Comparison
-    # ==========================
+    # ========================================================
+    # PER-PERSON FOOTPRINT
+    # ========================================================
+
+    per_person_footprint = (
+        household_footprint / size
+    )
+
+
+    # ========================================================
+    # GLOBAL COMPARISON
+    # ========================================================
+    #
+    # Prototype comparison value.
+    #
+    # This is deliberately labelled as a comparison rather
+    # than a precise measure of how the household "should"
+    # perform.
+    # ========================================================
 
     GLOBAL_AVERAGE = 5000
 
     global_percentage = (
-        per_person_footprint / GLOBAL_AVERAGE
+        per_person_footprint /
+        GLOBAL_AVERAGE
     ) * 100
+
 
     if global_percentage < 100:
 
-        difference = round(100 - global_percentage, 1)
+        difference = round(
+            100 - global_percentage,
+            1
+        )
 
         comparison_message = (
-            f"You are {difference}% below the global average 🌱"
+            f"You are approximately "
+            f"{difference}% below the global average 🌱"
         )
 
     elif global_percentage == 100:
 
         comparison_message = (
-            "You are exactly at the global average 🌍"
+            "You are approximately at the global average 🌍"
         )
 
     else:
 
-        difference = round(global_percentage - 100, 1)
-
-        comparison_message = (
-            f"You are {difference}% above the global average ⚠️"
+        difference = round(
+            global_percentage - 100,
+            1
         )
 
-    # ==========================
-    # Categories
-    # ==========================
+        comparison_message = (
+            f"You are approximately "
+            f"{difference}% above the global average ⚠️"
+        )
+
+
+    # ========================================================
+    # CATEGORY BREAKDOWN
+    # ========================================================
 
     categories = {
-        "Electricity": electricity_score,
-        "Water": water_score,
-        "Food Waste": food_score,
-        "Plastic": plastic_score,
-        "Transport": transport_score,
-        "Gas": gas_score,
-        "Flights": flight_score
+
+        "Electricity":
+            electricity_score,
+
+        "Water":
+            water_score,
+
+        "Food Waste":
+            food_score,
+
+        "Plastic":
+            plastic_score,
+
+        "Transport":
+            transport_score,
+
+        "Gas":
+            gas_score,
+
+        "Flights":
+            flight_score
     }
 
-    largest = max(categories, key=categories.get)
 
-    # ==================================================
-    # FAMILY-SIZE BENCHMARKS
-    # ==================================================
+    largest = max(
+        categories,
+        key=categories.get
+    )
+
+
+    # ========================================================
+    # PROTOTYPE HOUSEHOLD BENCHMARKS
+    # ========================================================
     #
-    # These are prototype benchmark values.
+    # These are comparison values for the prototype.
     #
     # Monthly:
     # Electricity -> kWh/person/month
@@ -269,9 +382,9 @@ def calculate():
     #
     # Flights -> flights/person/year
     #
-    # We can replace these later with properly
-    # sourced values.
-    # ==================================================
+    # These should eventually be replaced with properly
+    # sourced regional benchmarks.
+    # ========================================================
 
     BENCHMARKS = {
 
@@ -288,188 +401,309 @@ def calculate():
         "Gas": 0.25,
 
         "Flights": 1
-
     }
 
-    # ==========================
-    # Calculate Household
-    # Benchmarks
-    # ==========================
 
-    electricity_limit = BENCHMARKS["Electricity"] * size
-    water_limit = BENCHMARKS["Water"] * size
-    food_limit = BENCHMARKS["Food Waste"] * size
-    plastic_limit = BENCHMARKS["Plastic"] * size
-    transport_limit = BENCHMARKS["Transport"] * size
-    gas_limit = BENCHMARKS["Gas"] * size
-    flights_limit = BENCHMARKS["Flights"] * size
+    # ========================================================
+    # HOUSEHOLD BENCHMARKS
+    # ========================================================
 
-    # ==========================
-    # Generate Recommendations
-    # ==========================
+    electricity_limit = (
+        BENCHMARKS["Electricity"] *
+        size
+    )
+
+    water_limit = (
+        BENCHMARKS["Water"] *
+        size
+    )
+
+    food_limit = (
+        BENCHMARKS["Food Waste"] *
+        size
+    )
+
+    plastic_limit = (
+        BENCHMARKS["Plastic"] *
+        size
+    )
+
+    transport_limit = (
+        BENCHMARKS["Transport"] *
+        size
+    )
+
+    gas_limit = (
+        BENCHMARKS["Gas"] *
+        size
+    )
+
+    flights_limit = (
+        BENCHMARKS["Flights"] *
+        size
+    )
+
+
+    # ========================================================
+    # RECOMMENDATIONS
+    # ========================================================
 
     recommendations = []
 
-    # 120% threshold
     threshold = 1.20
 
-    # Electricity
+
+    # --------------------------------------------------------
+    # ELECTRICITY
+    # --------------------------------------------------------
+
     if electricity > electricity_limit * threshold:
 
         recommendations.append(
+
             "💡 <strong>Electricity:</strong> "
-            f"Your household uses {electricity:.0f} kWh/month, "
-            f"which is above the benchmark of "
-            f"{electricity_limit:.0f} kWh/month for a family of {size}. "
+            f"Your household uses about "
+            f"{electricity:.0f} kWh/month, "
+            f"compared with a prototype benchmark of "
+            f"{electricity_limit:.0f} kWh/month. "
             "Try switching off unused lights and appliances, "
-            "using natural light, and avoiding standby power."
+            "using natural light, and reducing unnecessary "
+            "standby power."
         )
 
-    # Water
+
+    # --------------------------------------------------------
+    # WATER
+    # --------------------------------------------------------
+
     if water > water_limit * threshold:
 
         recommendations.append(
+
             "💧 <strong>Water:</strong> "
-            f"Your household uses {water:.0f} L/month, "
-            f"compared with a benchmark of "
-            f"{water_limit:.0f} L/month. "
-            "Try taking shorter showers, turning off taps when "
-            "not needed, and checking for leaks."
+            f"Your household uses about "
+            f"{water:,.0f} L/month, "
+            f"compared with a prototype benchmark of "
+            f"{water_limit:,.0f} L/month. "
+            "Try taking shorter showers, turning off taps "
+            "when they are not needed, and checking for leaks."
         )
 
-    # Food
+
+    # --------------------------------------------------------
+    # FOOD
+    # --------------------------------------------------------
+
     if food > food_limit * threshold:
 
         recommendations.append(
+
             "🍽️ <strong>Food waste:</strong> "
-            f"Your household wastes about {food:.1f} kg/month, "
-            f"above the benchmark of {food_limit:.1f} kg/month. "
-            "Plan meals before shopping, store leftovers properly, "
-            "and check your fridge before buying more food."
+            f"Your household wastes about "
+            f"{food:.1f} kg/month, "
+            f"compared with a prototype benchmark of "
+            f"{food_limit:.1f} kg/month. "
+            "Plan meals, store leftovers properly, and check "
+            "your refrigerator before buying more food."
         )
 
-    # Plastic
+
+    # --------------------------------------------------------
+    # PLASTIC
+    # --------------------------------------------------------
+
     if plastic > plastic_limit * threshold:
 
         recommendations.append(
+
             "♻️ <strong>Plastic:</strong> "
-            f"Your household produces about {plastic:.1f} kg/month, "
-            f"above the benchmark of {plastic_limit:.1f} kg/month. "
-            "Try reusable bottles and containers and reduce "
-            "single-use plastic."
+            f"Your household produces about "
+            f"{plastic:.1f} kg/month, "
+            f"compared with a prototype benchmark of "
+            f"{plastic_limit:.1f} kg/month. "
+            "Try reusable bottles, bags and containers and "
+            "reduce unnecessary single-use plastic."
         )
 
-    # Transport
+
+    # --------------------------------------------------------
+    # TRANSPORT
+    # --------------------------------------------------------
+
     if transport > transport_limit * threshold:
 
         recommendations.append(
+
             "🚗 <strong>Transport:</strong> "
-            f"Your household travels about {transport:.0f} km/month, "
-            f"above the benchmark of {transport_limit:.0f} km/month. "
+            f"Your household travels about "
+            f"{transport:,.0f} km/month, "
+            f"compared with a prototype benchmark of "
+            f"{transport_limit:,.0f} km/month. "
             "Consider walking, cycling, public transport, "
-            "carpooling, or combining errands."
+            "carpooling, or combining errands when practical."
         )
 
-    # Gas
+
+    # --------------------------------------------------------
+    # COOKING FUEL
+    # --------------------------------------------------------
+
     if gas > gas_limit * threshold:
 
         recommendations.append(
+
             "🔥 <strong>Cooking fuel:</strong> "
-            f"Your household uses about {gas:.2f} LPG cylinders/month, "
-            f"above the benchmark of {gas_limit:.2f} cylinders/month. "
-            "Use the correct flame size, cover pots while cooking, "
-            "and avoid leaving the flame on unnecessarily."
+            f"Your household uses about "
+            f"{gas:.2f} LPG cylinders/month, "
+            f"compared with a prototype benchmark of "
+            f"{gas_limit:.2f} cylinders/month. "
+            "Use an appropriately sized flame, cover pots "
+            "when suitable, and avoid unnecessary fuel use."
         )
 
-    # Flights
+
+    # --------------------------------------------------------
+    # FLIGHTS
+    # --------------------------------------------------------
+
     if flights > flights_limit * threshold:
 
         recommendations.append(
+
             "✈️ <strong>Air travel:</strong> "
-            f"Your household takes about {flights} flights/year, "
-            f"above the benchmark of {flights_limit} flight(s)/year. "
-            "When practical, consider alternatives to flying "
-            "and combine trips."
+            f"Your household takes about "
+            f"{flights} flight(s)/year, "
+            f"compared with a prototype benchmark of "
+            f"{flights_limit:.0f} flight(s)/year. "
+            "When practical, consider lower-emission "
+            "alternatives and combine trips."
         )
 
-    # ==========================
-    # If Everything Is Good
-    # ==========================
+
+    # ========================================================
+    # IF HOUSEHOLD IS WITHIN ALL BENCHMARKS
+    # ========================================================
 
     if len(recommendations) == 0:
 
         recommendation = (
-            "🌱 <p>Great job!</p> "
-            f"Your household of {size} is within the prototype "
-            "benchmarks across all categories. "
-            "Keep up the sustainable habits!"
+
+            "<strong>🌱 Polaris Recommendations</strong><br><br>"
+
+            "Great job! Your household is within the "
+            "prototype comparison benchmarks across all "
+            "categories. Keep building sustainable habits!"
         )
 
     else:
 
         recommendation = (
-            "<strong>🌍 Polaris Recommendations</strong><br><br>"
-            + "<br><br>".join(recommendations)
+
+            "<strong>🌍 Polaris Recommendations</strong>"
+            "<br><br>" +
+
+            "<br><br>".join(
+                recommendations
+            )
         )
 
-    # ==========================
-    # Graph Data
-    # ==========================
+
+    # ========================================================
+    # GRAPH DATA
+    # ========================================================
+    #
+    # The graph receives rounded values.
+    #
+    # We keep two decimal places here because the graph needs
+    # enough resolution to distinguish categories, but the
+    # main dashboard should use rounded whole-number values.
+    # ========================================================
 
     graph_data = {
 
-        "Electricity": round(electricity_score, 2),
+        "Electricity":
+            round(electricity_score, 2),
 
-        "Water": round(water_score, 2),
+        "Water":
+            round(water_score, 2),
 
-        "Food Waste": round(food_score, 2),
+        "Food Waste":
+            round(food_score, 2),
 
-        "Plastic": round(plastic_score, 2),
+        "Plastic":
+            round(plastic_score, 2),
 
-        "Transport": round(transport_score, 2),
+        "Transport":
+            round(transport_score, 2),
 
-        "Gas": round(gas_score, 2),
+        "Gas":
+            round(gas_score, 2),
 
-        "Flights": round(flight_score, 2)
-
+        "Flights":
+            round(flight_score, 2)
     }
 
-    # ==========================
-    # Return JSON
-    # ==========================
+
+    # ========================================================
+    # RETURN RESULTS
+    # ========================================================
 
     return jsonify({
 
-        "household": round(household_footprint, 2),
+        # Main dashboard values
+        # Rounded to whole kg to avoid false precision.
 
-        "per_person": round(per_person_footprint, 2),
+        "household":
+            round(household_footprint),
 
-        "global_average": GLOBAL_AVERAGE,
+        "per_person":
+            round(per_person_footprint),
 
-        "global_percentage": round(global_percentage, 1),
+        "global_average":
+            GLOBAL_AVERAGE,
 
-        "comparison_message": comparison_message,
+        "global_percentage":
+            round(global_percentage, 1),
 
-        "largest": largest,
+        "comparison_message":
+            comparison_message,
 
-        # ⭐ THIS FIXES YOUR undefined ERROR
-        "recommendation": recommendation,
+        "largest":
+            largest,
 
-        "electricity": graph_data["Electricity"],
+        "recommendation":
+            recommendation,
 
-        "water": graph_data["Water"],
 
-        "food": graph_data["Food Waste"],
+        # Graph data
 
-        "plastic": graph_data["Plastic"],
+        "electricity":
+            graph_data["Electricity"],
 
-        "transport": graph_data["Transport"],
+        "water":
+            graph_data["Water"],
 
-        "gas": graph_data["Gas"],
+        "food":
+            graph_data["Food Waste"],
 
-        "flights": graph_data["Flights"]
+        "plastic":
+            graph_data["Plastic"],
+
+        "transport":
+            graph_data["Transport"],
+
+        "gas":
+            graph_data["Gas"],
+
+        "flights":
+            graph_data["Flights"]
 
     })
+
+
+# ============================================================
+# RUN APPLICATION
+# ============================================================
 
 if __name__ == "__main__":
     app.run(debug=True)

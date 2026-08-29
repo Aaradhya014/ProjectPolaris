@@ -4,6 +4,7 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
+
     // =======================================
     // SHOW / HIDE TIPS
     // =======================================
@@ -41,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
     darkModeBtn.textContent = "🌙 Dark Mode";
 
     Object.assign(darkModeBtn.style, {
+
         position: "fixed",
         bottom: "20px",
         right: "20px",
@@ -52,15 +54,27 @@ document.addEventListener("DOMContentLoaded", function () {
         fontWeight: "bold",
         cursor: "pointer",
         zIndex: "10000"
+
     });
 
     document.body.appendChild(darkModeBtn);
 
-    darkModeBtn.addEventListener("click", function () {
 
-        document.body.classList.toggle("dark-mode");
+    darkModeBtn.addEventListener(
+        "click",
+        function () {
 
-    });
+            document.body.classList.toggle(
+                "dark-mode"
+            );
+
+            darkModeBtn.textContent =
+                document.body.classList.contains("dark-mode")
+                    ? "☀️ Light Mode"
+                    : "🌙 Dark Mode";
+
+        }
+    );
 
 
     // =======================================
@@ -73,88 +87,23 @@ document.addEventListener("DOMContentLoaded", function () {
     sliders.forEach(slider => {
 
         const value =
-            slider.parentElement?.querySelector(".slider-value");
+            slider.parentElement?.querySelector(
+                ".slider-value"
+            );
 
         if (!value) return;
 
         value.textContent = slider.value;
 
-        slider.addEventListener("input", function () {
+        slider.addEventListener(
+            "input",
+            function () {
 
-            value.textContent = slider.value;
+                value.textContent =
+                    slider.value;
 
-        });
-
-    });
-
-
-    // =======================================
-    // CONFIDENCE LEVEL
-    // =======================================
-
-    const inputMethods =
-        document.querySelectorAll(
-            'input[name="input_method"]'
+            }
         );
-
-    const confidenceLevel =
-        document.getElementById("confidence-level");
-
-    const confidenceText =
-        document.getElementById("confidence-text");
-
-    inputMethods.forEach(method => {
-
-        method.addEventListener("change", function () {
-
-            if (!confidenceLevel || !confidenceText) {
-                return;
-            }
-
-            switch (this.value) {
-
-                case "low":
-
-                    confidenceLevel.textContent = "🔴 Low";
-                    confidenceLevel.className = "confidence low";
-
-                    confidenceText.textContent =
-                        "Incomplete or missing information.";
-
-                    break;
-
-                case "estimate":
-
-                    confidenceLevel.textContent = "🟡 Medium";
-                    confidenceLevel.className = "confidence medium";
-
-                    confidenceText.textContent =
-                        "Based on estimated household values.";
-
-                    break;
-
-                case "bill":
-
-                    confidenceLevel.textContent = "🟢 High";
-                    confidenceLevel.className = "confidence high";
-
-                    confidenceText.textContent =
-                        "Based on utility bills.";
-
-                    break;
-
-                case "verified":
-
-                    confidenceLevel.textContent = "🔵 Very High";
-                    confidenceLevel.className = "confidence very-high";
-
-                    confidenceText.textContent =
-                        "Uploaded images of utility bills.";
-
-                    break;
-            }
-
-        });
 
     });
 
@@ -166,248 +115,382 @@ document.addEventListener("DOMContentLoaded", function () {
     let carbonChart = null;
 
     const form =
-        document.getElementById("footprint-form");
+        document.getElementById(
+            "footprint-form"
+        );
+
 
     if (form) {
 
-        form.addEventListener("submit", async function (e) {
+        form.addEventListener(
+            "submit",
+            async function (e) {
 
-            e.preventDefault();
-
-            const formData =
-                new FormData(form);
-
-            try {
-
-                const response =
-                    await fetch("/calculate", {
-                        method: "POST",
-                        body: formData
-                    });
-
-                if (!response.ok) {
-                    throw new Error("Server returned an error.");
-                }
-
-                const data =
-                    await response.json();
+                e.preventDefault();
 
 
-                // ==========================
-                // SCORES
-                // ==========================
-
-                const householdScore =
-                    document.getElementById("household-score");
-
-                if (householdScore) {
-                    householdScore.textContent =
-                        data.household + " kg CO₂e/year";
-                }
+                const formData =
+                    new FormData(form);
 
 
-                const yourFootprint =
-                    document.getElementById("your-footprint");
+                try {
 
-                if (yourFootprint) {
-                    yourFootprint.textContent =
-                        data.per_person + " kg CO₂e/year";
-                }
-
-
-                const globalFootprint =
-                    document.getElementById("global-footprint");
-
-                if (globalFootprint) {
-                    globalFootprint.textContent =
-                        data.global_average +
-                        " kg CO₂e/person/year";
-                }
+                    const response =
+                        await fetch(
+                            "/calculate",
+                            {
+                                method: "POST",
+                                body: formData
+                            }
+                        );
 
 
-                const comparisonScore =
-                    document.getElementById("comparison-score");
+                    if (!response.ok) {
 
-                if (comparisonScore) {
-                    comparisonScore.textContent =
-                        data.global_percentage +
-                        "% of global average";
-                }
+                        throw new Error(
+                            "Server returned an error."
+                        );
 
-
-                const polarisInsight =
-                    document.getElementById("polaris-insight");
-
-                if (polarisInsight) {
-                    polarisInsight.textContent =
-                        data.comparison_message;
-                }
+                    }
 
 
-                const personScore =
-                    document.getElementById("person-score");
-
-                if (personScore) {
-                    personScore.textContent =
-                        data.per_person +
-                        " kg CO₂e/year";
-                }
+                    const data =
+                        await response.json();
 
 
-                const largestSource =
-                    document.getElementById("largest-source");
+                    // ===================================
+                    // HOUSEHOLD SCORE
+                    // ===================================
 
-                if (largestSource) {
-                    largestSource.textContent =
-                        data.largest;
-                }
-
-
-                const recommendation =
-                    document.getElementById("recommendation");
-
-                if (recommendation) {
-
-                    recommendation.textContent =
-                        createRecommendation(data);
-
-                }
+                    const householdScore =
+                        document.getElementById(
+                            "household-score"
+                        );
 
 
-                // ==========================
-                // GRAPH
-                // ==========================
+                    if (householdScore) {
 
-                const graphData = {
+                        householdScore.textContent =
+                            data.household +
+                            " kg CO₂e/year";
 
-                    "Electricity":
-                        Number(data.electricity) || 0,
-
-                    "Water":
-                        Number(data.water) || 0,
-
-                    "Food Waste":
-                        Number(data.food) || 0,
-
-                    "Plastic":
-                        Number(data.plastic) || 0,
-
-                    "Transport":
-                        Number(data.transport) || 0,
-
-                    "Gas":
-                        Number(data.gas) || 0,
-
-                    "Flights":
-                        Number(data.flights) || 0
-
-                };
+                    }
 
 
-                const filteredData =
-                    Object.fromEntries(
-                        Object.entries(graphData)
-                            .filter(
+                    // ===================================
+                    // PER PERSON SCORE
+                    // ===================================
+
+                    const personScore =
+                        document.getElementById(
+                            "person-score"
+                        );
+
+
+                    if (personScore) {
+
+                        personScore.textContent =
+                            data.per_person +
+                            " kg CO₂e/year";
+
+                    }
+
+
+                    const yourFootprint =
+                        document.getElementById(
+                            "your-footprint"
+                        );
+
+
+                    if (yourFootprint) {
+
+                        yourFootprint.textContent =
+                            data.per_person +
+                            " kg CO₂e/year";
+
+                    }
+
+
+                    // ===================================
+                    // GLOBAL AVERAGE
+                    // ===================================
+
+                    const globalFootprint =
+                        document.getElementById(
+                            "global-footprint"
+                        );
+
+
+                    if (globalFootprint) {
+
+                        globalFootprint.textContent =
+                            data.global_average +
+                            " kg CO₂e/person/year";
+
+                    }
+
+
+                    // ===================================
+                    // GLOBAL COMPARISON
+                    // ===================================
+
+                    const comparisonScore =
+                        document.getElementById(
+                            "comparison-score"
+                        );
+
+
+                    if (comparisonScore) {
+
+                        comparisonScore.textContent =
+                            data.global_percentage +
+                            "% of global average";
+
+                    }
+
+
+                    const polarisInsight =
+                        document.getElementById(
+                            "polaris-insight"
+                        );
+
+
+                    if (polarisInsight) {
+
+                        polarisInsight.textContent =
+                            data.comparison_message;
+
+                    }
+
+
+                    // ===================================
+                    // LARGEST SOURCE
+                    // ===================================
+
+                    const largestSource =
+                        document.getElementById(
+                            "largest-source"
+                        );
+
+
+                    if (largestSource) {
+
+                        largestSource.textContent =
+                            data.largest;
+
+                    }
+
+
+                    // ===================================
+                    // RECOMMENDATION
+                    // ===================================
+
+                    const recommendation =
+                        document.getElementById(
+                            "recommendation"
+                        );
+
+
+                    if (recommendation) {
+
+                        recommendation.textContent =
+                            createRecommendation(
+                                data
+                            );
+
+                    }
+
+
+                    // ===================================
+                    // GRAPH DATA
+                    // ===================================
+
+                    const graphData = {
+
+                        "Electricity":
+                            Number(
+                                data.electricity
+                            ) || 0,
+
+                        "Water":
+                            Number(
+                                data.water
+                            ) || 0,
+
+                        "Food Waste":
+                            Number(
+                                data.food
+                            ) || 0,
+
+                        "Plastic":
+                            Number(
+                                data.plastic
+                            ) || 0,
+
+                        "Transport":
+                            Number(
+                                data.transport
+                            ) || 0,
+
+                        "Gas":
+                            Number(
+                                data.gas
+                            ) || 0,
+
+                        "Flights":
+                            Number(
+                                data.flights
+                            ) || 0
+
+                    };
+
+
+                    // ===================================
+                    // REMOVE ZERO VALUES
+                    // ===================================
+
+                    const filteredData =
+                        Object.fromEntries(
+
+                            Object.entries(
+                                graphData
+                            ).filter(
                                 ([key, value]) =>
                                     value > 0
                             )
-                    );
+
+                        );
 
 
-                const ctx =
-                    document.getElementById("carbonChart");
+                    // ===================================
+                    // CREATE / UPDATE GRAPH
+                    // ===================================
+
+                    const ctx =
+                        document.getElementById(
+                            "carbonChart"
+                        );
 
 
-                if (
-                    ctx &&
-                    typeof Chart !== "undefined"
-                ) {
+                    if (
+                        ctx &&
+                        typeof Chart !== "undefined"
+                    ) {
 
-                    if (carbonChart) {
-                        carbonChart.destroy();
-                    }
 
-                    carbonChart =
-                        new Chart(ctx, {
+                        if (carbonChart) {
 
-                            type: "bar",
+                            carbonChart.destroy();
 
-                            data: {
+                        }
 
-                                labels:
-                                    Object.keys(filteredData),
 
-                                datasets: [{
+                        carbonChart =
+                            new Chart(
+                                ctx,
+                                {
 
-                                    label:
-                                        "Annual CO₂e by Category (kg CO₂e/year)",
+                                    type: "bar",
 
-                                    data:
-                                        Object.values(filteredData),
+                                    data: {
 
-                                    backgroundColor:
-                                        "#4CAF50"
+                                        labels:
+                                            Object.keys(
+                                                filteredData
+                                            ),
 
-                                }]
+                                        datasets: [
 
-                            },
+                                            {
 
-                            options: {
+                                                label:
+                                                    "Estimated annual CO₂e by category (kg CO₂e/year)",
 
-                                responsive: true,
+                                                data:
+                                                    Object.values(
+                                                        filteredData
+                                                    ),
 
-                                scales: {
+                                                backgroundColor:
+                                                    "#4CAF50"
 
-                                    y: {
+                                            }
 
-                                        beginAtZero: true,
+                                        ]
 
-                                        title: {
+                                    },
 
-                                            display: true,
 
-                                            text: "CO₂e"
+                                    options: {
+
+                                        responsive: true,
+
+                                        scales: {
+
+                                            y: {
+
+                                                beginAtZero: true,
+
+                                                title: {
+
+                                                    display: true,
+
+                                                    text:
+                                                        "Estimated CO₂e (kg/year)"
+
+                                                }
+
+                                            }
 
                                         }
 
                                     }
 
                                 }
+                            );
 
-                            }
+                    }
+
+
+                    // ===================================
+                    // SCROLL TO DASHBOARD
+                    // ===================================
+
+                    const dashboard =
+                        document.getElementById(
+                            "dashboard"
+                        );
+
+
+                    if (dashboard) {
+
+                        dashboard.scrollIntoView({
+
+                            behavior: "smooth"
 
                         });
 
+                    }
+
                 }
 
 
-                const dashboard =
-                    document.getElementById("dashboard");
+                catch (error) {
 
-                if (dashboard) {
+                    console.error(
+                        "Polaris calculator error:",
+                        error
+                    );
 
-                    dashboard.scrollIntoView({
-                        behavior: "smooth"
-                    });
+
+                    alert(
+                        "Something went wrong calculating your footprint. Please try again."
+                    );
 
                 }
 
             }
-
-            catch (error) {
-
-                console.error(
-                    "Polaris calculator error:",
-                    error
-                );
-
-                alert(
-                    "Something went wrong calculating your footprint. Please try again."
-                );
-
-            }
-
-        });
+        );
 
     }
 
@@ -419,38 +502,59 @@ document.addEventListener("DOMContentLoaded", function () {
     const ecoBadges = {
 
         "energy-saver": {
+
             name: "Energy Guardian",
+
             icon: "💡"
+
         },
 
         "water-warrior": {
+
             name: "Water Protector",
+
             icon: "💧"
+
         },
 
         "food-hero": {
+
             name: "Food Saver",
+
             icon: "🍽️"
+
         },
 
         "plastic-patrol": {
+
             name: "Plastic Defender",
+
             icon: "♻️"
+
         },
 
         "energy-guardian": {
+
             name: "Fuel Saver",
+
             icon: "🔥"
+
         },
 
         "green-journey": {
+
             name: "Green Traveler",
+
             icon: "🚗"
+
         },
 
         "sky-impact": {
+
             name: "Sky Protector",
+
             icon: "✈️"
+
         }
 
     };
@@ -474,9 +578,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             "🏠 Energy Hunt: Find one habit in your home that wastes electricity. Change that habit for the rest of today.",
 
-            "📊 Energy Reflection: Compare today's electricity-saving actions with your normal routine and identify two changes you could keep permanently.",
+            "📊 Energy Reflection: Review today's electricity-saving actions and identify two changes you could continue permanently.",
 
-            "🌱 Final Energy Audit: Complete a full walk-through of your home before bed. Switch off unnecessary lights, electronics and standby devices."
+            "🌱 Final Energy Audit: Complete a full walk-through of your home before bed. Switch off unnecessary lights, electronics, and standby devices."
+
         ],
 
 
@@ -486,7 +591,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             "🚿 Shower Challenge: Reduce your shower time compared with your normal routine and record approximately how many minutes you saved.",
 
-            "🔎 Leak Hunt: Inspect taps, toilets and visible pipes for signs of leaks. Report or fix one problem if you find one.",
+            "🔎 Leak Hunt: Inspect taps, toilets, and visible pipes for signs of leaks. Report or fix one problem if you find one.",
 
             "🪣 Water Use Audit: Identify one activity where water is commonly left running unnecessarily and change the way you do it today.",
 
@@ -495,6 +600,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "♻️ Reuse Challenge: Find one safe way to reuse water that would normally be discarded, such as water from rinsing produce.",
 
             "🌊 Final Water Audit: Walk through your home and identify three opportunities to reduce water waste. Put at least one improvement into practice."
+
         ],
 
 
@@ -513,6 +619,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "🍲 Leftover Creation: Transform one leftover ingredient or meal into a new meal instead of throwing it away.",
 
             "🌱 Food Waste Audit: Review the food you threw away this week and identify the main reason it became waste. Choose one change to prevent it."
+
         ],
 
 
@@ -524,21 +631,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
             "🥡 Container Challenge: Use a reusable container or lunchbox instead of a disposable food container for one meal.",
 
-            "🚫 Single-Use Audit: Track every unnecessary single-use plastic item you encounter today and identify which ones you could replace.",
+            "🚫 Single-Use Audit: Track unnecessary single-use plastic items you encounter today and identify which ones you could replace.",
 
             "♻️ Packaging Investigation: Choose one product you are buying and compare whether a lower-packaging alternative is available.",
 
             "🌎 Plastic-Free Swap: Replace at least two disposable plastic items you normally use with reusable alternatives.",
 
-            "📊 Plastic Audit: Count how many single-use plastic items you avoided this week and identify your biggest opportunity for improvement."
+            "📊 Plastic Audit: Count how many unnecessary single-use plastic items you avoided this week and identify your biggest opportunity for improvement."
+
         ],
 
 
         "energy-guardian": [
 
-            "🔥 Burner Efficiency: When cooking, match the burner size to the size of your cookware instead of using a larger flame than necessary.",
+            "🔥 Burner Efficiency: Match the burner size to the size of your cookware instead of using a larger flame than necessary.",
 
-            "🍳 Heat Challenge: Cover a pot or pan while cooking one meal and observe how efficiently the food heats compared with cooking uncovered.",
+            "🍳 Heat Challenge: Cover a pot or pan while cooking one meal and observe how efficiently the food heats.",
 
             "🔥 Flame Check: During cooking, make sure the flame is not unnecessarily high and reduce it once the food is properly heating.",
 
@@ -549,6 +657,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "⏱️ Heat Management: Once food reaches the required cooking temperature, reduce the flame instead of maintaining an unnecessarily high setting.",
 
             "🌱 Final Fuel Audit: Review your cooking habits from the week and identify two changes that could permanently reduce cooking-fuel use."
+
         ],
 
 
@@ -566,7 +675,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             "🚲 Active Travel: Complete one short journey by walking or cycling instead of using a motor vehicle, if safe.",
 
-            "🌱 Weekly Transport Audit: Review your journeys from the week and identify the single biggest opportunity to reduce transportation emissions."
+            "🌱 Weekly Transport Audit: Review your journeys from the week and identify the biggest opportunity to reduce transportation emissions."
+
         ],
 
 
@@ -574,7 +684,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             "✈️ Flight Necessity Check: Think of a future flight you may take and identify whether the journey is necessary or whether another option could work.",
 
-            "🚆 Alternative Transport: For a hypothetical or upcoming journey, investigate whether rail, bus or another lower-emission option could replace flying.",
+            "🚆 Alternative Transport: For a hypothetical or upcoming journey, investigate whether rail, bus, or another lower-emission option could replace flying.",
 
             "🗺️ Trip Planning: Combine activities or destinations into fewer journeys when planning future travel.",
 
@@ -584,7 +694,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             "✈️ Short-Flight Check: Identify whether any future short-distance flight could reasonably be replaced by another mode of transportation.",
 
-            "🌍 Travel Reflection: Review your travel choices from the week and write down two principles you will use to make lower-carbon travel decisions in the future."
+            "🌍 Travel Reflection: Review your travel choices and write down two principles you will use to make lower-carbon travel decisions in the future."
+
         ]
 
     };
@@ -615,7 +726,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =======================================
-    // UPDATE BADGE DISPLAY
+    // GET UNLOCKED BADGES
     // =======================================
 
     function getUnlockedBadges() {
@@ -624,8 +735,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const saved =
                 JSON.parse(
-                    localStorage.getItem("polarisBadges")
+                    localStorage.getItem(
+                        "polarisBadges"
+                    )
                 );
+
 
             return Array.isArray(saved)
                 ? saved
@@ -642,6 +756,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    // =======================================
+    // UPDATE BADGE DISPLAY
+    // =======================================
+
     function updateBadgeDisplay() {
 
         const unlockedBadges =
@@ -652,35 +770,57 @@ document.addEventListener("DOMContentLoaded", function () {
             .querySelectorAll(".badge-card")
             .forEach(card => {
 
+
                 const badgeId =
                     card.dataset.badge;
 
+
                 const status =
-                    card.querySelector(".badge-status");
+                    card.querySelector(
+                        ".badge-status"
+                    );
 
 
                 if (
-                    unlockedBadges.includes(badgeId)
+                    unlockedBadges.includes(
+                        badgeId
+                    )
                 ) {
 
-                    card.classList.remove("locked");
-                    card.classList.add("unlocked");
+                    card.classList.remove(
+                        "locked"
+                    );
+
+                    card.classList.add(
+                        "unlocked"
+                    );
+
 
                     if (status) {
+
                         status.textContent =
                             "🏅 Unlocked!";
+
                     }
 
                 }
 
                 else {
 
-                    card.classList.remove("unlocked");
-                    card.classList.add("locked");
+                    card.classList.remove(
+                        "unlocked"
+                    );
+
+                    card.classList.add(
+                        "locked"
+                    );
+
 
                     if (status) {
+
                         status.textContent =
                             "🔒 Locked";
+
                     }
 
                 }
@@ -691,19 +831,30 @@ document.addEventListener("DOMContentLoaded", function () {
         const earned =
             unlockedBadges.length;
 
+
         const total =
-            Object.keys(ecoBadges).length;
+            Object.keys(
+                ecoBadges
+            ).length;
 
 
         const earnedElement =
-            document.getElementById("badges-earned");
+            document.getElementById(
+                "badges-earned"
+            );
+
 
         const progressFill =
-            document.getElementById("badge-progress-fill");
+            document.getElementById(
+                "badge-progress-fill"
+            );
 
 
         if (earnedElement) {
-            earnedElement.textContent = earned;
+
+            earnedElement.textContent =
+                earned;
+
         }
 
 
@@ -713,6 +864,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 total === 0
                     ? 0
                     : (earned / total) * 100;
+
 
             progressFill.style.width =
                 percentage + "%";
@@ -726,7 +878,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // =======================================
-    // ONLY RUN TRACKER ON CHALLENGE PAGE
+    // CHALLENGE SYSTEM
+    // ONLY RUNS ON CHALLENGE PAGES
     // =======================================
 
     if (
@@ -747,30 +900,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function setupChallenge(id) {
 
+
         const startButton =
             document.getElementById(
                 "start-challenge-btn"
             );
+
 
         const completeButton =
             document.getElementById(
                 "complete-day-btn"
             );
 
+
         const todayAction =
             document.getElementById(
                 "today-action"
             );
+
 
         const trackerStatus =
             document.getElementById(
                 "tracker-status"
             );
 
+
         const badgeBox =
             document.getElementById(
                 "badge-earned"
             );
+
 
         const badgeName =
             document.getElementById(
@@ -778,8 +937,13 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-        if (!startButton || !completeButton) {
+        if (
+            !startButton ||
+            !completeButton
+        ) {
+
             return;
+
         }
 
 
@@ -798,7 +962,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             progress =
                 JSON.parse(
-                    localStorage.getItem(storageKey)
+                    localStorage.getItem(
+                        storageKey
+                    )
                 );
 
         }
@@ -830,26 +996,42 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
+        if (
+            !Array.isArray(
+                progress.completedDays
+            )
+        ) {
+
+            progress.completedDays = [];
+
+        }
+
+
         // ===================================
         // GET LOCAL DATE
         // ===================================
 
         function getToday() {
 
-            const now = new Date();
+            const now =
+                new Date();
+
 
             const year =
                 now.getFullYear();
+
 
             const month =
                 String(
                     now.getMonth() + 1
                 ).padStart(2, "0");
 
+
             const day =
                 String(
                     now.getDate()
                 ).padStart(2, "0");
+
 
             return (
                 year +
@@ -863,26 +1045,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         // ===================================
-        // SAVE
+        // SAVE PROGRESS
         // ===================================
 
         function saveProgress() {
 
             localStorage.setItem(
+
                 storageKey,
-                JSON.stringify(progress)
+
+                JSON.stringify(
+                    progress
+                )
+
             );
 
         }
 
 
         // ===================================
-        // GET CURRENT TASK NUMBER
+        // GET NEXT DAY
         // ===================================
 
         function getNextDay() {
 
-            return progress.completedDays.length + 1;
+            return (
+                progress.completedDays.length +
+                1
+            );
 
         }
 
@@ -894,7 +1084,9 @@ document.addEventListener("DOMContentLoaded", function () {
         function showCurrentTask() {
 
             if (!todayAction) {
+
                 return;
+
             }
 
 
@@ -903,14 +1095,14 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!progress.started) {
 
                 todayAction.textContent =
-                    "Start the challenge to reveal your first task. 🌱";
+                    "Start the challenge to reveal your first action. 🌱";
 
                 return;
 
             }
 
 
-            // All seven completed
+            // Complete
 
             if (
                 progress.completedDays.length >= 7
@@ -929,15 +1121,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             const task =
-                challengeTasks[id][nextDay - 1];
+                challengeTasks[id][
+                    nextDay - 1
+                ];
 
 
             if (task) {
 
                 todayAction.textContent =
-                    "Day " +
-                    nextDay +
-                    ": " +
                     task;
 
             }
@@ -959,10 +1150,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 .querySelectorAll(".day-box")
                 .forEach(box => {
 
+
                     const day =
                         Number(
                             box.dataset.day
                         );
+
 
                     const status =
                         box.querySelector(
@@ -976,6 +1169,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     );
 
 
+                    // Completed
+
                     if (
                         progress.completedDays
                             .includes(day)
@@ -985,11 +1180,18 @@ document.addEventListener("DOMContentLoaded", function () {
                             "completed"
                         );
 
+
                         if (status) {
-                            status.textContent = "✅";
+
+                            status.textContent =
+                                "✅";
+
                         }
 
                     }
+
+
+                    // Next available day
 
                     else if (
                         progress.started &&
@@ -1001,16 +1203,26 @@ document.addEventListener("DOMContentLoaded", function () {
                             "active"
                         );
 
+
                         if (status) {
-                            status.textContent = "▶️";
+
+                            status.textContent =
+                                "▶️";
+
                         }
 
                     }
 
+
+                    // Locked
+
                     else {
 
                         if (status) {
-                            status.textContent = "🔒";
+
+                            status.textContent =
+                                "🔒";
+
                         }
 
                     }
@@ -1021,7 +1233,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         // ===================================
-        // UPDATE BUTTONS / STATUS
+        // UPDATE UI
         // ===================================
 
         function updateUI() {
@@ -1032,30 +1244,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
             updateDayBoxes();
 
-
             showCurrentTask();
 
 
-            // -------------------------------
+            // ===================================
             // NOT STARTED
-            // -------------------------------
+            // ===================================
 
             if (!progress.started) {
 
-                startButton.disabled = false;
+                startButton.disabled =
+                    false;
+
 
                 startButton.textContent =
-                    "Start Challenge";
+                    "🚀 Start Challenge";
 
-                completeButton.disabled = true;
+
+                completeButton.disabled =
+                    true;
+
 
                 completeButton.textContent =
-                    "Complete Today's Action";
+                    "Mark Today's Action Complete";
+
 
                 if (trackerStatus) {
 
                     trackerStatus.textContent =
-                        "Click Start Challenge to begin your 7-day journey! 🌱";
+                        "Start the challenge to begin your 7-day journey. 🌱";
 
                 }
 
@@ -1064,21 +1281,27 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
 
-            // -------------------------------
-            // FINISHED
-            // -------------------------------
+            // ===================================
+            // COMPLETE
+            // ===================================
 
             if (completed >= 7) {
 
-                startButton.disabled = true;
+                startButton.disabled =
+                    true;
+
 
                 startButton.textContent =
                     "🏅 Challenge Complete";
 
-                completeButton.disabled = true;
+
+                completeButton.disabled =
+                    true;
+
 
                 completeButton.textContent =
                     "🏅 Challenge Complete";
+
 
                 if (trackerStatus) {
 
@@ -1087,16 +1310,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 }
 
+
+                showBadge();
+
                 return;
 
             }
 
 
-            // -------------------------------
+            // ===================================
             // STARTED
-            // -------------------------------
+            // ===================================
 
-            startButton.disabled = true;
+            startButton.disabled =
+                true;
+
 
             startButton.textContent =
                 "✅ Challenge Started";
@@ -1106,41 +1334,53 @@ document.addEventListener("DOMContentLoaded", function () {
                 getToday();
 
 
-            // User already completed today's action
+            // ===================================
+            // TODAY ALREADY COMPLETE
+            // ===================================
 
             if (
-                progress.lastCompletedDate === today
+                progress.lastCompletedDate ===
+                today
             ) {
 
-                completeButton.disabled = true;
+                completeButton.disabled =
+                    true;
+
 
                 completeButton.textContent =
                     "✅ Today's Action Complete";
 
+
                 if (trackerStatus) {
 
                     trackerStatus.textContent =
-                        "Day " +
-                        completed +
-                        " completed! 🌱 Come back tomorrow for your next task.";
+                        "Today's action is complete. Come back tomorrow for your next action. 🌱";
 
                 }
 
             }
 
+
+            // ===================================
+            // READY FOR TODAY
+            // ===================================
+
             else {
 
-                completeButton.disabled = false;
+                completeButton.disabled =
+                    false;
+
 
                 completeButton.textContent =
-                    "Complete Today's Action";
+                    "Mark Today's Action Complete";
+
 
                 if (trackerStatus) {
 
                     trackerStatus.textContent =
                         "Day " +
                         (completed + 1) +
-                        " of 7 — Complete today's task! 🌱";
+                        " of 7 — Complete today's action! 🌱";
 
                 }
 
@@ -1157,19 +1397,28 @@ document.addEventListener("DOMContentLoaded", function () {
             "click",
             function () {
 
+
                 if (progress.started) {
+
                     return;
+
                 }
 
 
-                progress.started = true;
+                progress.started =
+                    true;
+
 
                 progress.startDate =
                     getToday();
 
-                progress.completedDays = [];
 
-                progress.lastCompletedDate = null;
+                progress.completedDays =
+                    [];
+
+
+                progress.lastCompletedDate =
+                    null;
 
 
                 saveProgress();
@@ -1189,23 +1438,24 @@ document.addEventListener("DOMContentLoaded", function () {
             "click",
             function () {
 
-                // --------------------------------
-                // SAFETY CHECK
-                // --------------------------------
+
+                // Challenge must be started
 
                 if (!progress.started) {
+
                     return;
+
                 }
 
 
-                // --------------------------------
-                // NEVER ALLOW MORE THAN 7
-                // --------------------------------
+                // Never exceed seven days
 
                 if (
                     progress.completedDays.length >= 7
                 ) {
+
                     return;
+
                 }
 
 
@@ -1213,21 +1463,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     getToday();
 
 
-                // --------------------------------
-                // THE IMPORTANT LOCK
-                // --------------------------------
-                //
-                // If they already completed a task
-                // today, they CANNOT advance.
-                //
+                // Same-day protection
 
                 if (
-                    progress.lastCompletedDate === today
+                    progress.lastCompletedDate ===
+                    today
                 ) {
 
                     alert(
                         "🌱 You've already completed today's action!\n\n" +
-                        "Come back tomorrow for the next task."
+                        "Come back tomorrow for your next action."
                     );
 
                     return;
@@ -1235,32 +1480,31 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
 
-                // --------------------------------
-                // ONLY COMPLETE THE NEXT DAY
-                // --------------------------------
+                // Determine next day
 
                 const nextDay =
-                    progress.completedDays.length + 1;
+                    progress.completedDays.length +
+                    1;
 
 
-                // Extra safety:
-                // Only 1 → 2 → 3 → ... → 7
+                // Safety check
 
                 if (
                     nextDay < 1 ||
                     nextDay > 7
                 ) {
+
                     return;
+
                 }
 
 
-                // --------------------------------
-                // RECORD COMPLETION
-                // --------------------------------
+                // Record completion
 
                 progress.completedDays.push(
                     nextDay
                 );
+
 
                 progress.lastCompletedDate =
                     today;
@@ -1269,9 +1513,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 saveProgress();
 
 
-                // --------------------------------
-                // BADGE ONLY AFTER DAY 7
-                // --------------------------------
+                // Unlock badge after Day 7
 
                 if (
                     progress.completedDays.length === 7
@@ -1282,19 +1524,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
 
-                // --------------------------------
-                // REFRESH
-                // --------------------------------
-                //
-                // After refresh:
-                //
-                // Day 1 completed
-                // ↓
-                // Day 2 appears
-                //
-                // BUT the button is locked
-                // until tomorrow.
-                //
+                // Refresh page
 
                 window.location.reload();
 
@@ -1313,7 +1543,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             if (!badge) {
+
                 return;
+
             }
 
 
@@ -1327,9 +1559,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 unlocked.push(id);
 
+
                 localStorage.setItem(
+
                     "polarisBadges",
-                    JSON.stringify(unlocked)
+
+                    JSON.stringify(
+                        unlocked
+                    )
+
                 );
 
             }
@@ -1360,6 +1598,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         // ===================================
+        // SHOW BADGE
+        // ===================================
+
+        function showBadge() {
+
+            const badge =
+                ecoBadges[id];
+
+
+            if (
+                !badge ||
+                !badgeBox ||
+                !badgeName
+            ) {
+
+                return;
+
+            }
+
+
+            badgeBox.classList.remove(
+                "hidden"
+            );
+
+
+            badgeName.textContent =
+                badge.icon +
+                " " +
+                badge.name;
+
+        }
+
+
+        // ===================================
         // INITIALIZE
         // ===================================
 
@@ -1376,35 +1648,53 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function createRecommendation(data) {
 
+
     const recommendations = {
 
+
         "Electricity":
-            "💡 Electricity is your biggest contributor. Try switching off unused lights and electronics, using natural light, and avoiding standby power.",
+
+            "💡 Electricity is your biggest source of estimated emissions. Try switching off unused lights and electronics, using natural light, and reducing unnecessary standby power.",
+
 
         "Water":
-            "💧 Water is your biggest contributor. Try taking shorter showers, turning off taps when not needed, and fixing leaks.",
+
+            "💧 Water use is your biggest source of estimated emissions. Try taking shorter showers, turning off taps when they are not needed, and fixing leaks.",
+
 
         "Food Waste":
-            "🍽️ Food waste is your biggest contributor. Plan meals, store leftovers properly, and only take the amount of food you can finish.",
+
+            "🍽️ Food waste is your biggest source of estimated emissions. Plan meals, store leftovers properly, and take only the amount of food you expect to finish.",
+
 
         "Plastic":
-            "♻️ Plastic is your biggest contributor. Try reusable bottles and bags, reusable containers, and avoiding unnecessary single-use plastics.",
+
+            "♻️ Plastic waste is your biggest source of estimated emissions. Try reusable bottles and bags, reusable containers, and avoiding unnecessary single-use plastics.",
+
 
         "Transport":
-            "🚗 Transport is your biggest contributor. Walk, cycle, use public transport, combine errands, or share rides when practical.",
+
+            "🚗 Transport is your biggest source of estimated emissions. Walk, cycle, use public transport, combine errands, or share rides when practical.",
+
 
         "Gas":
-            "🔥 Cooking fuel is your biggest contributor. Use the correct flame size, cover pots, and avoid leaving the flame on unnecessarily.",
+
+            "🔥 Cooking fuel is your biggest source of estimated emissions. Use the correct flame size, cover pots when appropriate, and avoid unnecessary fuel use.",
+
 
         "Flights":
-            "✈️ Flights are your biggest contributor. Consider alternatives to flying when practical and combine trips where possible."
+
+            "✈️ Flights are your biggest source of estimated emissions. Consider lower-emission alternatives to flying when practical and combine trips where possible."
 
     };
 
 
     return (
+
         recommendations[data.largest] ||
-        "🌱 Keep making sustainable choices! Focus on the category with the largest impact."
+
+        "🌱 Keep making sustainable choices! Focus on the category with the largest estimated impact."
+
     );
 
 }
