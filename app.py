@@ -175,7 +175,245 @@ def calculate():
             "error": "Calculator values cannot be negative and household size must be at least 1."
         }), 400
 
+        # ========================================================
+    # INPUT PLAUSIBILITY CHECK
+    # ========================================================
+    #
+    # These checks are NOT used to decide whether an input is
+    # correct or incorrect.
+    #
+    # They simply identify values that are unusually far from
+    # the prototype household benchmark for the given household
+    # size, so the user can double-check their input.
+    #
+    # A user can still continue if the value is genuinely correct.
+    # ========================================================
 
+    INPUT_WARNING_FACTOR = 3.0
+
+    input_warnings = []
+
+    # Prototype monthly benchmarks per person
+    INPUT_BENCHMARKS = {
+
+        "Electricity": 200,      # kWh/person/month
+        "Water": 2000,           # L/person/month
+        "Food Waste": 2,         # kg/person/month
+        "Plastic": 1.5,          # kg/person/month
+        "Transport": 300,        # km/person/month
+        "Gas": 0.25,             # cylinders/person/month
+        "Flights": 1             # flights/person/year
+    }
+
+
+    # --------------------------------------------------------
+    # ELECTRICITY
+    # --------------------------------------------------------
+
+    electricity_expected = (
+        INPUT_BENCHMARKS["Electricity"] * size
+    )
+
+    if electricity > electricity_expected * INPUT_WARNING_FACTOR:
+
+        input_warnings.append(
+            "⚠️ Your electricity input is unusually high for "
+            f"a household of {size}. Please check that you "
+            "entered your monthly electricity use in kWh. "
+            "If this value is correct, you can continue."
+        )
+
+    elif (
+        electricity > 0 and
+        electricity < electricity_expected / INPUT_WARNING_FACTOR
+    ):
+
+        input_warnings.append(
+            "⚠️ Your electricity input is unusually low for "
+            f"a household of {size}. Please check that you "
+            "entered your monthly electricity use in kWh. "
+            "If this value is correct, you can continue."
+        )
+
+
+    # --------------------------------------------------------
+    # WATER
+    # --------------------------------------------------------
+
+    water_expected = (
+        INPUT_BENCHMARKS["Water"] * size
+    )
+
+    if water > water_expected * INPUT_WARNING_FACTOR:
+
+        input_warnings.append(
+            "⚠️ Your water input is unusually high for "
+            f"a household of {size}. Please check that you "
+            "entered your monthly water use in litres. "
+            "If this value is correct, you can continue."
+        )
+
+    elif (
+        water > 0 and
+        water < water_expected / INPUT_WARNING_FACTOR
+    ):
+
+        input_warnings.append(
+            "⚠️ Your water input is unusually low for "
+            f"a household of {size}. Please check that you "
+            "entered your monthly water use in litres. "
+            "If this value is correct, you can continue."
+        )
+
+
+    # --------------------------------------------------------
+    # FOOD WASTE
+    # --------------------------------------------------------
+
+    food_expected = (
+        INPUT_BENCHMARKS["Food Waste"] * size
+    )
+
+    if food > food_expected * INPUT_WARNING_FACTOR:
+
+        input_warnings.append(
+            "⚠️ Your food waste input is unusually high for "
+            f"a household of {size}. Please check that you "
+            "entered your monthly food waste in kilograms. "
+            "If this value is correct, you can continue."
+        )
+
+    elif (
+        food > 0 and
+        food < food_expected / INPUT_WARNING_FACTOR
+    ):
+
+        input_warnings.append(
+            "⚠️ Your food waste input is unusually low for "
+            f"a household of {size}. Please check that you "
+            "entered your monthly food waste in kilograms. "
+            "If this value is correct, you can continue."
+        )
+
+
+    # --------------------------------------------------------
+    # PLASTIC
+    # --------------------------------------------------------
+
+    plastic_expected = (
+        INPUT_BENCHMARKS["Plastic"] * size
+    )
+
+    if plastic > plastic_expected * INPUT_WARNING_FACTOR:
+
+        input_warnings.append(
+            "⚠️ Your plastic input is unusually high for "
+            f"a household of {size}. Please check that you "
+            "entered your monthly plastic waste in kilograms. "
+            "If this value is correct, you can continue."
+        )
+
+    elif (
+        plastic > 0 and
+        plastic < plastic_expected / INPUT_WARNING_FACTOR
+    ):
+
+        input_warnings.append(
+            "⚠️ Your plastic input is unusually low for "
+            f"a household of {size}. Please check that you "
+            "entered your monthly plastic waste in kilograms. "
+            "If this value is correct, you can continue."
+        )
+
+
+    # --------------------------------------------------------
+    # TRANSPORT
+    # --------------------------------------------------------
+
+    transport_expected = (
+        INPUT_BENCHMARKS["Transport"] * size
+    )
+
+    if transport > transport_expected * INPUT_WARNING_FACTOR:
+
+        input_warnings.append(
+            "⚠️ Your transport input is unusually high for "
+            f"a household of {size}. Please check that you "
+            "entered your monthly travel distance in kilometres. "
+            "If this value is correct, you can continue."
+        )
+
+    elif (
+        transport > 0 and
+        transport < transport_expected / INPUT_WARNING_FACTOR
+    ):
+
+        input_warnings.append(
+            "⚠️ Your transport input is unusually low for "
+            f"a household of {size}. Please check that you "
+            "entered your monthly travel distance in kilometres. "
+            "If this value is correct, you can continue."
+        )
+
+
+    # --------------------------------------------------------
+    # LPG
+    # --------------------------------------------------------
+
+    gas_expected = (
+        INPUT_BENCHMARKS["Gas"] * size
+    )
+
+    if gas > gas_expected * INPUT_WARNING_FACTOR:
+
+        input_warnings.append(
+            "⚠️ Your LPG input is unusually high for "
+            f"a household of {size}. Please check that you "
+            "entered your monthly number of LPG cylinders. "
+            "If this value is correct, you can continue."
+        )
+
+    elif (
+        gas > 0 and
+        gas < gas_expected / INPUT_WARNING_FACTOR
+    ):
+
+        input_warnings.append(
+            "⚠️ Your LPG input is unusually low for "
+            f"a household of {size}. Please check that you "
+            "entered your monthly number of LPG cylinders. "
+            "If this value is correct, you can continue."
+        )
+
+
+    # --------------------------------------------------------
+    # FLIGHTS
+    # --------------------------------------------------------
+
+    flights_expected = (
+        INPUT_BENCHMARKS["Flights"] * size
+    )
+
+    if flights > flights_expected * INPUT_WARNING_FACTOR:
+
+        input_warnings.append(
+            "⚠️ Your number of flights is unusually high for "
+            f"a household of {size}. Please check that you "
+            "entered the number of flights taken per year. "
+            "If this value is correct, you can continue."
+        )
+
+    elif (
+        flights > 0 and
+        flights < flights_expected / INPUT_WARNING_FACTOR
+    ):
+
+        input_warnings.append(
+            "⚠️ Your number of flights is unusually low for "
+            f"a household of {size}. Please check that you "
+            "entered the number of flights taken per year. "
+            "If this value is correct, you can continue."
+        )
     # ========================================================
     # EMISSION FACTORS
     # ========================================================
@@ -692,11 +930,14 @@ def calculate():
         "transport":
             graph_data["Transport"],
 
-        "gas":
+               "gas":
             graph_data["Gas"],
 
         "flights":
-            graph_data["Flights"]
+            graph_data["Flights"],
+
+        "input_warnings":
+            input_warnings
 
     })
 
