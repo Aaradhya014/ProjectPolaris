@@ -1,9 +1,7 @@
-/* =========================================================
+   /* =========================================================
    PROJECT POLARIS
    Main Stylesheet
 ========================================================= */
-
-
 /* =========================================================
    GLOBAL
 ========================================================= */
@@ -24,6 +22,7 @@ body {
     color: #1f2d24;
     line-height: 1.6;
     transition: background 0.3s ease, color 0.3s ease;
+    margin: 0;
 }
 
 section {
@@ -128,12 +127,6 @@ nav {
     display: inline-block;
 }
 
-.tagline {
-    font-size: 1.4rem;
-    color: #49614e;
-    margin-bottom: 18px;
-}
-
 .one {
     font-size: 1.15rem;
     margin-bottom: 12px;
@@ -169,15 +162,19 @@ nav {
 ========================================================= */
 
 .features {
-    max-width: 1100px;
+    max-width: 1150px;
 
-    margin: 60px auto 0;
+    margin: 0 auto;
 
     display: grid;
 
     grid-template-columns: repeat(4, 1fr);
 
-    gap: 20px;
+    gap: 25px;
+
+    justify-items: center;
+
+    text-align: center;
 }
 
 .card {
@@ -276,7 +273,7 @@ nav {
 }
 
 .calculate {
-    display: inline-block;
+    display: block;
 
     padding: 14px 28px;
 
@@ -293,6 +290,11 @@ nav {
     transition:
         background 0.2s ease,
         transform 0.2s ease;
+
+    width: fit-content;
+
+    margin: 35px auto 0;
+
 }
 
 .calculate:hover {
@@ -334,7 +336,9 @@ nav {
     margin: 10px 0 40px;
 }
 
-
+.calculator-note{
+    text-align: center;
+}
 /* =========================================================
    INPUT METHOD
 ========================================================= */
@@ -366,16 +370,80 @@ nav {
     margin-bottom: 35px;
 }
 
-.slider-group {
-    margin-bottom: 30px;
+/* =========================================================
+   SLIDER SECTION
+========================================================= */
 
-    padding: 22px;
+.slider-title {
+    text-align: center;
+
+    color: #43a047;
+
+    font-size: 1.5rem;
+
+    margin-top: 25px;
+}
+
+.slider-subtitle {
+    text-align: center;
+
+    color: #657267;
+
+    margin-bottom: 25px;
+}
+
+
+/* Put the sliders into two columns */
+
+.slider-groups {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 14px 20px;
+
+    margin-top: 20px;
+}
+
+
+/* Individual slider */
+
+.slider-group {
+    margin-bottom: 0;
+
+    padding: 15px 18px;
 
     background: #f6faf6;
 
     border: 1px solid #dce8de;
 
     border-radius: 14px;
+}
+
+
+/* Label */
+
+.slider-group label {
+    display: block;
+
+    font-weight: 700;
+
+    color: #304536;
+
+    margin-bottom: 7px;
+}
+
+
+/* Current value */
+
+.slider-value {
+    text-align: right;
+
+    font-weight: 700;
+
+    color: #43a047;
+
+    margin-bottom: 5px;
 }
 
 .slider-group label {
@@ -1234,7 +1302,7 @@ button:disabled {
 ========================================================= */
 
 footer {
-    padding: 65px 7% 25px;
+    padding: 80px 7% 35px;
 
     background: #1d3022;
 
@@ -1320,7 +1388,7 @@ footer {
 
     color: #9fb2a2;
 
-    font-size: 0.9rem;
+    font-size: 0.95rem;
 }
 
 .footer-tagline {
@@ -1372,14 +1440,12 @@ body.dark-mode .hero {
 }
 
 body.dark-mode .hero h1 {
-    color: #81c784;
+    color: #26b02d;
 
     text-shadow:
-        0 0 8px rgba(129, 199, 132, 0.75),
-        0 0 20px rgba(129, 199, 132, 0.4);
+        0 0 5px rgba(129, 199, 132, 0.25);
 }
 
-body.dark-mode .tagline,
 body.dark-mode .one,
 body.dark-mode .two {
     color: #ffffff;
@@ -1424,7 +1490,7 @@ body.dark-mode .card h2,
 body.dark-mode .dashboard-card h2,
 body.dark-mode .challenge-card h2,
 body.dark-mode .badge-card h3 {
-    color: #81c784;
+    color: #34a339;
 }
 
 body.dark-mode .card p,
@@ -1440,10 +1506,10 @@ body.dark-mode .badge-card p {
 ========================= */
 
 body.dark-mode .card::after {
-    background: #81c784;
+    background: #34c03b;
 
     box-shadow:
-        0 0 8px rgba(129, 199, 132, 0.8),
+        0 0 8px rgba(46, 186, 53, 0.8),
         0 0 18px rgba(129, 199, 132, 0.4);
 }
 
@@ -1453,7 +1519,7 @@ body.dark-mode .card::after {
 ========================= */
 
 body.dark-mode .why h1 {
-    color: #81c784;
+    color: #31c138;
 }
 
 body.dark-mode .why li {
@@ -1467,7 +1533,7 @@ body.dark-mode .why li {
 
 body.dark-mode #calculator h2,
 body.dark-mode .slider-title {
-    color: #81c784;
+    color: #1fc127;
 }
 
 body.dark-mode .calculator-subtitle,
@@ -1489,10 +1555,8 @@ body.dark-mode .slider-group {
 ========================= */
 
 body.dark-mode #dashboard > h1 {
-    color: #81c784;
-
-    text-shadow:
-        0 0 8px rgba(129, 199, 132, 0.35);
+    color: #31d239;
+    text-shadow: 0 0 4px rgba(129, 199, 132, 0.18);
 }
 
 body.dark-mode .dashboard-card h3 {
@@ -1500,7 +1564,7 @@ body.dark-mode .dashboard-card h3 {
 }
 
 body.dark-mode .dashboard-card h2 {
-    color: #81c784;
+    color: #26bc2d;
 }
 
 
@@ -1515,7 +1579,7 @@ body.dark-mode .recommendation {
 }
 
 body.dark-mode .recommendation h2 {
-    color: #81c784;
+    color: #27ac2e;
 }
 
 body.dark-mode .recommendation p {
@@ -1529,7 +1593,7 @@ body.dark-mode .recommendation p {
 
 body.dark-mode .comparison h1,
 body.dark-mode .comparison h2 {
-    color: #81c784;
+    color: #25b62c;
 }
 
 body.dark-mode .comparison h3 {
@@ -1554,7 +1618,7 @@ body.dark-mode .comparison-message h3 {
 ========================= */
 
 body.dark-mode #challenges > h1 {
-    color: #81c784;
+    color: #2fb936;
 }
 
 body.dark-mode #challenges > p {
@@ -1624,7 +1688,7 @@ body.dark-mode .challenge-page {
 }
 
 body.dark-mode .challenge-detail > h1 {
-    color: #81c784;
+    color: #1b8d21;
 }
 
 body.dark-mode .challenge-subtitle {
@@ -1757,6 +1821,11 @@ body.dark-mode .badge-earned p {
 
 @media (max-width: 750px) {
 
+        .slider-group {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
     nav {
         flex-direction: column;
 
@@ -1824,4 +1893,1080 @@ body.dark-mode .badge-earned p {
     .challenge-buttons .challenge-btn {
         width: 100%;
     }
+}
+
+/* =========================================================
+   H1 GLOW CONTROL
+========================================================= */
+
+.hero h1 {
+
+    text-shadow:
+        0 0 5px rgba(76, 175, 80, 0.22);
+
+}
+
+#dashboard > h1 {
+
+    text-shadow:
+        0 0 4px rgba(76, 175, 80, 0.15);
+
+}
+
+#challenges > h1 {
+
+    text-shadow: none;
+
+}
+
+#eco-badges > h1 {
+
+    text-shadow: none;
+
+}
+
+.why h1 {
+
+    text-shadow: none;
+
+}
+
+.comparison h1 {
+
+    text-shadow: none;
+
+}
+
+
+/* =========================================================
+   POLARIS BEYOND — DARK MODE BACKGROUND
+========================================================= */
+
+body.dark-mode #polaris-beyond {
+
+    background-color: #1b261d;
+
+}
+
+
+/* =========================================================
+   POLARIS BEYOND — REMOVE WHITE EARNED GLOW
+========================================================= */
+
+/* Earned Beyond challenge cards */
+
+.polaris-beyond-challenge.earned,
+.polaris-beyond-challenge.completed {
+
+    box-shadow: none !important;
+    text-shadow: none !important;
+
+}
+
+
+/* Earned Beyond badges */
+
+.polaris-beyond-badge.earned {
+
+    border: 2px solid #2e7d32 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+
+}
+
+
+/* Remove glow from everything inside earned badges */
+
+.polaris-beyond-badge.earned *,
+.polaris-beyond-badge.earned h3,
+.polaris-beyond-badge.earned p,
+.polaris-beyond-badge.earned strong,
+.polaris-beyond-badge.earned span {
+
+    text-shadow: none !important;
+    box-shadow: none !important;
+
+}
+
+
+/* Remove glow from the "Beyond Badge Earned" message */
+
+.polaris-beyond-badge.earned::before,
+.polaris-beyond-badge.earned::after {
+
+    box-shadow: none !important;
+    text-shadow: none !important;
+
+}
+
+
+/* Dark mode — keep earned border green, never white */
+
+body.dark-mode .polaris-beyond-badge.earned {
+
+    border: 2px solid #4caf50 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+
+}
+
+body.dark-mode .polaris-beyond-badge.earned * {
+
+    text-shadow: none !important;
+    box-shadow: none !important;
+
+}
+
+
+/* =========================================================
+   POLARIS BEYOND — MISSIONS DARK MODE TEXT
+========================================================= */
+
+/* Mission cards */
+
+body.dark-mode #polaris-beyond .polaris-beyond-challenge,
+body.dark-mode #polaris-beyond .polaris-beyond-challenge * {
+
+    color: #e8e8e8 !important;
+    text-shadow: none !important;
+
+}
+
+
+/* Main "Beyond Missions" heading */
+
+body.dark-mode
+#polaris-beyond
+.polaris-beyond-section-heading h3 {
+
+    color: #ffffff !important;
+    text-shadow: none !important;
+
+}
+
+
+/* "7 advanced missions × 7 days = 49 actions." */
+
+body.dark-mode
+#polaris-beyond
+.polaris-beyond-section-heading p {
+
+    color: #ffffff !important;
+    text-shadow: none !important;
+
+}
+
+
+/* =========================================================
+   INPUT WARNINGS
+========================================================= */
+
+.input-warnings {
+
+    margin: 20px 0;
+
+}
+
+.input-warning-title {
+
+    font-weight: 700;
+    margin-bottom: 10px;
+
+}
+
+.input-warning {
+
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    border: 1px solid #e0a800;
+    background: #fff8e1;
+
+}
+
+/* =========================================================
+   POLARIS BEYOND — ALL MISSION TEXT WHITE IN DARK MODE
+========================================================= */
+
+body.dark-mode #polaris-beyond .polaris-beyond-challenge,
+body.dark-mode #polaris-beyond .polaris-beyond-challenge * {
+
+    color: #000000 !important;
+    text-shadow: none !important;
+
+}
+
+/* Mission titles */
+
+body.dark-mode #polaris-beyond .polaris-beyond-challenge h2,
+body.dark-mode #polaris-beyond .polaris-beyond-challenge h3 {
+
+    color: #000000 !important;
+
+}
+
+/* Mission descriptions */
+
+body.dark-mode #polaris-beyond .polaris-beyond-challenge p {
+
+    color: #000000 !important;
+
+}
+
+/* Progress text */
+
+body.dark-mode #polaris-beyond .polaris-beyond-challenge strong,
+body.dark-mode #polaris-beyond .polaris-beyond-challenge span {
+
+    color: #000000 !important;
+
+}
+
+/* Locked badge text */
+
+body.dark-mode #polaris-beyond .polaris-beyond-challenge .badge,
+body.dark-mode #polaris-beyond .polaris-beyond-challenge .locked {
+
+    color: #000000 !important;
+
+}
+
+/* Start mission button text */
+
+body.dark-mode #polaris-beyond .polaris-beyond-challenge button {
+
+    color: #000000 !important;
+
+}
+
+/* Mission heading + subtitle */
+
+body.dark-mode #polaris-beyond .polaris-beyond-section-heading h3,
+body.dark-mode #polaris-beyond .polaris-beyond-section-heading p {
+
+    color: #000000 !important;
+    text-shadow: none !important;
+
+}
+
+
+/* ==========================================
+   POLARIS BEYOND — CINEMATIC EXPERIENCE
+=========================================== */
+
+.beyond-banner {
+    position: relative;
+
+    width: 100%;
+    height: 520px;
+
+    margin: 70px 0 80px;
+
+    overflow: hidden;
+
+    background: #061517;
+
+    box-shadow: 0 25px 75px rgba(0, 0, 0, 0.28);
+
+    isolation: isolate;
+}
+
+
+/* ==========================================
+   AURORA IMAGE
+=========================================== */
+
+.beyond-banner img {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center 55%;
+
+    display: block;
+
+    transform: scale(1.02);
+
+    transition: transform 1.8s ease;
+}
+
+
+.beyond-banner:hover img {
+    transform: scale(1.055);
+}
+
+
+/* ==========================================
+   CINEMATIC OVERLAY
+=========================================== */
+
+.beyond-banner-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(3, 15, 18, 0.88) 0%,
+            rgba(3, 15, 18, 0.62) 24%,
+            rgba(3, 15, 18, 0.18) 52%,
+            rgba(3, 15, 18, 0.02) 78%,
+            rgba(3, 15, 18, 0) 100%
+        ),
+        linear-gradient(
+            0deg,
+            rgba(2, 12, 14, 0.38) 0%,
+            rgba(2, 12, 14, 0) 45%
+        );
+}
+
+
+/* ==========================================
+   BEYOND CONTENT
+=========================================== */
+
+.beyond-banner-content {
+    position: absolute;
+
+    z-index: 2;
+
+    left: 8%;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: min(520px, 46%);
+
+    color: white;
+}
+
+
+/* ==========================================
+   EYEBROW
+=========================================== */
+
+.beyond-eyebrow {
+    display: inline-flex;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+
+    padding: 9px 15px;
+
+    border: 1px solid rgba(255, 255, 255, 0.28);
+
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, 0.09);
+
+    backdrop-filter: blur(8px);
+
+    font-size: 0.72rem;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    color: rgba(255, 255, 255, 0.95);
+}
+
+
+/* ==========================================
+   MAIN TITLE
+=========================================== */
+
+.beyond-banner-content h2 {
+    margin: 0 0 20px;
+
+    font-size: clamp(3.4rem, 7vw, 6.5rem);
+
+    line-height: 0.9;
+
+    font-weight: 900;
+
+    letter-spacing: -4px;
+
+    color: #ffffff;
+
+    text-shadow:
+        0 5px 30px rgba(0, 0, 0, 0.30);
+}
+
+
+/* ==========================================
+   DESCRIPTION
+=========================================== */
+
+.beyond-banner-content p {
+    margin: 0;
+
+    max-width: 440px;
+
+    font-size: 1.08rem;
+
+    line-height: 1.7;
+
+    color: rgba(255, 255, 255, 0.90);
+}
+
+
+/* ==========================================
+   SUBTLE LIGHT EDGE
+=========================================== */
+
+.beyond-banner::after {
+    content: "";
+
+    position: absolute;
+
+    left: 8%;
+    right: 8%;
+    bottom: 0;
+
+    height: 1px;
+
+    z-index: 3;
+
+    background: rgba(255, 255, 255, 0.20);
+}
+
+
+/* ==========================================
+   DARK MODE
+=========================================== */
+
+body.dark-mode .beyond-banner {
+    box-shadow:
+        0 30px 90px rgba(0, 0, 0, 0.50);
+}
+
+
+/* ==========================================
+   MOBILE
+=========================================== */
+
+@media (max-width: 750px) {
+
+    .beyond-banner {
+        width: 100%;
+
+        height: 560px;
+
+        margin: 55px 0 60px;
+    }
+
+
+    .beyond-banner img {
+        object-position: center center;
+
+        transform: scale(1.04);
+    }
+
+
+    .beyond-banner-overlay {
+        background:
+            linear-gradient(
+                180deg,
+                rgba(3, 15, 18, 0.02) 0%,
+                rgba(3, 15, 18, 0.10) 30%,
+                rgba(3, 15, 18, 0.62) 65%,
+                rgba(3, 15, 18, 0.94) 100%
+            );
+    }
+
+
+    .beyond-banner-content {
+        left: 28px;
+        right: 28px;
+
+        bottom: 42px;
+        top: auto;
+
+        transform: none;
+
+        width: auto;
+    }
+
+
+    .beyond-eyebrow {
+        margin-bottom: 16px;
+
+        padding: 8px 12px;
+
+        font-size: 0.65rem;
+
+        letter-spacing: 2.3px;
+    }
+
+
+    .beyond-banner-content h2 {
+        margin-bottom: 16px;
+
+        font-size: 3.7rem;
+
+        letter-spacing: -2px;
+    }
+
+
+    .beyond-banner-content p {
+        font-size: 0.95rem;
+
+        line-height: 1.6;
+    }
+
+}
+
+/* ====================================================
+   🌌 POLARIS BEYOND — HIDDEN UNTIL UNLOCKED
+   ==================================================== */
+
+#polaris-beyond {
+    display: none;
+}
+
+#polaris-beyond.unlocked {
+    display: block;
+}
+
+/* ==========================================
+   SUSTAINABILITY CHALLENGES BANNER
+=========================================== */
+
+.challenges-banner {
+    position: relative;
+
+    width: min(1150px, 92%);
+    height: 390px;
+
+    margin: 55px auto 65px;
+
+    overflow: hidden;
+
+    border-radius: 26px;
+
+    background: #071b1b;
+
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.20);
+
+    isolation: isolate;
+}
+
+
+/* ==========================================
+   BANNER IMAGE
+=========================================== */
+
+.challenges-banner img {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center center;
+
+    display: block;
+
+    transform: scale(1.015);
+
+    transition: transform 1.2s ease;
+}
+
+
+.challenges-banner:hover img {
+    transform: scale(1.035);
+}
+
+
+/* ==========================================
+   DARK OVERLAY
+=========================================== */
+
+.challenges-banner-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(4, 20, 22, 0.88) 0%,
+            rgba(4, 20, 22, 0.68) 28%,
+            rgba(4, 20, 22, 0.30) 53%,
+            rgba(4, 20, 22, 0.04) 78%,
+            rgba(4, 20, 22, 0) 100%
+        );
+}
+
+
+/* ==========================================
+   BANNER TEXT
+=========================================== */
+
+.challenges-banner-content {
+    position: absolute;
+
+    z-index: 2;
+
+    left: 58px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: min(520px, 48%);
+
+    color: white;
+}
+
+
+.challenges-banner-content h1 {
+    margin: 0 0 16px;
+
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+
+    line-height: 1.05;
+
+    font-weight: 850;
+
+    letter-spacing: -1.5px;
+
+    color: #ffffff;
+
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+
+.challenges-banner-content p {
+    margin: 0;
+
+    max-width: 460px;
+
+    font-size: 1.05rem;
+
+    line-height: 1.7;
+
+    color: rgba(255, 255, 255, 0.92);
+}
+
+
+/* ==========================================
+   DARK MODE
+=========================================== */
+
+body.dark-mode .challenges-banner {
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.38);
+}
+
+
+/* ==========================================
+   MOBILE
+=========================================== */
+
+@media (max-width: 750px) {
+
+    .challenges-banner {
+        width: 92%;
+        height: 440px;
+
+        margin: 40px auto 50px;
+
+        border-radius: 20px;
+    }
+
+
+    .challenges-banner img {
+        object-position: center center;
+
+        transform: scale(1.03);
+    }
+
+
+    .challenges-banner-overlay {
+        background:
+            linear-gradient(
+                180deg,
+                rgba(4, 20, 22, 0.05) 0%,
+                rgba(4, 20, 22, 0.18) 38%,
+                rgba(4, 20, 22, 0.78) 72%,
+                rgba(4, 20, 22, 0.94) 100%
+            );
+    }
+
+
+    .challenges-banner-content {
+        left: 28px;
+        right: 28px;
+
+        bottom: 32px;
+        top: auto;
+
+        transform: none;
+
+        width: auto;
+    }
+
+
+    .challenges-banner-content h1 {
+        margin-bottom: 12px;
+
+        font-size: 2.4rem;
+
+        letter-spacing: -1px;
+    }
+
+
+    .challenges-banner-content p {
+        font-size: 0.95rem;
+
+        line-height: 1.6;
+    }
+
+}
+
+/* ==========================================
+   OUR MISSION
+   ========================================== */
+
+.our-mission {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 35px 40px;
+    text-align: center;
+
+    background: rgba(28, 23, 23, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.our-mission:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.18);
+}
+
+.our-mission h3 {
+    margin-bottom: 18px;
+
+    font-size: 1.8rem;
+    font-weight: 700;
+
+    color: black;
+}
+
+.mission-statement {
+    max-width: 750px;
+    margin: 0 auto;
+
+    font-size: 1.15rem;
+    line-height: 1.8;
+    font-weight: 400;
+
+    color: rgba(0, 0, 0, 0.88);
+}
+
+body.dark-mode .mission-statement {
+    color: #ffffff;
+}
+
+body.dark-mode  .our-mission h3{
+    color: #ffffff;
+}
+
+
+/* ==========================================
+   OUR MISSION — IMAGE BEHIND TEXT
+=========================================== */
+
+.mission-hero {
+    position: relative;
+
+    width: 100%;
+
+    margin: 0;
+
+    display: flex;
+    justify-content: center;
+}
+
+
+/* ==========================================
+   MISSION CARD
+=========================================== */
+
+.our-mission {
+    position: relative;
+
+    width: 84%;
+    height: 430px;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    background: #061517;
+
+    box-shadow:
+        0 25px 75px rgba(0, 0, 0, 0.28);
+
+    isolation: isolate;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 0 8%;
+
+    box-sizing: border-box;
+
+    color: white;
+}
+
+
+/* ==========================================
+   IMAGE — BEHIND EVERYTHING
+=========================================== */
+
+.our-mission img {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center center;
+
+    display: block;
+
+    z-index: 0;
+
+    transform: scale(1.02);
+
+    transition:
+        transform 1.5s ease;
+}
+
+
+/* ==========================================
+   IMAGE ZOOM ON HOVER
+=========================================== */
+
+.our-mission:hover img {
+    transform: scale(1.07);
+}
+
+
+/* ==========================================
+   DARK CINEMATIC OVERLAY
+=========================================== */
+
+.our-mission::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(3, 15, 18, 0.88) 0%,
+            rgba(3, 15, 18, 0.68) 30%,
+            rgba(3, 15, 18, 0.32) 60%,
+            rgba(3, 15, 18, 0.12) 100%
+        ),
+        linear-gradient(
+            0deg,
+            rgba(2, 12, 14, 0.38) 0%,
+            rgba(2, 12, 14, 0) 50%
+        );
+}
+
+
+/* ==========================================
+   TEXT — IN FRONT OF IMAGE
+=========================================== */
+
+.our-mission h3,
+.our-mission .mission-statement {
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* ==========================================
+   OUR MISSION TITLE
+=========================================== */
+
+.our-mission h3 {
+    margin: 0 0 22px;
+
+    font-size: clamp(3.2rem, 6vw, 5.8rem);
+
+    line-height: 0.95;
+
+    font-weight: 900;
+
+    letter-spacing: -3px;
+
+    color: #ffffff;
+
+    text-shadow:
+        0 5px 30px rgba(0, 0, 0, 0.35);
+
+    transition:
+        transform 0.5s ease;
+}
+
+
+/* ==========================================
+   MISSION STATEMENT
+=========================================== */
+
+.our-mission .mission-statement {
+    margin: 0;
+
+    max-width: 570px;
+
+    font-size: 1.08rem;
+
+    line-height: 1.7;
+
+    color: rgba(255, 255, 255, 0.92);
+
+    text-shadow:
+        0 2px 15px rgba(0, 0, 0, 0.35);
+}
+
+
+/* ==========================================
+   SLIGHT TEXT MOVEMENT ON HOVER
+=========================================== */
+
+.our-mission:hover h3 {
+    transform: translateY(-2px);
+}
+
+
+/* ==========================================
+   SUBTLE LIGHT EDGE
+=========================================== */
+
+.our-mission::after {
+    content: "";
+
+    position: absolute;
+
+    left: 8%;
+    right: 8%;
+
+    bottom: 0;
+
+    height: 1px;
+
+    z-index: 3;
+
+    background: rgba(255, 255, 255, 0.20);
+}
+
+
+/* ==========================================
+   DARK MODE
+=========================================== */
+
+body.dark-mode .our-mission {
+    box-shadow:
+        0 30px 90px rgba(0, 0, 0, 0.50);
+}
+
+
+/* ==========================================
+   MOBILE
+=========================================== */
+
+@media (max-width: 750px) {
+
+    .mission-hero {
+        margin: 55px 0 60px;
+    }
+
+
+    .our-mission {
+        width: 92%;
+
+        height: 500px;
+
+        border-radius: 22px;
+
+        padding: 0 28px;
+
+        justify-content: flex-end;
+
+        padding-bottom: 42px;
+    }
+
+
+    .our-mission img {
+        object-position: center center;
+
+        transform: scale(1.04);
+    }
+
+
+    .our-mission:hover img {
+        transform: scale(1.07);
+    }
+
+
+    .our-mission::before {
+        background:
+            linear-gradient(
+                180deg,
+                rgba(3, 15, 18, 0.05) 0%,
+                rgba(3, 15, 18, 0.18) 30%,
+                rgba(3, 15, 18, 0.65) 65%,
+                rgba(3, 15, 18, 0.94) 100%
+            );
+    }
+
+
+    .our-mission h3 {
+        margin-bottom: 16px;
+
+        font-size: 3.5rem;
+
+        letter-spacing: -2px;
+    }
+
+
+    .our-mission .mission-statement {
+        font-size: 0.95rem;
+
+        line-height: 1.6;
+    }
+
 }
