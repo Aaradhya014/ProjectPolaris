@@ -70,12 +70,14 @@ Users can earn eco badges as they progress through the challenges.
 ```text
 ProjectPolaris/
 │
-├── app.py
-│
 ├── static/
+|   |-- images
+|         |-- neon logo.jpg
 │   ├── script.js
 │   └── style.css
 │
-└── templates/
-    ├── index.html
-    └── challenge.html
+├── templates/
+│   ├── challenge.html
+│   └── index.html
+|-- app.py
+| README.md
